@@ -14,3 +14,7 @@ My take on Apple Home Dashboard Design
 - "apps" support notification
 
 ![Night Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/night_dashboard.png)
+
+## Credit
+
+- inspired by [Mattias Persson](https://github.com/matt8707/hass-config) & [lukevink](https://github.com/lukevink/hass-config-lajv)
