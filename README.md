@@ -15,6 +15,8 @@ My take on Apple Home Dashboard Design
 
 ![Night Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/night_dashboard.png)
 
+![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/day_dashboard.png)
+
 ## Credit
 
 - inspired by [Mattias Persson](https://github.com/matt8707/hass-config) & [lukevink](https://github.com/lukevink/hass-config-lajv)
