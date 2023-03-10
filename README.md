@@ -1,9 +1,9 @@
-![HomePlay](https://github.com/avenger11/Apple-HomePlay/blob/main/HomePlay-125x125.png)
+![HomePlay](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/HomePlay-125x125.png)
 # Apple HomePlay (Work In Progress)
 
 My take on Apple Home Dashboard Design
 
-![Night Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/night_dashboard.png)
+![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/01.gif)
 
 ## Feature
 
@@ -12,3 +12,5 @@ My take on Apple Home Dashboard Design
 - Weather background change based on condition and day/night (screenshot from weather app)
 - Calendar integration
 - "apps" support notification
+
+![Night Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/night_dashboard.png)
