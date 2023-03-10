@@ -1,7 +1,7 @@
 ![HomePlay](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/HomePlay-125x125.png)
 # Apple HomePlay (Work In Progress)
 
-My take on Apple Home Dashboard Design
+My take on Apple Home Dashboard Design for Home Assistant
 
 ![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/01.gif)
 
@@ -9,7 +9,7 @@ My take on Apple Home Dashboard Design
 
 - Day & Night theme support (NB: automation based on sun location)
 - Support multiple floor by swaping between card
-- Weather background change based on condition and day/night (screenshot from weather app)
+- 32 Weather background change based on condition and day/night (screenshot from weather app)
 - Calendar integration
 - "apps" support notification
 
