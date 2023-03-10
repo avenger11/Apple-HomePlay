@@ -1,4 +1,5 @@
+![](https://github.com/avenger11/Apple-HomePlay/blob/main/HomePlay-125x125.png)
 # Apple HomePlay (Work In Progress)
 
-My take as if Apple would design a Home Dashboard
+My take on Apple Home Dashboard Design
 
