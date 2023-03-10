@@ -1,2 +1,4 @@
-# Apple-HomePlay
-Custom Apple theme and configuration for Home Assistant
+# Apple HomePlay (Work In Progress)
+
+My take as if Apple would design a Home Dashboard
+
