@@ -1,0 +1,712 @@
+button_card_templates:
+  !include_dir_merge_named button_card_templates
+
+kiosk_mode:
+  hide_header: true
+
+views:
+  - type: custom:grid-layout
+    title: HomePlay
+    background: var(--background)
+    layout:
+      margin: 4px
+      grid-gap: 0.001vw
+      grid-template-columns: 26.6% 59.5% 14.1%
+      grid-template-rows: auto
+      grid-template-areas: |
+        "left center right"
+        "taskbar taskbar taskbar"
+
+    cards:
+      
+#..................................
+#.LLLL..................fffff.ttt..
+#.LLLL.................effffftttt..
+#.LLLL.................efff..tttt..
+#.LLLL........eeeeee..eeffffftttt..
+#.LLLL.......eeeeeeee.eeffffftttt..
+#.LLLL......Leee.eeee..efff..tttt..
+#.LLLL......Leee..eeee.efff..tttt..
+#.LLLL......Leeeeeeeee.efff..tttt..
+#.LLLL......Leeeeeeeee.efff..tttt..
+#.LLLL......Leee.......efff..tttt..
+#.LLLLLLLLLLLeee..eeee.efff..tttt..
+#.LLLLLLLLLL.eeeeeeee..efff..tttt..
+#.LLLLLLLLLL..eeeeee...efff..tttt..
+#..................................
+
+      - type: vertical-stack
+        view_layout:
+          grid-area: left
+        cards:
+          
+          - type: picture-elements
+            image: /local/weather/empty.png
+            style: |
+              ha-card {
+                border-radius: 20px !important;
+                --ha-card-background: rgba(0, 0, 0, 0);
+                --ha-card-border-color: rgba(0, 0, 0, 0);
+                --ha-card-border-width: 0px;
+                height: 35vw !important;
+                box-shadow: var(--custom-ha-card-box-shadow);
+              }
+              
+            elements:
+
+              ########################################
+              ##            Weather Card            ##
+              ########################################
+
+              - type: image
+                entity: sensor.weather_bg_condition2
+                action: none
+                hold_action: none
+                tap_action: none
+                style:
+                  top: 0px
+                  left: 0px
+                  transform: none
+                state_image: 
+                  !include button_card_templates/weather_bg.yaml
+
+              # Feel Like Temperature
+              - type: state-label
+                entity: sensor.feel_like
+                hold_action:
+                  action: none
+                style:
+                  color: 'rgb(255, 255, 255)'
+                  font-size: 6vw
+                  font-weight: 350
+                  text-align: center
+                  left: 50%
+                  top: 10%
+                  text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                tap_action:
+                  action: none
+
+              - type: state-label
+                entity: sensor.montreal_current_condition
+                style: 
+                    left: 50%
+                    top: 18%
+                    #width: 20vw
+                    text-align: center
+                    font-weight: 400
+                    font-size: 1.5vw
+                    text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                    color: rgba(255,255,255,1)
+
+              - type: state-label
+                entity: sensor.high_low_temp
+                style: 
+                    left: 50%
+                    top: 22%
+                    text-align: center
+                    font-weight: 400
+                    font-size: 1.5vw
+                    text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                    color: rgba(255,255,255,1)
+
+              - type: custom:mod-card
+                style:
+                  top: 34%
+                  left: 50%
+                  width: 100%
+                card:
+                  type: weather-forecast
+                  entity: weather.montreal_hourly_forecast
+                  show_current: false
+                  show_forecast: true
+                  style:
+                    padding: 12px 
+                  card_mod:
+                    style: |
+                      .forecast-image-icon > * {
+                        width: 30px !important;
+                        height: 25px !important;
+                      }
+
+              - type: custom:clock-weather-card
+                entity: weather.openweathermap
+                forecast_days: 4
+                hide_today_section: true
+                style:
+                  left: 50%
+                  top: 51.9%
+                  width: 95%
+                  backdrop-filter: var(--custom-weather-card-backdrop-filter)
+                  background-color: var(--custom-weather-card-background)
+                  border-color: rgba(255, 255, 255, 1)
+                  border-radius: 15px
+                  border-width: 1px
+                  text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                card_mod:
+                  style: |
+                    ha-card {
+                      --bar-height: 8px !important;
+                    }
+                    clock-weather-card-forecast-row {
+                      grid-template-columns: 2rem 2rem 3.1rem 84px 3.1rem !important;
+                      gap: 0.7rem !important;
+                    }
+                    forecast-text {
+                      text-align: right !important;
+                    }
+                    forecast-temperature-bar-background {
+                      background: rgb(0,0,0) !important;
+                    }
+                    .card-content {
+                      padding-top: 8px !important;
+                      padding-bottom: 8px !important;
+                    }
+
+          ########################################
+          ##           Calendar Card            ##
+          ########################################
+
+          - type: custom:atomic-calendar-revive
+            entities:
+              - entity: calendar.famille
+                name: famille
+                maxDaysToShow: 100
+            showWeekDay: true
+            showMonth: true
+            maxEventCount: 3
+            showLoader: false
+            showLocation: false
+            showProgressBar: false
+            showDatePerEvent: true
+            hideFinishedEvents: true
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {
+                  transform: none;
+                  background: var(--custom-ha-card-background) !important;
+                  backdrop-filter: var(--custom-ha-card-backdrop-filter);
+                  border-color: rgba(255, 255, 255, 0.03);
+                  border-radius: 20px;
+                  box-shadow: var(--custom-ha-card-box-shadow);
+                  padding:0.6vw !important;
+                }
+                .hoursHTML {
+                  --time-color: var(--custom-ha-card-text-color-secondary) !important;
+                  --time-size: 1.3vw !important;
+                  font-weight: 500;
+                }
+                .event-title {
+                  --event-title-size: 1.6vw !important;
+                  color: var(--custom-ha-card-text-color-primary) !important;
+                  font-weight: 600;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  width: 240px;
+                }
+                .relativeTime {
+                  --time-color: var(--custom-ha-card-text-color-secondary) !important;
+                  --time-size: 1vw !important;
+                  font-weight: 500;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  width: 110px;
+                }
+                .event-left {
+                  font-size: 1.3vw !important;
+                  font-weight: 500;
+                  color: var(--custom-ha-card-text-color-primary) !important;
+                }
+                .daywrap {
+                  border-color: rgba(255,255,255,0) !important;
+                  padding: 0px !important;
+                }
+                tr{
+                  background-color: var(--custom-ha-card-background-revert);
+                  display: block;
+                  border-radius: 1vw;
+                  margin-bottom: 0.3vw;
+                }
+                .cal-card{
+                  height: 19.4vw !important;
+                }
+
+#............................................................
+#....CCCCCCC..........................ttt....................
+#...CCCCCCCCC........................tttt....................
+#..CCCCCCCCCCC.......................tttt....................
+#..CCCC...CCCCC..eeeeee...nnnnnnnn.nnttttte.eeeeee..errrrrr..
+#.CCCC.....CCC..eeeeeeee..nnnnnnnnnnnttttteeeeeeeee.errrrrr..
+#.CCCC.........eeee.eeee..nnnn.nnnnn.tttt.eeee.eeee.errrr....
+#.CCCC.........eeee..eeee.nnnn..nnnn.tttt.eeee..eeeeerrr.....
+#.CCCC.........eeeeeeeeee.nnnn..nnnn.tttt.eeeeeeeeeeerrr.....
+#.CCCC.....CCC.eeeeeeeeee.nnnn..nnnn.tttt.eeeeeeeeeeerrr.....
+#..CCCC...CCCCCeeee.......nnnn..nnnn.tttt.eeee......errr.....
+#..CCCCCCCCCCC.eeee..eeee.nnnn..nnnn.tttt.eeee..eeeeerrr.....
+#...CCCCCCCCCC..eeeeeeee..nnnn..nnnn.ttttteeeeeeeee.errr.....
+#....CCCCCCC.....eeeeee...nnnn..nnnn.ttttte.eeeeee..errr.....
+#............................................................
+      
+      - view_layout:
+          grid-area: center
+        type: custom:mod-card
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--custom-ha-card-box-shadow);
+              border-radius: 20px;
+            }
+        card:
+            type: custom:swipe-card
+            start_card: 2
+            parameters:
+              effect: cards
+              spaceBetween: 8
+              pagination:
+                type: 'bullets'
+            cards:
+    
+              ###############################
+              # BASEMENT FLOOR              #
+              ###############################
+              - type: picture-elements
+                image: /local/house/floor-empty.png
+                style: |
+                  ha-card {
+                    border-radius: 20px !important ;
+                    --ha-card-border-width: 0px;
+                  }
+                elements:
+                  - type: image
+                    entity: sun.sun
+                    state_image:
+                      above_horizon: /local/house/basement-day.png
+                      below_horizon: /local/house/basement-night.png
+                    style:
+                      Left: 50%
+                      top: 50%
+                      width: 100%
+                    hold_action:
+                      action: none
+                    tap_action:
+                      action: none
+
+                  - type: custom:button-card
+                    entity: switch.switch_basement
+                    icon: phu:ceiling-runner-three
+                    style: 
+                      left: 45%
+                      top: 32%
+                    template:
+                    - light
+
+
+              ###############################
+              # GROUND FLOOR                #
+              ###############################
+              - type: picture-elements
+                image: /local/house/rdc-night.png
+                style: |
+                  ha-card {
+                    border-radius: 20px !important ;
+                    --ha-card-border-width: 0px;
+                  }
+                elements:
+                  
+                  - type: image
+                    entity: sun.sun
+                    state_image:
+                      above_horizon: /local/house/rdc-day.png
+                      below_horizon: /local/house/rdc-night.png
+                    style:
+                      Left: 50%
+                      top: 50%
+                      width: 100%
+                    hold_action:
+                      action: none
+                    tap_action:
+                      action: none
+
+                  - type: custom:button-card
+                    entity: light.dimmerlivingroom
+                    icon: phu:bulb-group-ceiling-round
+                    style: 
+                      left: 45%
+                      top: 32%
+                    template:
+                    - light
+
+                  - entity: light.kitchen_leds
+                    type: custom:button-card
+                    icon: phu:light-strip
+                    style:
+                      left: 85%
+                      top: 75%
+                    template:
+                    - light
+
+                  - entity: switch.switchentreelivingroom_switch
+                    type: custom:button-card
+                    icon: phu:friends-of-hue-iq-pendant
+                    style:
+                      left: 70%
+                      top: 35%
+                    template:
+                    - light
+
+                  - entity: switch.switchvestibule_switch
+                    type: custom:button-card
+                    icon: phu:ceiling-fugato-three
+                    style:
+                      left: 74%
+                      top: 17%
+                    template:
+                    - light
+
+                  - entity: switch.switchexteriorfront
+                    type: custom:button-card
+                    icon: phu:wall-appear
+                    style:
+                      left: 72%
+                      top: 5%
+                    template:
+                    - light
+
+                  - entity: switch.switchexterieurback_switch
+                    type: custom:button-card
+                    icon: phu:wall-flood
+                    style:
+                      left: 64%
+                      top: 95%
+                    template:
+                    - light
+
+                  - entity: light.floodlight_kitchen
+                    name: FloodLight
+                    type: custom:button-card
+                    icon: phu:ceiling-aurelle
+                    style:
+                      left: 70%
+                      top: 65%
+                    template:
+                    - light
+          
+                  - entity: light.grouplightkitchencounter
+                    type: custom:button-card
+                    icon: phu:bulb-group-classic-hung-4
+                    style:
+                      left: 55%
+                      top: 65% 
+                    template:
+                    - light
+                  
+                  - entity: light.stairs_lights
+                    type: custom:button-card
+                    icon: phu:ceiling-fugato-four-alt
+                    style: 
+                        left: 85%
+                        top: 50%
+                    template:
+                    - light
+              
+                  - entity: light.groupspotlightkitchensink
+                    type: custom:button-card
+                    icon: phu:bulb-group-ceiling-flush-circular
+                    style:
+                      left: 73% 
+                      top: 85% 
+                    template:
+                    - light
+                
+                  - entity: switch.switchexteriorfrontplug
+                    type: custom:button-card
+                    show_entity_picture: true
+                    style:
+                      left: 60% 
+                      top: 5% 
+                    template:
+                    - switch
+
+                  - entity: media_player.appletv_salon
+                    type: custom:button-card
+                    entity_picture: /local/icon/appletv.fill.png
+                    show_entity_picture: true
+                    style:
+                      left: 18%
+                      top: 40%
+                    template:
+                    - light
+
+              ###############################
+              # 1st floor                   #
+              ###############################
+              - type: picture-elements
+                image: /local/house/1st-floor-night.png
+                style: |
+                  ha-card {
+                    border-radius: 20px !important ;
+                    --ha-card-border-width: 0px;
+                  }
+                elements:
+
+                  - type: image
+                    entity: sun.sun
+                    state_image:
+                      above_horizon: /local/house/1st-floor-day.png
+                      below_horizon: /local/house/1st-floor-night.png
+                    style:
+                      Left: 50%
+                      top: 50%
+                      width: 100%
+                    hold_action:
+                      action: none
+                    tap_action:
+                      action: none
+
+                  - entity: light.bathroom_light
+                    type: custom:button-card
+                    icon: mdi:outdoor-lamp
+                    style: 
+                      left: 90%
+                      top: 80%
+                    template:
+                    - light
+
+                  - entity: light.stairs_lights
+                    type: custom:button-card
+                    icon: phu:ceiling-fugato-four-alt
+                    style: 
+                        left: 76%
+                        top: 55%
+                    template:
+                    - light
+
+#...............................................
+#.RRRRRRRRRR...iiii............hhhh........ttt..
+#.RRRRRRRRRRR..iiii............hhhh.......tttt..
+#.RRRRRRRRRRR..................hhhh.......tttt..
+#.RRRR...RRRRR.iiii..ggggggggg.hhhhhhhh.hhtttt..
+#.RRRR...RRRRR.iiii.gggggggggg.hhhhhhhhhhhtttt..
+#.RRRRRRRRRRR..iiiiigggg.ggggg.hhhh.hhhhh.tttt..
+#.RRRRRRRRRRR..iiiiiggg...gggg.hhhh..hhhh.tttt..
+#.RRRRRRRR.....iiiiiggg...gggg.hhhh..hhhh.tttt..
+#.RRRR.RRRR....iiiiiggg...gggg.hhhh..hhhh.tttt..
+#.RRRR..RRRR...iiiiiggg...gggg.hhhh..hhhh.tttt..
+#.RRRR..RRRRR..iiiiigggg.ggggg.hhhh..hhhh.tttt..
+#.RRRR...RRRRR.iiii.gggggggggg.hhhh..hhhh.tttt..
+#.RRRR....RRRR.iiii..ggggggggg.hhhh..hhhh.tttt..
+#.........................gggg..................
+#..................igggg.gggg...................
+#...................ggggggggg...................
+#....................ggggggg....................
+#...............................................
+
+      - type: vertical-stack
+        view_layout:
+          grid-area: right
+        cards:
+          - type: custom:button-card
+            entity: person.sebastien_logeais
+            name: Sébastien
+            label: >
+              [[[
+                return states['sensor.seb_work_travel_time'].state + ' mins pour aller <br/> au travail.';
+              ]]]
+            styles:
+              card:
+                - background-image: url('/local/person/seb-blur.jpg')
+            template:
+              - person
+            
+          - type: custom:button-card
+            entity: person.lynn
+            name: Lynn
+            label: Temps pour aller <br/> au travail.
+            styles:
+              card:
+                - background-image: url('/local/person/lynn-blur.jpg')
+            template:
+              - person
+
+          - type: custom:button-card
+            entity: sensor.garbage
+            name: Poubelle
+            icon: fapro:garbage
+            template:
+              - garbage
+
+          - type: custom:button-card
+            entity: sensor.recycling
+            name: Recyclage
+            icon: fapro:recycling
+            template:
+              - garbage
+
+#.....................................................................
+#.TTTTTTTTTTT..................sssk......kkkb.........................
+#.TTTTTTTTTTT..................sssk......kkkb.........................
+#.TTTTTTTTTTT..................sssk......kkkb.........................
+#....TTTT....aaaaaa...aasssss..sssk.kkkkkkkkbbbbbb....baaaaa..aaarrr..
+#....TTTT...Taaaaaaa.aaassssss.ssskkkkkk.kkkbbbbbbb..bbaaaaaa.aaarrr..
+#....TTTT..TTaa.aaaa.aaas.ssss.ssskkkkk..kkkbb.bbbbbbbba.aaaa.aaarr...
+#....TTTT......aaaaa.aaass.....ssskkkk...kkkb...bbbb....aaaaa.aaar....
+#....TTTT...Taaaaaaa.aaassss...ssskkkk...kkkb...bbbb.bbaaaaaa.aaar....
+#....TTTT..TTaaaaaaa...assssss.ssskkkkk..kkkb...bbbbbbbaaaaaa.aaar....
+#....TTTT..TTaa.aaaa......sssssssskkkkkk.kkkb...bbbbbbba.aaaa.aaar....
+#....TTTT..TTaa.aaaa.aaas..sssssssk.kkkk.kkkbb.bbbb.bbba.aaaa.aaar....
+#....TTTT..TTaaaaaaa.aaassssss.sssk..kkkkkkkbbbbbbb.bbbaaaaaa.aaar....
+#....TTTT...Taaaaaaaa..asssss..sssk..kkkkkkkbbbbbb...bbaaaaaaaaaar....
+#.....................................................................
+
+      - type: vertical-stack
+        view_layout:
+          grid-area: taskbar
+        cards:
+          - type: picture-elements
+            image: /local/1x1_trans.png
+            style: |
+              ha-card {
+                border-radius: 0px 0px 20px 20px !important;
+                --ha-card-background: var(--custom-ha-card-background);
+                backdrop-filter: var(--custom-ha-card-backdrop-filter);
+                --ha-card-border-color: rgba(0, 0, 0, 0);
+                --ha-card-border-width: 0px;
+                height: 6.15vw !important;
+                margin-left: -8px;
+                margin-right: -8px;
+                margin-top: -5px;
+              }
+            elements:
+              - type: state-label
+                entity: sensor.time
+                style:
+                  top: 3.1vw
+                  left: 93.8%
+                  color: var(--custom-ha-card-text-color-primary)
+                  font-size: 4.3vw
+                  font-weight: 300
+                  letter-spacing: '-0.2vw'
+                  width: 12vw
+                  height: 6.15vw
+                  display: flex #enable alignement
+                  align-items: center #Verticaly align
+                  justify-content: center #Horizontaly align
+                  background: var(--custom-ha-card-background-revert)
+                  border-radius: 0px 0px 20px 0px
+                action: none
+                hold_action: none
+                tap_action: none
+
+              # Weekday
+              - type: state-label
+                entity: sensor.day
+
+                style:
+                  top: 2vw
+                  left: 87%
+                  transform: translate(-100%, -50%)
+                  color: var(--custom-ha-card-text-color-secondary)
+                  font-size: 2vw
+                  font-weight: 400
+                  letter-spacing: '-0.05vw'
+                  display: flex #enable alignement
+                  justify-content: right
+                action: none
+                hold_action: none
+                tap_action: none
+
+              # day + Month 
+              - type: state-label
+                entity: sensor.month
+                style:
+                  top: 4vw
+                  left: 87%
+                  transform: translate(-100%, -50%)
+                  color: var(--custom-ha-card-text-color-secondary)
+                  font-size: 2vw
+                  font-weight: 400
+                  letter-spacing: '-0.05vw'
+                  display: flex #enable alignement
+                  justify-content: right
+                  width: 120px
+                action: none
+                hold_action: none
+                tap_action: none
+
+#....................................................
+#.....AAAAA.....PPPPPPPPP...PPPPPPPPP....SSSSSSS.....
+#.....AAAAA.....PPPPPPPPPP..PPPPPPPPPP..SSSSSSSSS....
+#....AAAAAA.....PPPPPPPPPPP.PPPPPPPPPPP.SSSSSSSSSS...
+#....AAAAAAA....PPPP...PPPP.PPPP...PPPPPSSSS..SSSS...
+#...AAAAAAAA....PPPP...PPPP.PPPP...PPPPPSSSS.........
+#...AAAAAAAA....PPPPPPPPPPP.PPPPPPPPPPP.SSSSSSS......
+#...AAAA.AAAA...PPPPPPPPPP..PPPPPPPPPP...SSSSSSSSS...
+#..AAAAAAAAAA...PPPPPPPPP...PPPPPPPPP......SSSSSSS...
+#..AAAAAAAAAAA..PPPP........PPPP..............SSSSS..
+#..AAAAAAAAAAA..PPPP........PPPP.......PSSS....SSSS..
+#.AAAA....AAAA..PPPP........PPPP.......PSSSSSSSSSSS..
+#.AAAA.....AAAA.PPPP........PPPP........SSSSSSSSSS...
+#.AAAA.....AAAA.PPPP........PPPP.........SSSSSSSS....
+#....................................................
+
+              - type: custom:hui-element
+                card_type: horizontal-stack
+                style: 
+                    top: 3vw
+                    left: 50%
+                    background: var(--custom-ha-card-background-revert)
+                    padding-right: 1.4vw
+                    padding-left: 1.4vw
+                    padding-top: 0.6vw
+                    padding-bottom: 0.5vw
+                cards:
+
+                  - type: custom:button-card
+                    entity: group.hass_update_notification
+                    entity_picture: /local/icon/HA.png
+                    template:
+                      - apps
+                    tap_action:
+                      !include popup/homeassistant.yaml
+
+                  - type: custom:button-card
+                    entity: group.router_update_notification
+                    entity_picture: /local/icon/wifi.png
+                    template:
+                      - apps
+
+                  - type: custom:button-card
+                    entity: alarm_control_panel.alarme
+                    entity_picture: /local/icon/alarm2.png
+                    template:
+                      - apps
+                    tap_action:
+                      !include popup/alarm.yaml
+
+                  - type: custom:button-card
+                    entity: binary_sensor.server_security_status
+                    entity_picture: /local/icon/server.png
+                    template:
+                      - apps
+                    tap_action:
+                      !include popup/server.yaml
+  
+
+                  ### SEPARATOR ##################################################
+#                  - type: custom:button-card
+#                    show_state: false
+#                    show_name: false
+#                    show_icon: false
+#                    styles:
+#                      card:
+#                        - width: 2px
+#                        - height: 50px
+#                        - borderRadius: 0px
+#                        - border-width: 0px
+#                        - background-color: 'rgba(255,255,255,0.4)'
+#                        - margin: 12px 0px 0px 0px

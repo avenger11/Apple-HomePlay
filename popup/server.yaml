@@ -1,0 +1,108 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: NAS
+    timeout: 30000
+    style: >
+      --popup-max-width: calc(385px + 385px + 385px);
+      --ha-card-border-radius: 0;
+    content:
+      type: custom:layout-card
+      cards:
+        - type: entities
+          title: Synology DS920+
+          show_header_toggle: false
+          card_mod:
+            class: header
+            # no border on last card
+            style: |
+              ha-card {
+                border: none !important;
+              }
+          entities:
+            - entity: binary_sensor.server_security_status
+              name: Security Status
+
+            - entity: sensor.server_temperature
+
+            - entity: sensor.server_last_boot
+              name: Last reboot
+
+            - entity: update.server_dsm_update
+              icon: mdi:package-up
+              name: Update
+
+            - type: custom:bar-card
+              width: 55%
+              height: 2em
+              decimal: 0
+              unit_of_measurement: '%'
+              #positions: *bar_card_positions
+              #severity: *bar_card_severity
+              entity_row: true
+              entities:
+
+                - entity: sensor.server_cpu_load_average_1_min
+                  name: Processor
+                  icon: mdi:chip
+                  tap_action:
+                    action: call-service
+                    service: homeassistant.update_entity
+                    service_data:
+                      entity_id: sensor.server_cpu_load_average_1_min
+
+                - entity: sensor.server_memory_usage_real
+                  name: RAM - 8GB
+                  tap_action:
+                    action: call-service
+                    service: homeassistant.update_entity
+                    service_data:
+                      entity_id: sensor.server_memory_usage_real
+
+                - entity: sensor.server_volume_1_volume_used
+                  name: Volume - 12TB
+                  tap_action:
+                    action: call-service
+                    service: homeassistant.update_entity
+                    service_data:
+                      entity_id: sensor.server_volume_1_volume_used
+
+            - type: custom:hui-element
+              card_type: horizontal-stack
+              cards:
+                - type: custom:button-card
+                  name: Restart
+                  icon: mdi:restart-alert
+                  confirmation:
+                    text: Est-ce que vous êtes sûre de vouloir redemarrer ?
+                  tap_action:
+                    action: call-service
+                    service: browser_mod.sequence
+                    service_data:
+                      sequence:
+                        - service: browser_mod.notification
+                          data:
+                            message: Redemarrage du serveur...
+                        - service: button.press
+                          data:
+                            entity_id: button.server_reboot
+                  #template: icon_name
+
+                - type: custom:button-card
+                  name: Shutdown
+                  icon: mdi:alert
+                  confirmation:
+                    text: Etes-vous sûre de vouloir arrêter le serveur ?
+                  tap_action:
+                    action: call-service
+                    service: browser_mod.sequence
+                    service_data:
+                      sequence:
+                        - service: browser_mod.notification
+                          data:
+                            message: Arrêt du serveur ...
+                        - service: button.press
+                          data:
+                            entity_id: button.server_shutdown
+                  #template: icon_name

@@ -1,0 +1,14 @@
+{
+    "state": {
+        "today": "azi",
+        "tomorrow": "mâine",
+        "Today": "Azi",
+        "Tomorrow": "Mâine"
+    },
+    "other": {
+      "due": "scadentă",
+      "Due": "Scadentă",
+      "due_today_order": "true",
+      "in_days": "în DAYS zile"
+    }
+}

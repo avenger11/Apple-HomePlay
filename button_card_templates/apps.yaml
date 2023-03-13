@@ -1,0 +1,30 @@
+apps:
+  show_state: false
+  show_icon: false
+  show_name: false
+  show_entity_picture: true
+  styles:
+    card:
+      - width: 6.15vw
+      - height: 6.15vw
+      - borderRadius: 0px
+      - border-width: 0px
+      - background-color: 'rgba(0,0,0,0)'
+    entity_picture:
+      - height: 4.5vw
+      - width: 4.5vw
+      - border-radius: 1vw
+    custom_fields:
+      notification:
+        - background-color: >
+            [[[ return (entity.state == 'on') ? 'rgba(255,0,0,1)' : 'rgba(0,0,0,0)' ;]]]
+        - border-radius: 50%
+        - left: 74%
+        - top: 4%
+        - position: absolute
+        - height: 1.5vw
+        - width: 1.5vw
+        - color: 'rgba(0,0,0,0)'                    
+  custom_fields:
+    notification: |
+        [[[ return (entity.state) ]]]

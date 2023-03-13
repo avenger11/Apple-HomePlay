@@ -1,0 +1,82 @@
+garbage:
+  show_name: true
+  show_label: true
+  aspect_ratio: 1/1
+  styles:
+    card:
+      #- width: 176.5px
+      #- height: 176.5px
+      - padding: 15px
+      - border-radius: 20px
+      - box-shadow: var(--custom-ha-card-box-shadow)
+    grid:
+      - grid-template-areas: '"i" "n" "l"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: 1fr min-content min-content
+    name:
+      - justify-self: start
+      - font-size: 22px 
+      - font-weight: 600
+      - color: var(--custom-ha-card-text-color-primary)
+      - padding-bottom: 3px
+    img_cell:
+      - justify-content: center
+      - align-items: center
+      - margin-bottom: 0.5vw
+      - size: 60px
+      - background: var(--custom-ha-card-background-revert)
+      - border-radius: 10px
+      - width: 5.5vw
+      - height: 5.5vw
+      - place-self: start
+    label:
+      - justify-self: start
+      - font-size: 14px
+      - font-weight: 600
+      - color: var(--custom-ha-card-text-color-secondary)
+      - padding-bottom: 5px
+    icon:
+      - color: var(--custom-ha-card-icon-color)
+      - width: 70%
+  state:
+    - value: 0
+      styles:
+        img_cell:
+          - background: orange
+        name:
+          - color: black
+        label:
+          - color: black
+        card:
+          - background: 'rgba(255, 255, 255, 1)'
+        icon:
+          - color: black
+    - value: 1
+      styles:
+        img_cell:
+          - background: orange
+        name:
+          - color: black
+        label:
+          - color: black
+        card:
+          - background: 'rgba(255, 255, 255, 1)'
+        icon:
+          - color: black
+  label: >
+    [[[
+      if (entity.state == 0) return 'Sortir bac ce matin';
+      if (entity.state == 1) return 'Sortir le bac ce soir';
+      else return 'Passe dans '+ entity.attributes.days + ' jours';
+    ]]]
+  style: |
+    ha-card {
+      background: var(--custom-ha-card-background);
+      backdrop-filter: var(--custom-ha-card-backdrop-filter) !important;
+      box-shadow: none; 
+      border-width: 0px;                
+    }   
+  tap_action:
+    action: none
+
+    

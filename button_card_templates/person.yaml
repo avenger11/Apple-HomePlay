@@ -1,0 +1,53 @@
+person:
+  show_entity_picture: true
+  show_name: false
+  show_state: true
+  show_label: true
+  aspect_ratio: 1/1
+  styles:
+    card:
+      #- width: 176.5px
+      - border-radius: 20px
+      #- height: 176.5px
+      - background-size: 130%
+      - background-position: center
+      - padding: 15px 15px 5px 15px
+      - box-shadow: var(--custom-ha-card-box-shadow)
+    grid:
+      - grid-template-areas: '"i" "s" "l"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: 1fr min-content min-content
+    state:
+      - justify-self: start
+      - font-size: 22px
+      - font-weight: 600
+      - color: white
+      - padding-top: 10px
+      - padding-bottom: 5px
+    label:
+      - justify-self: start
+      - font-size: 16px
+      - color: white
+      - padding-bottom: 5px
+      - align-self: start
+      - text-align: justify
+    entity_picture:
+      - border-radius: 50%
+      - height: 60px
+      - width: 60px
+
+    img_cell:
+      - justify-content: start
+      - align-items: start
+      - margin: none
+    icon:
+      - border-width: 10px
+      - border-color: white
+  style: |
+    ha-card {
+      backdrop-filter: blur(33px) !important;
+      -webkit-backdrop-filter: blur(33px) !important;
+      box-shadow: none; 
+      border-color: rgba(255, 255, 255, 0.03);                              
+    }
+              

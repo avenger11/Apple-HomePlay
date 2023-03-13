@@ -1,0 +1,68 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: HOME ASSISTANT
+    timeout: 30000
+    content:
+      type: custom:layout-card
+      cards:
+        - type: entities
+
+          entities:
+            - entity: update.home_assistant_core_update
+              name: Version disponible
+              icon: mdi:home-assistant
+
+            - entity: update.home_assistant_core_update
+              type: attribute
+              attribute: installed_version
+              name: Version installée
+              icon: mdi:home-assistant
+
+            - entity: sensor.home_assistant_v2_db_size
+              icon: mdi:database
+
+            - entity: sensor.home_assistant_log_size
+              name: Loggfil
+              icon: mdi:file-document
+
+            - type: custom:hui-horizontal-stack-card
+              cards:
+                - type: custom:button-card
+                  name: Redémarrer serveur
+                  icon: mdi:reload
+                  tap_action:
+                    action: fire-dom-event
+                    browser_mod:
+                      service: browser_mod.sequence
+                      data:
+                        sequence:
+                          - service: browser_mod.confirm
+                            data:
+                              message: "Êtes-vous sûre ?"
+                              title: "Confirmation"
+                              confirm_button_text: "Oui"
+                              cancel_button_text: "Non"
+                          - service: browser_mod.notification
+                            data:
+                              message: Redémarrage du serveur en cours...
+                          - service: browser_mod.delay
+                            data:
+                              time: 3000
+                          #- service: homeassistant.restart
+                  size: 1.4em
+                  color: '#9da0a2'
+                  styles:
+                    grid:
+                      - grid-template-areas: '"i n"'
+                      - grid-column-gap: 0.3em
+                    card:
+                      - color: '#9da0a2'
+                      - border-radius: 0.6em
+                      - padding: 1em 1.4em 1em 1.2em
+                      - width: max-content
+                      - font-size: 1.06em
+                      - font-weight: 500
+                      - letter-spacing: 0.03em
+                      - background: '#FFFFFF10'

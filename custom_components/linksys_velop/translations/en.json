@@ -1,0 +1,124 @@
+{
+    "config": {
+        "abort": {
+            "abort_login": "Unable to complete the login process.",
+            "already_configured": "Device already configured.",
+            "not_found": "Device not found.",
+            "not_velop": "Not a Velop device.",
+            "single_instance_allowed": "Integration already configured."
+        },
+        "error": {
+            "connection_error": "Connection error.",
+            "invalid_input": "Invalid action in request.",
+            "login_error": "Unable to login.  Please check the username and password.",
+            "login_bad_response": "Bad response on login.  Check that the primary node is correct.",
+            "node_not_primary": "The primary node in the Velop mesh should be specified.",
+            "node_timeout": "Timeout whilst contacting the node."
+        },
+        "flow_title": "{name}",
+        "step": {
+            "device_trackers": {
+                "data": {
+                    "tracked": "Available devices"
+                },
+                "description": "Select the devices you would like to use for presence tracking",
+                "title": "Linksys Velop"
+            },
+            "timers": {
+                "data": {
+                    "api_request_timeout": "Time to wait for a response from the Mesh (in seconds)",
+                    "consider_home": "Time to wait before switching to not_home (in seconds)",
+                    "scan_interval": "Scan interval (in seconds)",
+                    "scan_interval_device_tracker": "Scan interval for device trackers (in seconds)"
+                },
+                "description": "Set the various timers for the integration",
+                "title": "Linksys Velop"
+            },
+            "user": {
+                "data": {
+                    "node": "Primary node address",
+                    "password": "Password"
+                },
+                "description": "Enter the details to connect to the Linksys Velop mesh",
+                "title": "Linksys Velop"
+            }
+        },
+        "title": "Linksys Velop"
+    },
+    "device_automation": {
+        "trigger_type": {
+            "logging_stopped": "Logging stopped",
+            "new_device": "New device found",
+            "new_node": "New node found",
+            "new_primary_node": "Primary node changed"
+        }
+    },
+    "entity": {
+        "sensor": {
+            "connection_type": {
+                "state": {
+                    "wired": "Wired",
+                    "wireless": "Wireless"
+                }
+            },
+            "node_type": {
+                "state": {
+                    "primary": "Primary",
+                    "secondary": "Secondary"
+                }
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "advanced_options": {
+                "data": {
+                    "node_images": "Node image path"
+                },
+                "data_description": {
+                    "node_images": "Path to the node images, e.g. /local/velop_images.\nUse * to remove the value."
+                },
+                "description": "Options below are considered advanced for various reasons.\nConfigure them carefully.",
+                "title": "Linksys Velop"
+            },
+            "device_trackers": {
+                "data": {
+                    "tracked": "Available devices"
+                },
+                "description": "Select the devices you would like to use for presence tracking.",
+                "title": "Linksys Velop"
+            },
+            "init": {
+                "menu_options": {
+                    "advanced_options": "Advanced Options",
+                    "device_trackers": "Device Trackers",
+                    "logging": "Logging",
+                    "timers": "Timers"
+                },
+                "title": "Linksys Velop"
+            },
+            "logging": {
+                "data": {
+                    "logging_mode": "Logging mode",
+                    "logging_jnap_response": "Include query responses in debug logs",
+                    "logging_serial": "Include the serial number in debug logs"
+                },
+                "data_description": {
+                    "logging_mode": "The mode setting has no effect if logging for the integration is defined in configuration.yaml"
+                },
+                "description": "Configure logging details and state.{logging_mode_warning}",
+                "title": "Linksys Velop"
+            },
+            "timers": {
+                "data": {
+                    "api_request_timeout": "Time to wait for a response from the Mesh (in seconds)",
+                    "consider_home": "Time to wait before switching to not_home (in seconds)",
+                    "scan_interval": "Scan interval (in seconds)",
+                    "scan_interval_device_tracker": "Scan interval for device trackers (in seconds)"
+                },
+                "description": "Set the various timers for the integration.",
+                "title": "Linksys Velop"
+            }
+        }
+    }
+}

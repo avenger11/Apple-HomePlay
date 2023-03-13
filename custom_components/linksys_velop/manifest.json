@@ -1,0 +1,27 @@
+{
+  "codeowners": [
+    "@uvjim"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "ssdp"
+  ],
+  "domain": "linksys_velop",
+  "documentation": "https://github.com/uvjim/linksys_velop",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/uvjim/linksys_velop/issues",
+  "loggers": [
+    "pyvelop"
+  ],
+  "name": "Linksys Velop",
+  "requirements": [
+    "pyvelop==2022.12.3"
+  ],
+  "ssdp": [
+    {
+      "st": "urn:schemas-upnp-org:device:InternetGatewayDevice:2",
+      "manufacturer": "Linksys"
+    }
+  ],
+  "version": "2023.1.1"
+}

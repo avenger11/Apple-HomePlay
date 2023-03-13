@@ -1,0 +1,104 @@
+auto_start: true
+
+name: Home Assistant Bridge
+
+filter:
+  include_entities:
+    - alarm_control_panel.alarme
+    - light.dimmerlivingroom
+    - light.dreamview_t1
+    - light.floodlight_kitchen
+    - light.grouplightkitchencounter
+    - light.groupspotlightkitchen
+    - light.groupspotlightkitchensink
+    - light.kitchen_leds
+    - light.lampe_salle_de_bain
+    - light.lumiere_salle_de_bain_2
+    - light.stairs_lights
+    - light.ambientlightbedroomclara_lightbulb
+
+    - switch.switch_basement
+    - switch.switchentreelivingroom_switch
+    - switch.switchexterieurback_switch
+    - switch.switchexteriorfront
+    - switch.switchexteriorfrontplug
+    - switch.switchvestibule_switch
+    - switch.plug_christmastree
+
+    - input_boolean.above_1500lx
+    - input_boolean.above_6000lx
+    - input_boolean.above_600lx
+
+
+    - climate.entryway
+
+    - sensor.temperaturesensor_basement_temperature
+    - sensor.temperaturesensor_basement_humidity
+    - sensor.temperaturesensor_clara_temperature
+    - sensor.temperaturesensor_clara_humidity
+    - sensor.temperaturesensor_masterbedroom_temperature
+    - sensor.temperaturesensor_masterbedroom_humidity
+
+    - input_boolean.homekit_someone_home
+
+entity_config:
+  alarm_control_panel.alarme:
+    name: Alarme
+    code: !secret Alarm_code
+
+  light.dimmerlivingroom:
+    name: Salon
+  light.dreamview_t1:
+    name: TV Ambient
+  light.floodlight_kitchen:
+    name: Floodlight
+  light.grouplightkitchencounter:
+    name: Comptoir
+  light.groupspotlightkitchen:
+    name: Spot
+  light.groupspotlightkitchensink:
+    name: Evier
+  light.kitchen_leds:
+    name: Leds
+  light.lampe_salle_de_bain:
+    name: Miroir1
+  light.lumiere_salle_de_bain_2:
+    name: Miroir2
+  light.stairs_lights:
+    name: Escalier
+  light.ambientlightbedroomclara_lightbulb:
+    name: Lampe Ambience
+    
+
+  switch.switch_basement:
+    name: Sous-sol
+  switch.switchentreelivingroom_switch:
+    name: Entrée
+  switch.switchexterieurback_switch:
+    name: Arrière
+  switch.switchexteriorfront:
+    name: Avant
+  switch.switchexteriorfrontplug:
+    name: Prise Avant
+    type: outlet
+  switch.switchvestibule_switch:
+    name: Vestibule
+
+  climate.entryway:
+    name: Climat
+
+  sensor.temperaturesensor_basement_temperature:
+    name: Température
+  sensor.temperaturesensor_basement_humidity:
+    name: Humidité
+  sensor.temperaturesensor_clara_temperature:
+    name: Température
+  sensor.temperaturesensor_clara_humidity:
+    name: Humidité
+  sensor.temperaturesensor_masterbedroom_temperature:
+    name: Température
+  sensor.temperaturesensor_masterbedroom_humidity:
+    name: Humidité
+
+  input_boolean.homekit_someone_home:
+    name: Homekit Someone Home

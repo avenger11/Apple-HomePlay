@@ -1,0 +1,22 @@
+
+
+category:
+  show_state: true
+  layout: icon_name_state2nd
+  styles:
+    card:
+      - width: 150px
+      - height: 50px
+      - border-radius: 30px
+      - padding: 4%
+    name:
+      - font-size: 18px
+      - padding-right: 10px
+      - justify-self: start
+    state:
+      - font-size: 14px
+      - color: grey
+      - padding-right: 10px
+      - justify-self: start
+    icon:
+      - padding-bottom: 3px

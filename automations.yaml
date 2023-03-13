@@ -1,0 +1,135 @@
+- id: '1674524773575'
+  alias: Day to night
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.sun_phase
+    to: Civil Twilight
+    from: Day
+  condition: []
+  action:
+  - service: frontend.set_theme
+    data:
+      name: dark
+  mode: single
+- id: '1674524878733'
+  alias: Night to Day
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.sun_phase
+    from: Civil Twilight
+    to: Day
+  condition: []
+  action:
+  - service: frontend.set_theme
+    data:
+      name: light
+  mode: single
+- id: '1677275739371'
+  alias: Alarm panel show
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - alarm_control_panel.alarme
+    from: disarmed
+    to: arming
+  condition: []
+  action:
+    action: fire-dom-event
+    browser_mod:
+      service: browser_mod.popup
+      data:
+        title: Sécurité
+        style: '#--popup-max-width: 200px; --popup-min-width: 300px; --ha-card-border-radius:
+          0; --ha-card-background: none;
+
+          '
+        card_mod:
+          style:
+            layout-card:
+              $grid-layout$:
+                .: "#root {\n  margin: -24px 0 !important;\n}\n"
+                hui-entities-card:
+                  $: ".card-content {\n  padding: 1.4em 2.2em 1.6em 1.5em;\n  padding-bottom:
+                    0.8em;\n}\nha-card {\n  border-right: 1.5px solid rgba(0, 0, 0,
+                    0.2);\n  border-radius: 0;\n  transition: none;\n}\n"
+        content:
+          type: custom:layout-card
+          layout:
+            margin: 0
+          cards:
+          - type: custom:alarmo-card
+            entity: alarm_control_panel.alarme
+            use_clear_icon: true
+            button_scale_keypad: 2
+            show_messages: false
+            states:
+              armed_home:
+                hide: true
+            keep_keypad_visible: true
+            button_scale_actions: 1.5
+            style: "ha-card {\n  border: none;\n  padding-bottom: 0px !important;\n
+              \ max-width: 380px;\n  height: 500px;\n}\nha-button-menu {\n  display:
+              none !important;\n}\n"
+  mode: single
+- id: '1677374042197'
+  alias: Show Alarm Popup
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - alarm_control_panel.alarme
+    from: disarmed
+    to: arming
+  - platform: state
+    entity_id:
+    - alarm_control_panel.alarme
+    to: triggered
+  condition: []
+  action:
+  - service: button.press
+    data: {}
+    target:
+      entity_id: button.fire_tablet_bring_to_foreground
+  - service: browser_mod.popup
+    data:
+      title: Sécurité
+      style: '#--popup-max-width: 200px; --popup-min-width: 300px; --ha-card-border-radius:
+        0; --ha-card-background: none;
+
+        '
+      card_mod:
+        style:
+          layout-card:
+            $grid-layout$:
+              .: "#root {\n  margin: -24px 0 !important;\n}\n"
+              hui-entities-card:
+                $: ".card-content {\n  padding: 1.4em 2.2em 1.6em 1.5em;\n  padding-bottom:
+                  0.8em;\n}\nha-card {\n  border-right: 1.5px solid rgba(0, 0, 0,
+                  0.2);\n  border-radius: 0;\n  transition: none;\n}\n"
+      content:
+        type: custom:layout-card
+        layout:
+          margin: 0
+        cards:
+        - type: custom:alarmo-card
+          entity: alarm_control_panel.alarme
+          use_clear_icon: true
+          button_scale_keypad: 2
+          show_messages: false
+          states:
+            armed_home:
+              hide: true
+          keep_keypad_visible: true
+          button_scale_actions: 1.5
+          style: "ha-card {\n  border: none;\n  padding-bottom: 0px !important;\n
+            \ max-width: 380px;\n  height: 500px;\n}\nha-button-menu {\n  display:
+            none !important;\n}\n"
+    target:
+      device_id:
+      - 9662d0b85fdeab3c6effe8998bd1bbfb
+  mode: single

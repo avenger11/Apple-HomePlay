@@ -1,0 +1,81 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: Sécurité
+    timeout: 70000
+    style: >
+      #--popup-max-width: 200px;
+      --popup-min-width: 300px;
+      --ha-card-border-radius: 0;
+      --ha-card-background: none;
+      --masonry-view-card-margin: none;
+      #backdrop-filter: blur(30px) saturate(180%) !important;
+
+    card_mod:
+      style:
+
+        ha-dialog: 
+          $: |
+            .mdc-dialog__container {
+              --dialog-surface-margin-top: 20px !important;
+            }
+
+
+        layout-card: 
+          $grid-layout$:
+            .: |
+              #root {
+                margin: -24px 0 !important;
+              }
+            hui-entities-card:
+              $: |
+                .card-content {
+                  padding: 1.4em 2.2em 1.6em 1.5em;
+                  padding-bottom: 0.8em;
+                }
+                ha-card {
+                  border-right: 1.5px solid rgba(0, 0, 0, 0.2);
+                  border-radius: 0;
+                  transition: none;
+                }
+    content:
+      type: custom:layout-card
+      layout:
+        margin: 0
+      cards:
+        - type: custom:alarmo-card
+          entity: alarm_control_panel.alarme
+          use_clear_icon: true
+          button_scale_keypad: 2
+          show_messages: false
+          states: 
+            armed_home:
+              hide: true
+          keep_keypad_visible: true
+          button_scale_actions: 1.5
+          style: |
+            ha-card {
+              border: none;
+              padding-bottom: 0px !important;
+              max-width: 380px;
+              height: 500px;
+            }
+            ha-button-menu {
+              display: none !important;
+            }
+
+
+          #  :host {
+          #    left: 89.5%;
+          #    top: 70%;
+          #    #width: 22vw;
+          #  }
+
+          #    background: none;
+          #    box-shadow: none;
+
+          #  mwc-icon-button {
+          ##    display: none;
+          #  }
+                

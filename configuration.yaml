@@ -1,0 +1,212 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+homekit: !include homekit.yaml
+
+homeassistant:
+  allowlist_external_dirs:
+    - /config
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+  extra_module_url:
+    - /local/community/custom-brand-icons/custom-brand-icons.js #Add new icon from elax46, use phu:
+    - /local/community/garbage-collection-card/garbage-collection-card.js
+    - /local/community/light-popup-card/light-popup-card.js
+    - /local/community/kiosk-mode/kiosk-mode.js
+    - /local/community/bar-card/bar-card.js
+    - /local/fonts.css
+
+
+##############################################
+# Group
+##############################################
+
+group:
+  persons:
+    name: family
+    entities:
+      - person.sebastien_logeais
+      - person.lynn
+
+  hass_update_notification:
+    name: Home assistant Update
+    entities:
+      - update.home_assistant_core_update
+      - update.home_assistant_operating_system_update
+      - update.home_assistant_supervisor_update
+
+  router_update_notification:
+    name: Velop Mesh Wifi Notification
+    entities:
+      - update.bureau_update
+      - update.salon_update
+      - update.sous_sol_update
+
+light:
+  - platform: group
+    name: "Kitchen Leds"
+    entities:
+      - light.ledkitchen_light_bulb
+      - light.ledkitchenoven_light_bulb
+  
+  - platform: group
+    name: "Bathroom light"
+    entities:
+      - light.lampe_salle_de_bain
+      - light.lumiere_salle_de_bain_2
+      
+##############################################
+# UI Librairies
+##############################################
+lovelace:
+  dashboards:
+    lovelace-homeplay:
+      mode: yaml
+      filename: homeplay.yaml
+      title: HomePlay
+      icon: phu:homekit
+      show_in_sidebar: true
+      
+##############################################
+# Apple Calendar Config
+##############################################
+
+calendar:
+  - platform: caldav
+    url: https://caldav.icloud.com
+    username: !secret apple_username
+    password: !secret apple_secret
+    calendars:
+      - Famille
+
+##############################################
+# Additional Sensor
+##############################################
+
+sensor:
+  # Documentation
+  # https://developpeurs.stm.info/documentation/gtfsrtv2
+  # https://github.com/zacs/ha-gtfs-rt/issues/22
+
+  #- platform: gtfs_rt
+  #  trip_update_url: "https://api.stm.info/pub/od/gtfs-rt/ic/v2/tripUpdates"
+  #  vehicle_position_url: "https://api.stm.info/pub/od/gtfs-rt/ic/v2/vehiclePositions"
+  #  api_key: "l7xxb2e7ebd39629480aaeb63ffc17b6ac15"
+  #  departures:
+  #    - name: 191 Bus
+  #      route: 191
+  #      stopid: 57237
+
+  - platform: time_date
+    display_options:
+      - "time"
+      - "date"
+      - "time_date"
+
+  - platform: sun2
+    monitored_conditions:
+      - sun_phase
+
+
+  ##########
+  # FILTER #
+  ##########
+  - platform: filter
+    name: "Filter_feel_like_temperature"
+    entity_id: sensor.montreal_wind_chill
+    filters:
+      - filter: outlier
+        window_size: 4
+        radius: 4.0
+      - filter: lowpass
+        time_constant: 5
+        precision: 2
+
+  #######################################################################################
+  ## Templates (Used for updating text in the UI and converting sensors to CSS values )
+  #######################################################################################
+
+  - platform: template
+    sensors:
+      ## Find the Min and max temperature in the house
+      ## Do not forget to add new temperature sensor to these math
+      temperature_min:
+        value_template: >
+          {{ [
+              states('sensor.entryway_temperature'),
+              states('sensor.temperaturesensor_basement_temperature'),
+              states('sensor.temperaturesensor_clara_temperature'),
+              states('sensor.temperaturesensor_masterbedroom_temperature')
+              ] | min 
+          }}
+
+      temperature_max:
+        value_template: >
+          {{ [
+              states('sensor.entryway_temperature'),
+              states('sensor.temperaturesensor_basement_temperature'),
+              states('sensor.temperaturesensor_clara_temperature'),
+              states('sensor.temperaturesensor_masterbedroom_temperature')
+              ] | max 
+          }}
+      temperature_min_max:
+        value_template: "{{ states('sensor.temperature_min') | round(1) }} - {{ states('sensor.temperature_max') | round(1) }}°"
+
+      ## Converts time and date into sentence for UI
+      day:
+        value_template: >
+          {{["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"][now().weekday()]}}
+
+      month:
+        value_template: >
+          {% set months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"] %}
+          {{ strptime(states('sensor.date'), '%Y-%m-%d').day }}
+          {{ months[now().month-1] }}
+      date_string:
+        friendly_name: "Full Date"
+        value_template: "{{ states('sensor.day') }} {{ states('sensor.month') }}"
+
+      ### feel like temperature
+      feel_like:
+        #unit_of_measurement: "°"
+        value_template: >
+          {% if is_state('sensor.montreal_wind_chill','unknown') %}
+            {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
+          {% else %}
+            {{ states('sensor.montreal_wind_chill') | round(0) }}°
+          {% endif %}
+      ### High and low temperature
+      high_low_temp:
+        value_template: >
+          ↑ {{ states('sensor.montreal_high_temperature') }}° ↓ {{ states('sensor.montreal_low_temperature') }}°
+
+      weather_bg_condition2:
+        value_template: >
+          {% if is_state('sensor.sun_phase','Day') %}
+            {{ states('sensor.montreal_icon_code') | round(0) }}
+          {% elif is_state('sensor.sun_phase','Night') %}
+            {{ states('sensor.montreal_icon_code') | round(0) + 100  }}
+          {% elif is_state('sensor.sun_phase','Astronomical Twilight') %}
+            {{ states('sensor.montreal_icon_code') | round(0) + 100  }}
+          {% else %}
+            {{ states('sensor.montreal_icon_code') | round(0) + 200 }}
+          {% endif %}
+
+      humidity_masterbedroom:
+        value_template: >
+          {{ states('sensor.temperaturesensor_masterbedroom_humidity') | round(0) }}%
+
+
+logger:
+  default: info
+  logs:
+    custom_components.gtfs_rt: debug

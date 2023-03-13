@@ -1,0 +1,125 @@
+# Linksys Velop services
+
+check_updates:
+  name: Check for Updates
+  description: Instruct the mesh to check for firmware updates
+  fields:
+    mesh:
+      name: Mesh
+      description: The Mesh that the action should be executed on
+      required: true
+      selector:
+        device:
+          integration: linksys_velop
+          manufacturer: uvjim
+
+delete_device:
+  name: Delete Device
+  description:
+    Delete a device from the mesh Device List (only a single device can be deleted at a time).
+    The mesh will reject the request if the device is not marked as offline.
+  fields:
+    mesh:
+      name: Mesh
+      description: The Mesh that the action should be executed on
+      required: true
+      selector:
+        device:
+          integration: linksys_velop
+          manufacturer: uvjim
+    device:
+      name: Device
+      description: The name or identifier of the device to rename
+      required: true
+      selector:
+        text:
+
+device_internet_access:
+  name: Control Internet Access for a Device
+  description: Pause/Resume a device's access to the Internet via the Mesh
+  fields:
+    mesh:
+      name: Mesh
+      description: The Mesh that the action should be executed on
+      required: true
+      selector:
+        device:
+          integration: linksys_velop
+          manufacturer: uvjim
+    device:
+      name: Device
+      description: The name or identifier of the device to pause/resume
+      required: true
+      selector:
+        text:
+    pause:
+      name: Pause Access
+      description: Enable to pause Internet access for the device
+      required: true
+      selector:
+        boolean:
+
+reboot_node:
+  name: "Reboot Node"
+  description: Instruct the mesh to reboot a node
+  fields:
+    mesh:
+      name: Mesh
+      description: The Mesh that the action should be executed on
+      required: true
+      selector:
+        device:
+          integration: linksys_velop
+          manufacturer: uvjim
+    node_name:
+      name: "Name"
+      description: The name of the node to reboot
+      required: true
+      selector:
+        text:
+    is_primary:
+      name: "Is Primary"
+      description:
+        Rebooting the primary node will force a reboot on all secondary nodes.
+        If you are sure you want to do this, enable this setting and turn it on.
+      required: false
+      selector:
+        boolean:
+
+rename_device:
+  name: Rename Device
+  description: Rename a device on the Mesh
+  fields:
+    mesh:
+      name: Mesh
+      description: The Mesh that the action should be executed on
+      required: true
+      selector:
+        device:
+          integration: linksys_velop
+          manufacturer: uvjim
+    device:
+      name: Device
+      description: The name or identifier of the device to rename
+      required: true
+      selector:
+        text:
+    new_name:
+      name: New Name
+      description: The new name for the device
+      required: true
+      selector:
+        text:
+
+start_speedtest:
+  name: Execute Speedtest
+  description: Instruct the mesh to carry out a Speedtest
+  fields:
+    mesh:
+      name: Mesh
+      description: The Mesh that the action should be executed on
+      required: true
+      selector:
+        device:
+          integration: linksys_velop
+          manufacturer: uvjim

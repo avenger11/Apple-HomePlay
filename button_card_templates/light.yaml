@@ -1,0 +1,59 @@
+  ##########################################
+  # Light           
+  ##########################################
+
+  light:
+
+    extra_styles: |
+      #### glowing flash animation ############
+      @keyframes glowing {
+        30% {
+          filter: drop-shadow(0px 0px 0px white);
+        }
+        60% {
+          filter: drop-shadow(0px 0px 6px white);
+        }
+        100% {
+          filter: drop-shadow(0px 0px 0px white);
+        }
+      }
+      ##########################################
+
+      @keyframes press {
+      0% {
+        transform: scale(1);
+      }  
+      50% {
+        transform: scale(0.95);
+      }
+      100% {
+        transform: scale(1);
+      }
+      }
+
+    show_state: false
+    show_icon: true
+    show_name: false
+    show_label: false
+    color_type: icon
+    size: 60%
+    tap_action:
+      action: more-info
+    styles:
+      icon:
+        - color: >
+            [[[ return (entity.state === 'on' ) ? 'rgb(255, 255, 255)' : 'rgba(252, 204, 17, 1.0)'; ]]]  
+        #Apple Yellow rgb(252, 204, 17)
+        - animation: >
+            [[[ return (entity.state === 'on') ? '2s glowing' : '']]]
+      card:
+        - width: 5vw
+        - height: 5vw
+        - borderRadius: 10vw
+        - border-width: 0px
+        - background-color: >
+            [[[ return (entity.state === 'on' ) ? 'rgba(252, 204, 17, 1.0)' : 'var(--custom-switch-bg-color)'; ]]]
+        #Apple Yellow rgba(252, 204, 17, 1.0)
+        - animation: >
+            [[[ return (entity.state === 'on') ? 'press 0.5s': 'press 0.5s'; ]]]
+        #- filter: drop-shadow(0px 0px 2px rgba(0 , 0, 0, 0.5))

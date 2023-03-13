@@ -1,0 +1,98 @@
+siren:
+  alias: Siren
+  sequence:
+  - service: media_player.volume_set
+    data:
+      volume_level: 1
+    target:
+      device_id: de85dd03f204d3d7834699c52d5d9711
+  - repeat:
+      until:
+      - condition: state
+        entity_id: alarm_control_panel.alarme
+        state: disarmed
+      sequence:
+      - service: media_player.play_media
+        target:
+          entity_id: media_player.fire_tablet
+        data:
+          media_content_id: media-source://media_source/local/Siren_Noise.mp3
+          media_content_type: audio/mpeg
+        metadata:
+          title: Siren_Noise.mp3
+          thumbnail:
+          media_class: music
+          children_media_class:
+          navigateIds:
+          - {}
+          - media_content_type: app
+            media_content_id: media-source://media_source
+      - wait_template: '{{ is_state("media_player.fire_tablet", "idle") }}'
+        continue_on_timeout: true
+  mode: single
+  icon: mdi:bullhorn
+stop_siren:
+  alias: stop siren
+  sequence:
+  - service: media_player.media_stop
+    data: {}
+    target:
+      device_id: de85dd03f204d3d7834699c52d5d9711
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.3
+    target:
+      device_id: de85dd03f204d3d7834699c52d5d9711
+  mode: single
+  icon: mdi:bullhorn-outline
+start_blink_light_when_alarm_trigger:
+  alias: Start blink light when alarm trigger
+  sequence:
+  - service: scene.create
+    data:
+      scene_id: before_alarm
+      snapshot_entities:
+      - light.ledkitchen_light_bulb
+      - light.ledkitchenoven_light_bulb
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - repeat:
+      until:
+      - condition: state
+        entity_id: alarm_control_panel.alarme
+        state: disarmed
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 1
+          rgb_color:
+          - 255
+          - 0
+          - 0
+          brightness: 255
+        target:
+          entity_id: light.kitchen_leds
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - service: light.turn_off
+        data:
+          transition: 3
+        target:
+          entity_id: light.kitchen_leds
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.before_alarm
+  mode: single
+  icon: mdi:alarm-light

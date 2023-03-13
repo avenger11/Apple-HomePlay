@@ -1,0 +1,149 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: Climat
+    timeout: 30000
+    style: |
+      --popup-max-width: 900px;
+      --primary-color: transparent; /* hide timeout progress */
+    card_mod:
+      style:
+        # card divider border
+        layout-card$grid-layout$: |
+          #root {
+            margin: -24px 0 !important;
+          }
+          hui-vertical-stack-card {
+            border-right: 1.5px solid rgba(0, 0, 0, 0.2);
+            border-radius: 0;
+            transition: none;
+          }
+        ha-dialog$: |
+          div.mdc-dialog__scrim {
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+          }
+    content:
+      type: custom:layout-card
+      layout_type: custom:grid-layout
+      layout:
+        margin: 0
+        grid-template-columns: 300px 300px 300px
+        grid-template-rows: 1fr
+        grid-template-areas: |
+          "control temperature humidity"
+
+      cards:
+      - type: vertical-stack
+        view_layout:
+          grid-area: control
+        cards:
+          - type: thermostat
+            entity: climate.entryway
+      
+      - type: grid
+        view_layout:
+          grid-area: temperature
+        columns: 2
+        square: true
+        cards:
+
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperaturesensor_masterbedroom_temperature
+                color: '#2196f3'
+            name: PARENT
+            hours_to_show: 48
+            icon: mdi:thermometer
+            align_icon: left
+            line_width: 5
+            font-size: 10px
+            card_mod:
+              style: |
+                ha-icon {
+                  color: rgb(148, 148, 148)
+                }
+
+
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperaturesensor_clara_temperature
+                color: '#2196f3'
+            name: CLARA
+            hours_to_show: 48
+            icon: mdi:thermometer
+            align_icon: left
+            line_width: 5
+            card_mod:
+              style: |
+                ha-icon {
+                  color: rgb(148, 148, 148)
+                }
+
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperaturesensor_basement_temperature
+                color: '#2196f3'
+            name: SOUS-SOL
+            hours_to_show: 48
+            icon: mdi:thermometer
+            align_icon: left
+            line_width: 5
+            card_mod:
+              style: |
+                ha-icon {
+                  color: rgb(148, 148, 148)
+                }
+
+      - type: grid
+        view_layout:
+          grid-area: humidity
+        columns: 2
+        square: true
+        cards:
+
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperaturesensor_masterbedroom_humidity
+                color: '#2196f3'
+            name: PARENT
+            hours_to_show: 48
+            icon: mdi:water-percent
+            align_icon: left
+            line_width: 5
+            card_mod:
+              style: |
+                ha-icon {
+                  color: rgb(148, 148, 148)
+                }
+
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperaturesensor_clara_humidity
+                color: '#2196f3'
+            name: CLARA
+            hours_to_show: 48
+            icon: mdi:water-percent
+            align_icon: left
+            line_width: 5
+            card_mod:
+              style: |
+                ha-icon {
+                  color: rgb(148, 148, 148)
+                }
+
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperaturesensor_basement_humidity
+                color: '#2196f3'
+            name: SOUS-SOL
+            hours_to_show: 48
+            icon: mdi:water-percent
+            align_icon: left
+            line_width: 5
+            card_mod:
+              style: |
+                ha-icon {
+                  color: rgb(148, 148, 148)
+                }
