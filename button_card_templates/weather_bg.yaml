@@ -8,14 +8,14 @@
 2: /local/weather/partly_cloudy_day.png #Partiellement nuageux / Partly Cloudy
 3: /local/weather/mostly_cloudy_day.png #Généralement nuageux / Mostly Cloudy
 6: /local/weather/drizzle_day.png #Faible averse de pluie / Light Rain Shower
-7: #Faible averse de pluie et de neige / Light Rain Shower and Flurries
+7: /local/weather/drizzle_day.png #Faible averse de pluie et de neige / Light Rain Shower and Flurries
 8: /local/weather/snow_day.png #Faible averse de neige / Light Flurries
 10: /local/weather/cloudy_day.png #Nuageux / Cloudy
 11: /local/weather/drizzle_day.png #Précipitations / Precipitation
 12: /local/weather/rain_day.png #Pluie / Rain
 13: #Pluie forte / Heavy Rain
 14: /local/weather/rain_day.png #Pluie verglaçante / Freezing Rain
-15: #Pluie et neige / Rain and Snow
+15: /local/weather/rain_day.png #Pluie et neige / Rain and Snow
 16: /local/weather/light_flurries_day.png #Neige faible / Light Snow
 17: /local/weather/snow_day.png #Neige / Snow
 18: /local/weather/heavy_snow_day.png #Neige forte / Heavy Snow
@@ -49,7 +49,7 @@
 112: /local/weather/rain_night.png #Pluie / Rain
 113: /local/weather/heavy_rain_night.png #Pluie forte / Heavy Rain
 114: /local/weather/rain_night.png #Pluie verglaçante / Freezing Rain
-115: #Pluie et neige / Rain and Snow
+115: /local/weather/rain_night.png #Pluie et neige / Rain and Snow
 116: /local/weather/light_flurries_night.png #Neige faible / Light Snow
 117: /local/weather/snow_night.png #Neige / Snow
 118: /local/weather/heavy_snow_night.png #Neige forte / Heavy Snow
