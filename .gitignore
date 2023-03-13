@@ -14,7 +14,7 @@ zigbee2mqtt/
 govee_learning.yaml
 secrets.yaml
 scenes.yaml
-
+www/community
 
 *.log*
 *.db*
