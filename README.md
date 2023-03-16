@@ -28,3 +28,8 @@ I'm sharing my configuration there is no install button.
 
 
 <a href="https://www.buymeacoffee.com/sebhome" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+## Resource
+
+Apple Icon
+https://www.figma.com/file/PwWaGiMaSyrktcQRh7MxAD/SF-Symbols-4.0---SVG-Icons-(Community)?node-id=1498-49395&t=8xsPmha2AmVoMsAg-0
