@@ -16,6 +16,8 @@ There is still a lot of work to be done, the dashboard appear aligned on my tabl
 - Day & Night theme support (NB: automation based on sun location)
 - Support multiple floor by swaping between card
 - 32 Weather background change based on condition and day/night (screenshot from weather app)
+- Garbage card background become white if it's time :)
+- Apple 
 - Calendar integration
 - "apps" support notification
 
@@ -25,7 +27,8 @@ There is still a lot of work to be done, the dashboard appear aligned on my tabl
 
 ## Credit
 
-- inspired by [Mattias Persson](https://github.com/matt8707/hass-config) & [lukevink](https://github.com/lukevink/hass-config-lajv)
+- inspired by [Mattias Persson](https://github.com/matt8707/hass-config) & [lukevink](https://github.com/lukevink/hass-config-lajv) 
+- Apple CarPlay
 
 If you'd like to support me and future projects:
 
