@@ -1,0 +1,16 @@
+setting_icon:
+  show_state: false
+  show_icon: true
+  show_name: false
+  show_entity_picture: false
+  styles:
+    card:
+      - width: 6.15vw
+      - height: 6.15vw
+      - borderRadius: 0px
+      - border-width: 0px
+      - background-color: 'rgba(0,0,0,0)'
+    icon:
+      - color: var(--custom-ha-card-icon-color)
+      - width: 80%
+      

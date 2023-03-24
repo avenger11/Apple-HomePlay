@@ -9,7 +9,7 @@ views:
     title: HomePlay
     background: var(--background)
     layout:
-      margin: 4px
+      margin: 0.3vw
       grid-gap: 0.001vw
       grid-template-columns: 26.6% 59.5% 14.1%
       grid-template-rows: auto
@@ -18,7 +18,7 @@ views:
         "taskbar taskbar taskbar"
 
     cards:
-      
+
 #..................................
 #.LLLL..................fffff.ttt..
 #.LLLL.................effffftttt..
@@ -35,6 +35,11 @@ views:
 #.LLLLLLLLLL..eeeeee...efff..tttt..
 #..................................
 
+
+      ########################################
+      ##            Weather Card            ##
+      ########################################
+
       - type: vertical-stack
         view_layout:
           grid-area: left
@@ -44,19 +49,15 @@ views:
             image: /local/weather/empty.png
             style: |
               ha-card {
-                border-radius: 20px !important;
+                border-radius: 1.5vw !important;
                 --ha-card-background: rgba(0, 0, 0, 0);
                 --ha-card-border-color: rgba(0, 0, 0, 0);
                 --ha-card-border-width: 0px;
-                height: 35vw !important;
+                height: 35.5vw !important;
                 box-shadow: var(--custom-ha-card-box-shadow);
               }
               
             elements:
-
-              ########################################
-              ##            Weather Card            ##
-              ########################################
 
               - type: image
                 entity: sensor.weather_bg_condition2
@@ -82,7 +83,7 @@ views:
                   text-align: center
                   left: 50%
                   top: 10%
-                  text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                  text-shadow: 0px 0px 10px rgba(0,0,0,0.4)
                 tap_action:
                   action: none
 
@@ -95,7 +96,7 @@ views:
                     text-align: center
                     font-weight: 400
                     font-size: 1.5vw
-                    text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                    text-shadow: 0px 0px 10px rgba(0,0,0,0.4)
                     color: rgba(255,255,255,1)
 
               - type: state-label
@@ -106,35 +107,43 @@ views:
                     text-align: center
                     font-weight: 400
                     font-size: 1.5vw
-                    text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                    text-shadow: 0px 0px 4px rgba(0,0,0,0.5)
                     color: rgba(255,255,255,1)
 
               - type: custom:mod-card
                 style:
-                  top: 34%
+                  top: 36%
                   left: 50%
-                  width: 100%
+                  width: 95%
                 card:
                   type: weather-forecast
                   entity: weather.montreal_hourly_forecast
                   show_current: false
                   show_forecast: true
                   style:
-                    padding: 12px 
+
                   card_mod:
                     style: |
                       .forecast-image-icon > * {
-                        width: 30px !important;
-                        height: 25px !important;
+                        transform: scale(0.8);
                       }
-
+                      .forecast {
+                        #text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+                        padding-top: 0.5vw !important;
+                      }
+                      ha-card {
+                        background: var(--custom-weather-card-background);
+                        backdrop-filter: var(--custom-weather-card-backdrop-filter);
+                        padding: 1px !important;
+                      }
+              
               - type: custom:clock-weather-card
                 entity: weather.openweathermap
                 forecast_days: 4
                 hide_today_section: true
                 style:
                   left: 50%
-                  top: 51.9%
+                  top: 53.1%
                   width: 95%
                   backdrop-filter: var(--custom-weather-card-backdrop-filter)
                   background-color: var(--custom-weather-card-background)
@@ -161,11 +170,11 @@ views:
                       padding-top: 8px !important;
                       padding-bottom: 8px !important;
                     }
-
+    
           ########################################
           ##           Calendar Card            ##
           ########################################
-
+      
           - type: custom:atomic-calendar-revive
             entities:
               - entity: calendar.famille
@@ -190,7 +199,7 @@ views:
                   background: var(--custom-ha-card-background) !important;
                   backdrop-filter: var(--custom-ha-card-backdrop-filter);
                   border-color: rgba(255, 255, 255, 0.03);
-                  border-radius: 20px;
+                  border-radius: 1.5vw;
                   box-shadow: var(--custom-ha-card-box-shadow);
                   padding:0.6vw !important;
                 }
@@ -206,7 +215,7 @@ views:
                   overflow: hidden;
                   text-overflow: ellipsis;
                   white-space: nowrap;
-                  width: 240px;
+                  width: 18vw;
                 }
                 .relativeTime {
                   --time-color: var(--custom-ha-card-text-color-secondary) !important;
@@ -215,7 +224,7 @@ views:
                   overflow: hidden;
                   text-overflow: ellipsis;
                   white-space: nowrap;
-                  width: 110px;
+                  width: 8.4vw;
                 }
                 .event-left {
                   font-size: 1.3vw !important;
@@ -233,7 +242,7 @@ views:
                   margin-bottom: 0.3vw;
                 }
                 .cal-card{
-                  height: 19.4vw !important;
+                  #height: 19.4vw !important;
                 }
 
 #............................................................
@@ -260,6 +269,9 @@ views:
             ha-card {
               box-shadow: var(--custom-ha-card-box-shadow);
               border-radius: 20px;
+              border-style: none !important;
+              border-width: 0px !important;
+              border-color: rgba(0,0,0,0) !important;
             }
         card:
             type: custom:swipe-card
@@ -279,7 +291,9 @@ views:
                 style: |
                   ha-card {
                     border-radius: 20px !important ;
-                    --ha-card-border-width: 0px;
+                    border-style: none !important;
+                    border-width: 0px !important;
+                    border-color: rgba(0,0,0,0) !important;
                   }
                 elements:
                   - type: image
@@ -305,6 +319,24 @@ views:
                     template:
                     - light
 
+                  - type: custom:button-card
+                    entity: sensor.temperaturesensor_basement_temperature
+                    show_state: true
+                    show_icon: false
+                    show_name: false
+                    show_label: false
+                    style:
+                      left: 45%
+                      top: 45%
+                    styles:
+                      card:
+                        - width: 3vw
+                        - height: 3vw
+                        - borderRadius: 6vw
+                        - border-width: 0px
+                        - background-color: var(--custom-switch-bg-color)
+                      state:
+                        - font-size: 1vw
 
               ###############################
               # GROUND FLOOR                #
@@ -522,7 +554,7 @@ views:
                 - background-image: url('/local/person/seb-blur.jpg')
             template:
               - person
-            
+
           - type: custom:button-card
             entity: person.lynn
             name: Lynn
@@ -546,6 +578,13 @@ views:
             icon: fapro:recycling
             template:
               - garbage
+
+    #      - type: custom:button-card
+    #        entity: input_select.washing_machine
+    #        name: Machine à lavée
+    #        icon: fapro:Icons=washer.fill
+    #        template:
+    #          - washer-dryer
 
 #.....................................................................
 #.TTTTTTTTTTT..................sssk......kkkb.........................
@@ -579,7 +618,7 @@ views:
                 height: 6.15vw !important;
                 margin-left: -8px;
                 margin-right: -8px;
-                margin-top: -5px;
+                margin-top: -4px;
               }
             elements:
               - type: state-label
@@ -657,15 +696,14 @@ views:
               - type: custom:hui-element
                 card_type: horizontal-stack
                 style: 
-                    top: 3vw
-                    left: 50%
-                    background: var(--custom-ha-card-background-revert)
-                    padding-right: 1.4vw
-                    padding-left: 1.4vw
-                    padding-top: 0.6vw
-                    padding-bottom: 0.5vw
+                  top: 3vw
+                  left: 50%
+                  padding-right: 1.4vw
+                  padding-left: 1.4vw
+                  padding-top: 0.6vw
+                  padding-bottom: 0.5vw
+                  background: var(--custom-ha-card-background-revert)                 
                 cards:
-
                   - type: custom:button-card
                     entity: group.hass_update_notification
                     entity_picture: /local/icon/HA.png
@@ -695,8 +733,18 @@ views:
                       - apps
                     tap_action:
                       !include popup/server.yaml
-  
 
+              - type: custom:button-card
+                entity: alarm_control_panel.alarme
+                icon: fapro:setting
+                style:
+                  top: 3vw
+                  left: 70%
+                template:
+                  - setting_icon
+                tap_action: 
+                  !include popup/setting.yaml
+  
                   ### SEPARATOR ##################################################
 #                  - type: custom:button-card
 #                    show_state: false

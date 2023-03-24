@@ -7,7 +7,7 @@ light:
   ##############################################################################
 
   # Custom Variable
-  custom-ha-card-background: rgba(255, 255, 255, 0.70)
+  custom-ha-card-background: rgba(255, 255, 255, 0.7)
   custom-ha-card-background-revert: rgba(0,0,0,0.1)
   custom-ha-card-backdrop-filter: blur(30px) saturate(180%)
   custom-ha-card-box-shadow: 0px 0px 10px rgba(0,0,0,0.3)
@@ -16,7 +16,7 @@ light:
   custom-ha-card-text-color-secondary: rgba(60,60,60,0.9)
   custom-ha-card-icon-color: rgba(0,0,0,1)
 
-  custom-switch-bg-color: rgba(40, 40, 40, 0.9)
+  custom-switch-bg-color: rgba(60, 60, 60, 0.9)
 
   custom-weather-card-background: rgba(0,0,0,0.1)
   custom-weather-card-backdrop-filter: blur(30px)
@@ -220,7 +220,7 @@ dark:
   ##############################################################################
 
   # Custom Variable
-  custom-ha-card-background: rgba(0, 0, 0, 0.7)
+  custom-ha-card-background: rgba(0, 0, 0, 0.8)
   custom-ha-card-background-revert: rgba(255,255,255,0.15)
   custom-ha-card-backdrop-filter: blur(30px) saturate(180%)
   custom-ha-card-box-shadow: 0px 0px 6px rgba(0,0,0,0.5)
@@ -304,7 +304,7 @@ dark:
   accent-color: var(--primary-color)
 
   # Text
-  primary-text-color: rgb(242, 242, 242)
+  primary-text-color: rgb(255, 255, 255) #rgb(242, 242, 242)
   secondary-text-color: rgb(166, 166, 166)
   text-primary-color: var(--primary-text-color)
   disabled-text-color: rgba(184, 190, 199, 0.4)
@@ -317,7 +317,7 @@ dark:
   sidebar-selected-text-color: var(--sidebar-selected-icon-color)
 
   # Buttons
-  paper-item-icon-color: rgb(169, 177, 188)
+  paper-item-icon-color: rgb(255,255,255) #rgb(169, 177, 188)
   paper-item-icon-active-color: rgb(138, 180, 248)
   mdc-button-outline-color: rgb(138, 180, 248)
 
