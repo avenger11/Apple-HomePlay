@@ -9,6 +9,7 @@ I'm sharing my configuration there is no install button.
 There is still a lot of work to be done, the dashboard appear aligned on my tablet but not really in browsers.
 
 I use a swipe card to be able to show the multiple stairs.
+
 ![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/01.gif)
 
 ## Feature
