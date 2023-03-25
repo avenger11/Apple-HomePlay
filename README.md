@@ -8,6 +8,7 @@ The Wall Mount tablet is a FireHD 10 from amazon running Fully Kiosk Browser.
 I'm sharing my configuration there is no install button.
 There is still a lot of work to be done, the dashboard appear aligned on my tablet but not really in browsers.
 
+I use a swipe card to be able to show the multiple stairs.
 ![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/01.gif)
 
 ## Feature
@@ -16,7 +17,6 @@ There is still a lot of work to be done, the dashboard appear aligned on my tabl
 - Support multiple floor by swaping between card
 - 32 Weather background change based on condition and day/night (screenshot from weather app)
 - Garbage card background become white if it's time :)
-- Apple 
 - Calendar integration
 - "apps" support notification
 
