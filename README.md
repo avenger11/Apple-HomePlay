@@ -25,6 +25,8 @@ I use a swipe card to show the multiple stairs of the house.
 
 ![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/day01.png)
 
+The floor plan have been designed in [Sweet Home 3D](https://www.sweethome3d.com/) and edited.
+
 ## Custom Cards from HACS
 Ensure to install those custom card before using this configuration via HACS
 
