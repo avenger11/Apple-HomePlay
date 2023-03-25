@@ -16,6 +16,7 @@ secrets.yaml
 scenes.yaml
 www/community/
 custom_components/
+automations.yaml
 
 *.log*
 *.db*
