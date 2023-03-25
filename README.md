@@ -21,9 +21,9 @@ I use a swipe card to be able to show the multiple stairs.
 - Calendar integration
 - "apps" support notification
 
-![Night Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/night_dashboard.png)
+![Night Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/night01.png)
 
-![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/day_dashboard.png)
+![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/day01.png)
 
 ## Credit
 
