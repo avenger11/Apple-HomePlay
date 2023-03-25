@@ -17,7 +17,7 @@ I use a swipe card to be able to show the multiple stairs.
 - Day & Night theme support (NB: automation based on sun location)
 - Support multiple floor by swaping between card
 - 32 Weather background change based on condition and day/night (screenshot from weather app)
-- Garbage card background become white if it's time :)
+- Garbage card background become white when it's time :)
 - Calendar integration
 - "apps" support notification
 
@@ -25,10 +25,16 @@ I use a swipe card to be able to show the multiple stairs.
 
 ![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/day01.png)
 
+## TODO List
+- [ ] FIll the empty space on the left, potentially light on count, climat etc..
+- [ ] Remove transition weather background and code
+- [ ] Improve all popups
+- [ ] Integrate Washer & Dryer Card
+
 ## Credit
 
 - inspired by [Mattias Persson](https://github.com/matt8707/hass-config) & [lukevink](https://github.com/lukevink/hass-config-lajv) 
-- Apple CarPlay
+
 
 If you'd like to support me and future projects:
 
