@@ -6,9 +6,9 @@ I'm running Home Assistant OS Supervised VM hosted on a NAS DS920+.
 The Wall Mount tablet is a FireHD 10 from amazon running Fully Kiosk Browser.
 
 I'm sharing my configuration there is no install button.
-There is still a lot of work to be done, the dashboard appear aligned on my tablet but not really in browsers.
+There is still a lot of work to be done, the dashboard appear aligned on my tablet but not perfect in browsers.
 
-I use a swipe card to be able to show the multiple stairs.
+I use a swipe card to show the multiple stairs of the house.
 
 ![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/01.gif)
 
@@ -25,15 +25,31 @@ I use a swipe card to be able to show the multiple stairs.
 
 ![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/day01.png)
 
+## Custom Cards from HACS
+Ensure to install those custom card before using this configuration via HACS
+
+- [Lovelace-Layout-Card](https://github.com/thomasloven/lovelace-layout-card) by Thomas loven.
+- [Swipe-card](https://github.com/bramkragten/swipe-card) by Bram Kragten.
+- [Button-card](https://github.com/custom-cards/button-card) by RomRider.
+- [Lovelace-Card-mod](https://github.com/thomasloven/lovelace-card-mod) by Thomas loven
+- [Atomic Calendar Revive](https://github.com/totaldebug/atomic-calendar-revive) by marksie1988
+- [Kiosk Mode](https://github.com/NemesisRE/kiosk-mode) by NemesisRE
+- [Clock weather card](https://github.com/pkissling/clock-weather-card) by pkissling
+
+## Custom integration from HACS
+- [Fontawesome](https://github.com/thomasloven/hass-fontawesome) by Thomas loven.
+- [Browser_mod](https://github.com/thomasloven/hass-browser_mod) by Thomas loven.
+
 ## TODO List
 - [ ] FIll the empty space on the left, potentially light on count, climat etc..
 - [ ] Remove transition weather background and code
 - [ ] Improve all popups
 - [ ] Integrate Washer & Dryer Card
+- [ ] Solve all resizing issues
 
 ## Credit
 
-- inspired by [Mattias Persson](https://github.com/matt8707/hass-config) & [lukevink](https://github.com/lukevink/hass-config-lajv) 
+- inspired by the great work of [Mattias Persson](https://github.com/matt8707/hass-config) & [lukevink](https://github.com/lukevink/hass-config-lajv) 
 
 
 If you'd like to support me and future projects:
