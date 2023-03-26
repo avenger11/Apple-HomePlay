@@ -1,4 +1,4 @@
-![HomePlay](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/HomePlay%20Banner.png)
+![HomePlay](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/HomePlay%20Banner.png)
 
 My take on Apple Home Dashboard Design for Home Assistant. (Work in Progress)
 
@@ -10,7 +10,7 @@ There is still a lot of work to be done, the dashboard appear aligned on my tabl
 
 I use a swipe card to show the multiple stairs of the house.
 
-![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/01.gif)
+![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/01.gif)
 
 ## Feature
 
@@ -21,9 +21,9 @@ I use a swipe card to show the multiple stairs of the house.
 - Calendar integration
 - "apps" support notification
 
-![Night Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/night01.png)
+![Night Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/night01.png)
 
-![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/main/Repo-images/day01.png)
+![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/day01.png)
 
 The floor plan have been designed in [Sweet Home 3D](https://www.sweethome3d.com/) and edited.
 
