@@ -27,6 +27,9 @@ I use a swipe card to show the multiple stairs of the house.
 
 The floor plan have been designed in [Sweet Home 3D](https://www.sweethome3d.com/) and edited.
 
+## Architecture
+
+
 ## Custom Cards from HACS
 Ensure to install those custom card before using this configuration via HACS
 
