@@ -29,6 +29,8 @@ The floor plan have been designed in [Sweet Home 3D](https://www.sweethome3d.com
 
 ## Architecture
 
+This is the keyplan for the layout.
+![Architecture](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/architecture.png)
 
 ## Custom Cards from HACS
 Ensure to install those custom card before using this configuration via HACS
