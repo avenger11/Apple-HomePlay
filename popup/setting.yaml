@@ -12,7 +12,6 @@ browser_mod:
             box-shadow: rgb(0 0 0 / 20%) 0px 1px 17px -7px, rgb(0 0 0 / 14%) -1px 0px 38px 3px, rgb(0 0 0 / 12%) -2px 2px 46px 8px
           } 
           header.mdc-top-app-bar {
-            background-color: var(--custom-ha-card-background-revert) !important;
             color: var(--custom-ha-card-text-color-primary) !important;
           }
           .mdc-dialog .mdc-dialog__surface {
@@ -20,7 +19,6 @@ browser_mod:
           }
           :host {
             color: var(--custom-ha-card-text-color-primary) !important;
-            --paper-item-icon-color:
           }
     content:
       type: custom:layout-card
@@ -36,4 +34,5 @@ browser_mod:
           entities:
             - entity: input_boolean.exteriorchristmaslight
               name: Cycle lumière extérieur de Noël
-
+            - entity: switch.adaptive_lighting_salon
+              name: Lumière adaptative Salon

@@ -18,7 +18,7 @@ views:
         "taskbar taskbar taskbar"
 
     cards:
-
+      
 #..................................
 #.LLLL..................fffff.ttt..
 #.LLLL.................effffftttt..
@@ -121,7 +121,6 @@ views:
                   show_current: false
                   show_forecast: true
                   style:
-
                   card_mod:
                     style: |
                       .forecast-image-icon > * {
@@ -130,6 +129,7 @@ views:
                       .forecast {
                         #text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
                         padding-top: 0.5vw !important;
+                        color: white;
                       }
                       ha-card {
                         background: var(--custom-weather-card-background);
@@ -150,7 +150,8 @@ views:
                   border-color: rgba(255, 255, 255, 1)
                   border-radius: 15px
                   border-width: 1px
-                  text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                  
+                  #text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
                 card_mod:
                   style: |
                     ha-card {
@@ -162,6 +163,7 @@ views:
                     }
                     forecast-text {
                       text-align: right !important;
+                      color: white;
                     }
                     forecast-temperature-bar-background {
                       background: rgb(0,0,0) !important;
@@ -174,7 +176,7 @@ views:
           ########################################
           ##           Calendar Card            ##
           ########################################
-      
+
           - type: custom:atomic-calendar-revive
             entities:
               - entity: calendar.famille
@@ -216,6 +218,7 @@ views:
                   text-overflow: ellipsis;
                   white-space: nowrap;
                   width: 18vw;
+                  padding-bottom: 0.3vw;
                 }
                 .relativeTime {
                   --time-color: var(--custom-ha-card-text-color-secondary) !important;
@@ -264,15 +267,42 @@ views:
       - view_layout:
           grid-area: center
         type: custom:mod-card
-        card_mod:
-          style: |
-            ha-card {
-              box-shadow: var(--custom-ha-card-box-shadow);
-              border-radius: 20px;
-              border-style: none !important;
-              border-width: 0px !important;
-              border-color: rgba(0,0,0,0) !important;
-            }
+        style:
+          swipe-card:
+            $: |
+              .swiper-pagination {
+                display: flex;
+                flex-direction: column-reverse;
+                width: 8% !important;
+                left: 0.4vw !important;
+                bottom: inherit !important;
+                top: 37%;
+              }
+              .swiper-pagination-bullets>span {
+                margin: 0.3vw !important;
+                min-width: 4vw;
+                min-height: 4vw;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                color: black;
+                background: rgba(255,255,255,0.8)
+              }
+              .swiper-pagination-bullets>span:nth-child(1):before {
+                content: "SS";
+                font-size: 1.5vw;
+                font-weight: 600;
+              }
+              .swiper-pagination-bullets>span:nth-child(2):before {
+                content: "RDC";
+                font-size: 1.5vw;
+                font-weight: 600;
+              }
+              .swiper-pagination-bullets>span:nth-child(3):before {
+                content: "N1";
+                font-size: 1.5vw;
+                font-weight: 600;
+              }
         card:
             type: custom:swipe-card
             start_card: 2
@@ -281,8 +311,8 @@ views:
               spaceBetween: 8
               pagination:
                 type: 'bullets'
+                clickable: true           
             cards:
-    
               ###############################
               # BASEMENT FLOOR              #
               ###############################
@@ -693,6 +723,18 @@ views:
 #.AAAA.....AAAA.PPPP........PPPP.........SSSSSSSS....
 #....................................................
 
+
+              - type: custom:button-card
+                entity: alarm_control_panel.alarme
+                icon: fapro:setting
+                style:
+                  top: 3vw
+                  left: 3.5%
+                template:
+                  - setting_icon
+                tap_action: 
+                  !include popup/setting.yaml
+  
               - type: custom:hui-element
                 card_type: horizontal-stack
                 style: 
@@ -734,16 +776,7 @@ views:
                     tap_action:
                       !include popup/server.yaml
 
-              - type: custom:button-card
-                entity: alarm_control_panel.alarme
-                icon: fapro:setting
-                style:
-                  top: 3vw
-                  left: 70%
-                template:
-                  - setting_icon
-                tap_action: 
-                  !include popup/setting.yaml
+
   
                   ### SEPARATOR ##################################################
 #                  - type: custom:button-card

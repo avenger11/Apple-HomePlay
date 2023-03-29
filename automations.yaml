@@ -4,9 +4,9 @@
   trigger:
   - platform: state
     entity_id:
-    - sensor.sun_phase
-    to: Civil Twilight
-    from: Day
+    - sun.sun
+    to: below_horizon
+    from: above_horizon
   condition: []
   action:
   - service: frontend.set_theme
@@ -19,9 +19,9 @@
   trigger:
   - platform: state
     entity_id:
-    - sensor.sun_phase
-    from: Civil Twilight
-    to: Day
+    - sun.sun
+    from: below_horizon
+    to: above_horizon
   condition: []
   action:
   - service: frontend.set_theme

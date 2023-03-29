@@ -4,9 +4,27 @@ browser_mod:
   data:
     title: NAS
     timeout: 30000
-    style: >
-      --popup-max-width: calc(385px + 385px + 385px);
-      --ha-card-border-radius: 0;
+    card_mod:
+      style: 
+        ha-dialog$: |
+          div.mdc-dialog__surface {
+            backdrop-filter: var(--custom-ha-card-backdrop-filter);
+            box-shadow: rgb(0 0 0 / 20%) 0px 1px 17px -7px, rgb(0 0 0 / 14%) -1px 0px 38px 3px, rgb(0 0 0 / 12%) -2px 2px 46px 8px
+          } 
+          header.mdc-top-app-bar {
+            background-color: var(--custom-ha-card-background-revert) !important;
+            color: var(--custom-ha-card-text-color-primary) !important;
+          }
+          .mdc-dialog .mdc-dialog__surface {
+            background-color: var(--custom-ha-card-background) !important;
+          }
+          :host {
+            color: var(--custom-ha-card-text-color-primary) !important;
+            --paper-item-icon-color:
+          }
+          ha-header-bar {
+            --mdc-theme-primary: black !important;
+          }
     content:
       type: custom:layout-card
       cards:
@@ -14,11 +32,11 @@ browser_mod:
           title: Synology DS920+
           show_header_toggle: false
           card_mod:
-            class: header
-            # no border on last card
             style: |
-              ha-card {
-                border: none !important;
+              :host {
+                --ha-card-background: rgba(0,0,0,0) !important;
+                --ha-card-border-width: 0px !important;
+                --ha-card-border-color: rgba(0,0,0,0);
               }
           entities:
             - entity: binary_sensor.server_security_status
@@ -38,8 +56,6 @@ browser_mod:
               height: 2em
               decimal: 0
               unit_of_measurement: '%'
-              #positions: *bar_card_positions
-              #severity: *bar_card_severity
               entity_row: true
               entities:
 

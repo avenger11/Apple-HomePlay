@@ -3,24 +3,31 @@ browser_mod:
   service: browser_mod.popup
   data:
     title: Sécurité
-    timeout: 70000
+    #timeout: 70000
     style: >
       #--popup-max-width: 200px;
       --popup-min-width: 300px;
       --ha-card-border-radius: 0;
       --ha-card-background: none;
       --masonry-view-card-margin: none;
-      #backdrop-filter: blur(30px) saturate(180%) !important;
 
     card_mod:
       style:
 
-        ha-dialog: 
-          $: |
-            .mdc-dialog__container {
-              --dialog-surface-margin-top: 20px !important;
-            }
-
+        ha-dialog$: |
+          div.mdc-dialog__surface {
+            backdrop-filter: var(--custom-ha-card-backdrop-filter);
+            box-shadow: rgb(0 0 0 / 20%) 0px 1px 17px -7px, rgb(0 0 0 / 14%) -1px 0px 38px 3px, rgb(0 0 0 / 12%) -2px 2px 46px 8px
+          } 
+          header.mdc-top-app-bar {
+            color: var(--custom-ha-card-text-color-primary) !important;
+          }
+          .mdc-dialog .mdc-dialog__surface {
+            background-color: var(--custom-ha-card-background) !important;
+          }
+          :host {
+            color: var(--custom-ha-card-text-color-primary) !important;
+          }
 
         layout-card: 
           $grid-layout$:

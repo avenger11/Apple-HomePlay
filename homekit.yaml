@@ -16,6 +16,7 @@ filter:
     - light.lumiere_salle_de_bain_2
     - light.stairs_lights
     - light.ambientlightbedroomclara_lightbulb
+    - light.wiz_rgbw_tunable_6261a4
 
     - switch.switch_basement
     - switch.switchentreelivingroom_switch
@@ -66,6 +67,8 @@ entity_config:
     name: Miroir2
   light.stairs_lights:
     name: Escalier
+  light.wiz_rgbw_tunable_6261a4:
+    name: Escalier Couleur
   light.ambientlightbedroomclara_lightbulb:
     name: Lampe Ambience
     

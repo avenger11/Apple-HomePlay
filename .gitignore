@@ -17,6 +17,8 @@ scenes.yaml
 www/community/
 custom_components/
 automations.yaml
+go2rtc.yaml
+homekit.yaml
 
 *.log*
 *.db*
@@ -24,3 +26,5 @@ automations.yaml
 .cloud/
 .storage/
 .ssh/
+www/community/clock-weather-card/clock-weather-card.js.gz
+automations.yaml

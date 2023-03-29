@@ -1,5 +1,8 @@
 light:
 
+  # Enable Card Mod Theme
+  card-mod-theme: light
+
   modes: {dark: {.: .}}
 
   ##############################################################################
@@ -76,6 +79,22 @@ light:
   #dialog-backdrop-filter: blur(30px) saturate(180%) brightness(120%)
 
 
+  mdc-theme-surface: var(--custom-ha-card-background)
+  primary-text-color: var(--custom-ha-card-text-color-primary)
+
+#_______________________________________________________________________________
+#   Popup dialog box
+
+  card-mod-more-info-yaml: |
+    $: |
+      .mdc-dialog__surface {
+        backdrop-filter: blur(30px) saturate(180%);
+      }
+    ha-header-bar:
+      $: |
+        .mdc-top-app-bar {
+          background: none !important;
+        }   
 
   ##############################################################################
   #  GOOGLE DARK THEME
@@ -95,7 +114,7 @@ light:
   accent-color: var(--primary-color)
 
   # Text
-  primary-text-color: rgb(242, 242, 242)
+  
   secondary-text-color: rgb(166, 166, 166)
   text-primary-color: var(--primary-text-color)
   disabled-text-color: rgba(184, 190, 199, 0.4)
@@ -161,7 +180,7 @@ light:
   # Dropdowns
   material-background-color: var(--table-row-background-color)
   material-secondary-background-color: var(--table-row-alternative-background-color)
-  mdc-theme-surface: var(--secondary-background-color)
+  
 
   # Pre/Code
   markdown-code-background-color: rgb(23, 23, 23)
@@ -212,6 +231,9 @@ light:
 ################################################################################
 
 dark:
+
+  # Enable Card Mod Theme
+  card-mod-theme: dark
 
   modes: {dark: {.: .}}
 
@@ -283,8 +305,32 @@ dark:
   popup-border-width: 1px
   popup-padding-x: 0px
   popup-padding-y: 0px
-  popup-background-color: rgba(0, 0, 0, 0.8)
-  #dialog-backdrop-filter: blur(30px) saturate(180%) brightness(80%)
+  #popup-background-color: rgba(0, 0, 0, 0.8)
+
+  mdc-theme-surface: var(--custom-ha-card-background)
+  primary-text-color: var(--custom-ha-card-text-color-primary)
+
+#_______________________________________________________________________________
+#   Popup dialog box
+
+  card-mod-more-info-yaml: |
+    $: |
+      .mdc-dialog__surface {
+        backdrop-filter: var(--custom-ha-card-backdrop-filter);
+      }
+    ha-header-bar:
+      $: |
+        .mdc-top-app-bar {
+          background: none !important;
+        }
+
+      # Doesn't work yet
+      ha-icon-button: |
+        $:|
+          .mdc-icon-button {
+            background-color: var(--custom-ha-card-background-revert);
+          }
+    
 
   ##############################################################################
   #  GOOGLE DARK THEME
@@ -297,14 +343,14 @@ dark:
   app-header-edit-background-color: rgb(136, 136, 136)
 
   # Main Interface Colors
-  primary-color: rgb(138, 180, 248)
+  primary-color:  rgb(138, 180, 248)
   primary-background-color: rgb(23, 23, 23)
   secondary-background-color: rgb(32, 33, 36)
   divider-color: var(--primary-background-color)
   accent-color: var(--primary-color)
 
   # Text
-  primary-text-color: rgb(255, 255, 255) #rgb(242, 242, 242)
+
   secondary-text-color: rgb(166, 166, 166)
   text-primary-color: var(--primary-text-color)
   disabled-text-color: rgba(184, 190, 199, 0.4)
@@ -370,7 +416,7 @@ dark:
   # Dropdowns
   material-background-color: var(--table-row-background-color)
   material-secondary-background-color: var(--table-row-alternative-background-color)
-  mdc-theme-surface: var(--secondary-background-color)
+
 
   # Pre/Code
   markdown-code-background-color: rgb(23, 23, 23)
