@@ -1,0 +1,38 @@
+topbar:
+  show_name: true
+  show_state: true
+  show_label: false
+  show_icon: false
+  style:
+    transform: none
+  tap_action:
+    action: none
+  hold_action:
+    action: none
+  styles:
+    card:
+      - padding: 1% 0px
+      - justify-self: start
+      - background: var(--custom-topbar-background)
+      - border-radius: 2vw
+      - width: fit-content
+    custom_fields:
+      icon:
+        - margin: 0 0.5vw 0 0.7vw  #top right bottom left
+    name:
+      - font-weight: 500
+      - font-size: 1vw
+      - margin-right: 1vw
+      - justify-self: start
+      - color: var(--custom-ha-card-text-color-primary)
+    state:
+      - font-size: 0.9vw
+      - color: var(--custom-ha-card-text-color-third)
+      - margin-right: 1vw
+      - justify-self: start
+    grid:
+      - grid-template-areas: |
+          "icon n"
+          "icon s"
+      - grid-template-columns: 3vw auto
+      - grid-template-row: auto auto

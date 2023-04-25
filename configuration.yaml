@@ -14,6 +14,19 @@ homeassistant:
   allowlist_external_dirs:
     - /config
 
+# Configuration for the remote home assistant instance with bluetooth
+#remote_homeassistant:
+#  instances:
+#    - host: !secret ha_remote_host
+#      port: !secret ha_remote_port
+#      secure: false
+#      verify_ssl: false
+#      access_token: !secret ha_remote_token
+#      entity_prefix: "RPI-"
+#      include:
+#        domains:
+#          - sensor
+
 frontend:
   themes: !include_dir_merge_named themes
 
@@ -51,6 +64,28 @@ group:
       - update.salon_update
       - update.sous_sol_update
 
+  all_light:
+    name: All light (switch and Light)
+    entities:
+        - light.dimmerlivingroom
+        - light.dreamview_t1
+        - light.floodlight_kitchen
+        - light.grouplightkitchencounter
+        - light.groupspotlightkitchen
+        - light.groupspotlightkitchensink
+        - light.kitchen_leds
+        - light.lampe_salle_de_bain
+        - light.stairs_lights
+        - light.ambientlightbedroomclara_lightbulb
+        - light.wiz_rgbw_tunable_6261a4
+        - switch.switch_basement
+        - switch.switchexterieurback_switch
+        - switch.switchexteriorfront
+        - switch.smartplugclara
+        - switch.switchvestibule_switch
+
+
+
 light:
   - platform: group
     name: "Kitchen Leds"
@@ -63,7 +98,9 @@ light:
     entities:
       - light.lampe_salle_de_bain
       - light.lumiere_salle_de_bain_2
-      
+
+
+
 ##############################################
 # UI Librairies
 ##############################################
@@ -91,6 +128,13 @@ calendar:
 ##############################################
 # Additional Sensor
 ##############################################
+
+binary_sensor:
+  - platform: tod
+    name: 7-9AM
+    after: '7:00'
+    before: '9:00'
+
 
 sensor:
   # Documentation
@@ -131,12 +175,52 @@ sensor:
         time_constant: 5
         precision: 2
 
+
+# Determine the min and max humidity in the house
+  - platform: min_max
+    name: humidity_min
+    type: min
+    entity_ids:
+      - sensor.temperaturesensor_masterbedroom_humidity
+      - sensor.temperaturesensor_basement_humidity
+      - sensor.temperaturesensor_clara_humidity
+
+  - platform: min_max
+    name: humidity_max
+    type: max
+    entity_ids:
+      - sensor.temperaturesensor_masterbedroom_humidity
+      - sensor.temperaturesensor_basement_humidity
+      - sensor.temperaturesensor_clara_humidity
+
   #######################################################################################
   ## Templates (Used for updating text in the UI and converting sensors to CSS values )
   #######################################################################################
 
   - platform: template
     sensors:
+
+      ##################################################################################
+      ### TOP BAR TEMPLATE #############################################################
+      ##################################################################################
+
+      climate_temp:
+        value_template: "{{ state_attr('climate.entryway','current_temperature') | round(0)}}°"
+
+
+      climate_text:
+        value_template: >
+          {% if is_state_attr('climate.entryway', 'hvac_action', 'heating') %}
+            Chauffe à {{ state_attr('climate.entryway','target_temp_low') | round(1) }}°
+          {% elif is_state_attr('climate.entryway', 'hvac_action', 'cooling') %}
+            Refroidi à {{ state_attr('climate.entryway','target_temp_high') | round(1) }}°
+          {% else %}
+            {{ state_attr('climate.entryway','target_temp_low') | round(1) }} - {{ state_attr('climate.entryway','target_temp_high') | round(1) }}°
+          {% endif %}          
+
+      humidity_min_max:
+        value_template: "{{ states('sensor.humidity_min') | round(0) }} - {{ states('sensor.humidity_max') | round(0) }} %"
+    
       ## Find the Min and max temperature in the house
       ## Do not forget to add new temperature sensor to these math
       temperature_min:
@@ -161,6 +245,31 @@ sensor:
       temperature_min_max:
         value_template: "{{ states('sensor.temperature_min') | round(1) }} - {{ states('sensor.temperature_max') | round(1) }}°"
 
+      lights_on_count:
+        friendly_name: 'Lights on count'
+        value_template: "{{ expand('group.all_light') | selectattr('state','eq','on') | list | count }} lumières allumées"
+
+      battery_min_max:
+        value_template: > 
+          {{ states.sensor 
+            | selectattr('attributes.device_class', 'defined') 
+            | selectattr('attributes.device_class', 'eq', 'battery') 
+            | map(attribute='state') 
+            | map('int', -1)
+            | list | min 
+          }} - 
+          {{ states.sensor 
+            | selectattr('attributes.device_class', 'defined') 
+            | selectattr('attributes.device_class', 'eq', 'battery') 
+            | map(attribute='state') 
+            | map('int', -1)
+            | list | max 
+          }}%
+
+      ##################################################################################
+      ### TASKBAR TEMPLATE #############################################################
+      ##################################################################################
+
       ## Converts time and date into sentence for UI
       day:
         value_template: >
@@ -182,7 +291,7 @@ sensor:
           {% if is_state('sensor.montreal_wind_chill','unknown') %}
             {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
           {% else %}
-            {{ states('sensor.montreal_wind_chill') | round(0) }}°
+            {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
           {% endif %}
       ### High and low temperature
       high_low_temp:

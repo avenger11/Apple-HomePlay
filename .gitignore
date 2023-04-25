@@ -15,6 +15,7 @@ govee_learning.yaml
 secrets.yaml
 scenes.yaml
 www/community/
+www/qr_code/
 custom_components/
 automations.yaml
 go2rtc.yaml

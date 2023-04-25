@@ -1,0 +1,44 @@
+  ##########################################
+  # Light           
+  ##########################################
+
+  light-svg:
+    show_state: false
+    show_icon: false
+    show_name: false
+    show_label: false
+    #color_type: icon
+    #size: 60%
+    tap_action:
+      action: more-info
+    styles:
+      custom_fields:
+        icon:
+          - height: 3.5vw
+          - width: 3.5vw
+          - top: 50%
+          - left: 50%
+          - margin: auto
+          #- display: flex #enable alignement
+          #- align-items: center #Verticaly align
+          #- justify-content: center #Horizontaly align
+
+      #icon:
+      #  - color: >
+      #      [[[ return (entity.state === 'on' ) ? 'rgb(255, 255, 255)' : 'rgba(252, 204, 17, 1.0)'; ]]]  
+        #Apple Yellow rgb(252, 204, 17)
+      #  - animation: >
+      #     [[[ return (entity.state === 'on') ? '2s glowing' : '']]]
+      card:
+        - width: 5vw
+        - height: 5vw
+        - borderRadius: 10vw
+        - border-width: 0px
+        - background-color: >
+            [[[ return (entity.state === 'on' ) ? 'rgba(252, 204, 17, 1.0)' : 'var(--custom-switch-bg-color)'; ]]]
+      grid:
+        - grid-template-areas: |
+            "icon"
+        - grid-template-columns: auto
+        - grid-template-row: auto
+

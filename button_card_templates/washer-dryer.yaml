@@ -1,6 +1,7 @@
 washer-dryer:
   show_name: true
-  show_label: true
+  show_label: false
+  show_state: true
   aspect_ratio: 1/1
   styles:
     card:
@@ -10,7 +11,7 @@ washer-dryer:
       - border-radius: 20px
       - box-shadow: var(--custom-ha-card-box-shadow)
     grid:
-      - grid-template-areas: '"i" "n" "l"'
+      - grid-template-areas: '"i" "n" "s"'
       - grid-template-columns: 1fr
       - grid-template-rows: 1fr min-content min-content
     name:
@@ -29,7 +30,7 @@ washer-dryer:
       - width: 5.5vw
       - height: 5.5vw
       - place-self: start
-    label:
+    state:
       - justify-self: start
       - font-size: 14px
       - font-weight: 600
@@ -39,36 +40,19 @@ washer-dryer:
       - color: var(--custom-ha-card-icon-color)
       - width: 70%
   state:
-    - value: 0
+    - value: "Cycle terminé"
       styles:
         img_cell:
-          - background: orange
+          - background: rgb(132,209,253)
         name:
           - color: black
-        label:
+        state:
           - color: black
         card:
           - background: 'rgba(255, 255, 255, 1)'
         icon:
           - color: black
-    - value: 1
-      styles:
-        img_cell:
-          - background: orange
-        name:
-          - color: black
-        label:
-          - color: black
-        card:
-          - background: 'rgba(255, 255, 255, 1)'
-        icon:
-          - color: black
-  label: >
-    [[[
-      if (entity.state == 0) return 'Sortir bac ce matin';
-      if (entity.state == 1) return 'Sortir le bac ce soir';
-      else return 'Passe dans '+ entity.attributes.days + ' jours';
-    ]]]
+
   style: |
     ha-card {
       background: var(--custom-ha-card-background);

@@ -20,22 +20,22 @@
       ##########################################
 
       @keyframes press {
-      0% {
-        transform: scale(1);
-      }  
-      50% {
-        transform: scale(0.95);
-      }
-      100% {
-        transform: scale(1);
-      }
+        0% {
+          transform: scale(1);
+        }  
+        50% {
+          transform: scale(0.95);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
 
     show_state: false
     show_icon: true
     show_name: false
     show_label: false
-    color_type: icon
+    #color_type: icon
     size: 60%
     tap_action:
       action: more-info

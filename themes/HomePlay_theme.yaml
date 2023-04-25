@@ -10,19 +10,24 @@ light:
   ##############################################################################
 
   # Custom Variable
-  custom-ha-card-background: rgba(255, 255, 255, 0.7)
-  custom-ha-card-background-revert: rgba(0,0,0,0.1)
+  custom-ha-card-background: rgba(255, 255, 255, 0.8)
+  custom-ha-card-background-revert: rgba(0,0,0,0.15)
   custom-ha-card-backdrop-filter: blur(30px) saturate(180%)
   custom-ha-card-box-shadow: 0px 0px 10px rgba(0,0,0,0.3)
 
   custom-ha-card-text-color-primary: rgb(0,0,0) #rgb(20,20,20)
-  custom-ha-card-text-color-secondary: rgba(60,60,60,0.9)
+  custom-ha-card-text-color-secondary: rgba(0,122,255,0.9) #rgba(60,60,60,0.9)
+  custom-ha-card-text-color-third: rgba(60,60,60,0.9) #grey
   custom-ha-card-icon-color: rgba(0,0,0,1)
 
   custom-switch-bg-color: rgba(60, 60, 60, 0.9)
 
   custom-weather-card-background: rgba(0,0,0,0.1)
-  custom-weather-card-backdrop-filter: blur(30px)
+  custom-weather-card-backdrop-filter: blur(30px) #saturate(109%) brightness(96%)
+
+  custom-topbar-background: rgba(0,0,0,0.15)
+  custom-topbar-icon-color-primary: rgba(0,0,0,0.7)
+  custom-topbar-icon-color-secondary: rgba(0,0,0,0.4)
 
 #_______________________________________________________________________________
 # Background
@@ -69,6 +74,7 @@ light:
   weather-icon-windy-variant: url('/local/icon/weather/Icons=wind.snow.svg')
   weather-icon-exceptional: url('/local/icon/weather/Icons=exclamationmark.triangle.svg')
 
+
 #_______________________________________________________________________________
 #   Browser mod popup
 
@@ -85,6 +91,8 @@ light:
 #_______________________________________________________________________________
 #   Popup dialog box
 
+  header-height: 65px
+
   card-mod-more-info-yaml: |
     $: |
       .mdc-dialog__surface {
@@ -95,7 +103,26 @@ light:
         .mdc-top-app-bar {
           background: none !important;
         }   
+      ha-icon-button:
+        $: 
+          mwc-icon-button:
+            $: |
+              .mdc-icon-button {
+                background-color: rgba(0,0,0,0.16) !important;
+                border-radius: 50% !important;
+                width: 40px !important;
+                height: 40px !important;
+              }
 
+
+
+
+#_______________________________________________________________________________
+# Layout
+  masonry-view-card-margin: 0
+
+  ##############################################################################
+  ##############################################################################
   ##############################################################################
   #  GOOGLE DARK THEME
   ##############################################################################
@@ -127,9 +154,10 @@ light:
   sidebar-selected-text-color: var(--sidebar-selected-icon-color)
 
   # Buttons
-  paper-item-icon-color: rgb(169, 177, 188)
-  paper-item-icon-active-color: rgb(138, 180, 248)
+  paper-item-icon-color:  rgb(0,0,0) #rgb(169, 177, 188)
+  paper-item-icon-active-color: rgb(0,122,255) #rgb(138, 180, 248)
   mdc-button-outline-color: rgb(138, 180, 248)
+  #state-switch-inactive-color: rgb(0,0,0)
 
   # States and Badges
   state-icon-color: var(--paper-item-icon-color)
@@ -247,14 +275,19 @@ dark:
   custom-ha-card-backdrop-filter: blur(30px) saturate(180%)
   custom-ha-card-box-shadow: 0px 0px 6px rgba(0,0,0,0.5)
 
-  custom-ha-card-text-color-primary: rgb(255,255,255)
-  custom-ha-card-text-color-secondary: rgba(187,32,62,1)
+  custom-ha-card-text-color-primary: rgb(255,255,255)  #white
+  custom-ha-card-text-color-secondary: rgba(187,32,62,1)  #red
+  custom-ha-card-text-color-third: rgba(200,200,200,1) #grey
   custom-ha-card-icon-color: rgba(255,255,255,1)
 
   custom-switch-bg-color: rgba(0, 0, 0, 0.8)
 
   custom-weather-card-backdrop-filter: blur(30px) brightness(1.2)
   custom-weather-card-background: rgba(255,255,255,0)
+
+  custom-topbar-background: rgba(255,255,255,0.15)
+  custom-topbar-icon-color-primary: rgba(255,255,255,1)
+  custom-topbar-icon-color-secondary: rgba(255,255,255,0.4)
 
 #_______________________________________________________________________________
 # Background
@@ -313,6 +346,8 @@ dark:
 #_______________________________________________________________________________
 #   Popup dialog box
 
+  header-height: 65px
+
   card-mod-more-info-yaml: |
     $: |
       .mdc-dialog__surface {
@@ -323,15 +358,24 @@ dark:
         .mdc-top-app-bar {
           background: none !important;
         }
+      ha-icon-button:
+        $: 
+          mwc-icon-button:
+            $: |
+              .mdc-icon-button {
+                background-color: rgba(255,255,255,0.16) !important;
+                border-radius: 50% !important;
+                width: 40px !important;
+                height: 40px !important;
+              }
 
-      # Doesn't work yet
-      ha-icon-button: |
-        $:|
-          .mdc-icon-button {
-            background-color: var(--custom-ha-card-background-revert);
-          }
     
+#_______________________________________________________________________________
+# Layout
+  masonry-view-card-margin: 0
 
+  ##############################################################################
+  ##############################################################################
   ##############################################################################
   #  GOOGLE DARK THEME
   ##############################################################################

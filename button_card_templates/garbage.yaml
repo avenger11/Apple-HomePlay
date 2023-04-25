@@ -42,7 +42,7 @@ garbage:
     - value: 0
       styles:
         img_cell:
-          - background: orange
+          - background: 'rgb(90,201,186)'
         name:
           - color: black
         label:
@@ -54,7 +54,7 @@ garbage:
     - value: 1
       styles:
         img_cell:
-          - background: orange
+          - background: 'rgb(90,201,186)'
         name:
           - color: black
         label:

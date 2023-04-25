@@ -3,66 +3,98 @@ browser_mod:
   service: browser_mod.popup
   data:
     title: Wifi
-    timeout: 30000
+    #timeout: 30000
+    card_mod:
+      style: 
+        ha-dialog$: |
+          div.mdc-dialog__surface {
+            backdrop-filter: var(--custom-ha-card-backdrop-filter);
+            box-shadow: rgb(0 0 0 / 20%) 0px 1px 17px -7px, rgb(0 0 0 / 14%) -1px 0px 38px 3px, rgb(0 0 0 / 12%) -2px 2px 46px 8px
+          } 
+          header.mdc-top-app-bar {
+            background-color: var(--custom-ha-card-background-revert) !important;
+            color: var(--custom-ha-card-text-color-primary) !important;
+          }
+          .mdc-dialog .mdc-dialog__surface {
+            background-color: var(--custom-ha-card-background) !important;
+          }
+          :host {
+            color: var(--custom-ha-card-text-color-primary) !important;
+            --popup-max-width: calc(385px + 385px + 385px);
+          }
+          ha-header-bar {
+            --mdc-theme-primary: black !important;
+          }
     content:
       type: custom:layout-card
       cards:
+
+        - type: tile
+          entity: switch.mesh_guest_wi_fi
+          card_mod:
+            style: |
+              ha-card {
+                margin: 1vw;
+                background: var(--custom-ha-card-background-revert);
+                color: var(--custom-ha-card-text-color-primary);
+                --ha-card-border-width: 0px !important;
+              }
+
+        - type: picture
+          image: /local/qr_code/guest_wifi.jpg
+          tap_action:
+            action: none
+          hold_action:
+            action: none
+          style: |
+            ha-card {
+              margin: 1vw;
+              --ha-card-border-width: 0px !important;
+            }
+
         - type: entities
-
+          card_mod:
+            style: |
+              :host {
+                --ha-card-background: rgba(0,0,0,0) !important;
+                --ha-card-border-width: 0px !important;
+                --ha-card-border-color: rgba(0,0,0,0);
+              }
           entities:
-            - entity: update.home_assistant_core_update
-              name: Version disponible
-              icon: mdi:home-assistant
+            - entity: binary_sensor.bureau_status
+              name: Bureau
+            
+            - entity: binary_sensor.salon_status
+              name: Salon
 
-            - entity: update.home_assistant_core_update
-              type: attribute
-              attribute: installed_version
-              name: Version installée
-              icon: mdi:home-assistant
+            - entity: binary_sensor.sous_sol_status
+              name: Sous-sol
 
-            - entity: sensor.home_assistant_v2_db_size
-              icon: mdi:database
+            - entity: binary_sensor.mesh_wan_status
+              name: Status Internet
+            
+            - entity: sensor.mesh_online_devices
+              name: Appareil Connecté
+            
 
-            - entity: sensor.home_assistant_log_size
-              name: Loggfil
-              icon: mdi:file-document
 
-            - type: custom:hui-horizontal-stack-card
-              cards:
-                - type: custom:button-card
-                  name: Redémarrer serveur
-                  icon: mdi:reload
-                  tap_action:
-                    action: fire-dom-event
-                    browser_mod:
-                      service: browser_mod.sequence
-                      data:
-                        sequence:
-                          - service: browser_mod.confirm
-                            data:
-                              message: "Êtes-vous sûre ?"
-                              title: "Confirmation"
-                              confirm_button_text: "Oui"
-                              cancel_button_text: "Non"
-                          - service: browser_mod.notification
-                            data:
-                              message: Redémarrage du serveur en cours...
-                          - service: browser_mod.delay
-                            data:
-                              time: 3000
-                          #- service: homeassistant.restart
-                  size: 1.4em
-                  color: '#9da0a2'
-                  styles:
-                    grid:
-                      - grid-template-areas: '"i n"'
-                      - grid-column-gap: 0.3em
-                    card:
-                      - color: '#9da0a2'
-                      - border-radius: 0.6em
-                      - padding: 1em 1.4em 1em 1.2em
-                      - width: max-content
-                      - font-size: 1.06em
-                      - font-weight: 500
-                      - letter-spacing: 0.03em
-                      - background: '#FFFFFF10'
+        - type: entities
+          card_mod:
+            style: |
+              :host {
+                --ha-card-background: rgba(0,0,0,0) !important;
+                --ha-card-border-width: 0px !important;
+                --ha-card-border-color: rgba(0,0,0,0);
+              }
+          entities:
+            - entity: button.mesh_start_speedtest
+              name: Démarrer Speed Test
+            - entity: sensor.mesh_speedtest_last_run
+              name: Dernier rafraichissement
+            - entity: sensor.mesh_speedtest_download_bandwidth
+              name: Download
+            - entity: sensor.mesh_speedtest_upload_bandwidth
+              name: Upload
+          
+
+
