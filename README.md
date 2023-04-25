@@ -5,9 +5,6 @@ My take on Apple Home Dashboard Design for Home Assistant. (Work in Progress)
 I'm running Home Assistant OS Supervised VM hosted on a NAS DS920+.
 The Wall Mount tablet is a FireHD 10 from amazon running Fully Kiosk Browser.
 
-I'm sharing my configuration there is no install button.
-There is still a lot of work to be done, the dashboard appear aligned on my tablet but not perfect in browsers.
-
 I use a swipe card to show the multiple stairs of the house.
 
 ![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/01.gif)
@@ -16,7 +13,6 @@ I use a swipe card to show the multiple stairs of the house.
 
 - Day & Night theme support (NB: automation based on sun location)
 - Support multiple floor by swaping between card
-- 32 Weather background change based on condition and day/night (screenshot from weather app)
 - Garbage card background become white when it's time :)
 - Calendar integration
 - "apps" support notification
@@ -26,6 +22,10 @@ I use a swipe card to show the multiple stairs of the house.
 ![Day Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/day01.png)
 
 The floor plan have been designed in [Sweet Home 3D](https://www.sweethome3d.com/) and edited.
+
+### Weather background change based on condition and day/night (screenshot from weather app)
+
+![Weather Variation](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/Weather%20Variations.png)
 
 ## Architecture
 
