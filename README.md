@@ -5,9 +5,6 @@ My take on Apple Home Dashboard Design for Home Assistant. (Work in Progress)
 I'm running Home Assistant OS Supervised VM hosted on a NAS DS920+.
 The Wall Mount tablet is a FireHD 10 from amazon running Fully Kiosk Browser.
 
-I'm sharing my configuration there is no install button.
-There is still a lot of work to be done, the dashboard appear aligned on my tablet but not perfect in browsers.
-
 I use a swipe card to show the multiple stairs of the house.
 
 ![Dashboard](https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/01.gif)
