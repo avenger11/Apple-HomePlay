@@ -4,12 +4,9 @@ My take on Apple Home Dashboard Design for Home Assistant.
 I'm running Home Assistant OS Supervised VM hosted on a NAS DS920+.
 The Wall Mount tablet is a FireHD 10 from amazon running Fully Kiosk Browser.
 
-## Some Feature
+![general](https://user-images.githubusercontent.com/37946892/234757433-a61e6b98-37e2-4309-bf98-05d19f896596.gif)
 
-- Day & Night theme support (NB: automation based on sun location)
-- Support multiple floor by swaping between card
-- Calendar integration
-- "apps" support notification
+<img src="https://user-images.githubusercontent.com/37946892/234759009-f83ca24f-1963-4c80-bbe3-b7b3b7f8aaca.png" width=50% height=50%><img src="https://user-images.githubusercontent.com/37946892/234759019-8742bccd-4f0c-4769-bc4f-4363300e87c5.png" width=50% height=50%>
 
 # Architecture
 
@@ -19,7 +16,7 @@ The code for the custom:grid-layout can be edited within homeplay.yaml
 
 <img src="https://user-images.githubusercontent.com/37946892/234449029-eb518f05-ca48-468b-9ef2-6d73abda07d9.png" width=40% height=40%>
 
-![image](https://user-images.githubusercontent.com/37946892/234452580-5278f1b3-c71f-4653-8507-8d89ed29911f.png)
+<img src="https://user-images.githubusercontent.com/37946892/234452580-5278f1b3-c71f-4653-8507-8d89ed29911f.png" width=60% height=60%>
 
 # TOPBAR | Quick Glance at your house state
 
@@ -33,26 +30,26 @@ The code for the custom:grid-layout can be edited within homeplay.yaml
 - Heavy use of template that are found in button_card_template directory
 - Popup for battery level (more to come)
 
-![image](https://user-images.githubusercontent.com/37946892/234737716-e039c402-9a8c-4b80-95f1-01bf7a79f02e.png)
+<img src="https://user-images.githubusercontent.com/37946892/234737716-e039c402-9a8c-4b80-95f1-01bf7a79f02e.png" width=40% height=40%>
 
 These custom button are integrated in a custom:hui-element – horizontal stack center to the screen.
 
-![image](https://user-images.githubusercontent.com/37946892/234737747-07818cf9-6d7f-4e0b-868a-2e229689eeb5.png)
+<img src="https://user-images.githubusercontent.com/37946892/234737747-07818cf9-6d7f-4e0b-868a-2e229689eeb5.png" width=40% height=40%>
 
 # LEFT COLUMN | Weather Card
 
-![image](https://user-images.githubusercontent.com/37946892/234737981-17ce3c72-89f2-4ca9-b6c5-e850b9f8f10f.png)
+<img src="https://user-images.githubusercontent.com/37946892/234737981-17ce3c72-89f2-4ca9-b6c5-e850b9f8f10f.png" width=50% height=50%>
 
 Weather background change based on condition and day/night (screenshot from weather app).
 The background can be found in www/weather folder.
 I’m using the weather code from the Montréal Environnement Canada Integration and a Value template in configuration.yaml to differentiate between day and night.
 
-![image](https://user-images.githubusercontent.com/37946892/234737871-760f7af8-5c04-431c-b1f9-39ecef1b4a64.png)
-![image](https://user-images.githubusercontent.com/37946892/234737875-6635c314-f8dc-4039-b1d2-f32e74d33831.png)
+<img src="https://user-images.githubusercontent.com/37946892/234737871-760f7af8-5c04-431c-b1f9-39ecef1b4a64.png" width=25% height=25%><img src="https://user-images.githubusercontent.com/37946892/234737875-6635c314-f8dc-4039-b1d2-f32e74d33831.png" width=25% height=25%>
+
 
 One example: The high and low temperature in the card use a value template as well to format properly
 
-![image](https://user-images.githubusercontent.com/37946892/234737956-17515b79-dc90-40e7-80e6-8176586b4da1.png)
+<img src="https://user-images.githubusercontent.com/37946892/234737956-17515b79-dc90-40e7-80e6-8176586b4da1.png" width=80% height=80%>
 
 
 # LEFT COLUMN | Calendar Card
@@ -60,7 +57,7 @@ One example: The high and low temperature in the card use a value template as we
 - Calendar Card from Atomic Calendar.
 - Heavily modified with Card Mod.
 
-![image](https://user-images.githubusercontent.com/37946892/234738068-32f7286f-703f-482f-bf3a-a0db17d7f365.png)
+<img src="https://user-images.githubusercontent.com/37946892/234738068-32f7286f-703f-482f-bf3a-a0db17d7f365.png" width=25% height=25%>
 
 
 # CENTER COLUMN | Home view map
@@ -69,20 +66,18 @@ One example: The high and low temperature in the card use a value template as we
 - Image change based on day and night
 - The floor plan have been designed in [Sweet Home 3D](https://www.sweethome3d.com/) and edited.
 
-![image](https://user-images.githubusercontent.com/37946892/234738924-f882810a-8815-49fa-81af-027dd9f8f43a.png)
-![image](https://user-images.githubusercontent.com/37946892/234738933-a550a9d3-363b-4ca0-bcc4-7f905b726a5b.png)
+<img src="https://user-images.githubusercontent.com/37946892/234738924-f882810a-8815-49fa-81af-027dd9f8f43a.png" width=40% height=40%><img src="https://user-images.githubusercontent.com/37946892/234738933-a550a9d3-363b-4ca0-bcc4-7f905b726a5b.png" width=40% height=40%>
 
 
 # RIGHT SIDE | highlight card 
 
+![Lavage](https://user-images.githubusercontent.com/37946892/234757521-0b5d624e-8156-437f-a92a-d4243921dc2c.gif)
 
-![image](https://user-images.githubusercontent.com/37946892/234738123-c75fea94-f189-471d-bfbd-1b83dba82e6d.png)
-![image](https://user-images.githubusercontent.com/37946892/234738133-73cd420a-1eea-4935-8576-96744aae5348.png)
+<img src="https://user-images.githubusercontent.com/37946892/234738123-c75fea94-f189-471d-bfbd-1b83dba82e6d.png" width=10% height=10%><img src="https://user-images.githubusercontent.com/37946892/234738133-73cd420a-1eea-4935-8576-96744aae5348.png" width=10% height=10%>
 
 # TASK BAR | 
 
-![image](https://user-images.githubusercontent.com/37946892/234738185-5866cfe7-f777-47d0-a140-66f442b4f126.png)
-![image](https://user-images.githubusercontent.com/37946892/234738193-1ec31a2c-2f42-4527-a433-ca20ed0d7d8a.png)
+<img src="https://user-images.githubusercontent.com/37946892/234738185-5866cfe7-f777-47d0-a140-66f442b4f126.png" width=80% height=80%><img src="https://user-images.githubusercontent.com/37946892/234738193-1ec31a2c-2f42-4527-a433-ca20ed0d7d8a.png" width=80% height=80%>
 
 
 
