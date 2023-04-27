@@ -1,5 +1,5 @@
 <img src="https://github.com/avenger11/Apple-HomePlay/blob/master/Repo-images/HomePlay%20Banner.png" width=60% height=60%>
-My take on Apple Home Dashboard Design for Home Assistant. (Work in Progress)
+My take on Apple Home Dashboard Design for Home Assistant.
 
 I'm running Home Assistant OS Supervised VM hosted on a NAS DS920+.
 The Wall Mount tablet is a FireHD 10 from amazon running Fully Kiosk Browser.
