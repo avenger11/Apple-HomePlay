@@ -284,6 +284,10 @@ sensor:
         friendly_name: "Full Date"
         value_template: "{{ states('sensor.day') }} {{ states('sensor.month') }}"
 
+      ##################################################################################
+      ### WEATHER CARD TEMPLATE ########################################################
+      ##################################################################################
+
       ### feel like temperature
       feel_like:
         #unit_of_measurement: "°"

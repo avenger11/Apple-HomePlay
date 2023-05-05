@@ -36,3 +36,5 @@ browser_mod:
               name: Cycle lumière extérieur de Noël
             - entity: switch.adaptive_lighting_salon
               name: Lumière adaptative Salon
+            - entity: input_boolean.automatisation_lumiere_du_salon
+            

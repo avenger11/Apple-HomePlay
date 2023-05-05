@@ -73,12 +73,10 @@ views:
                     template:
                       - topbar
                       - icon_thermometer
-
+                  
                   - type: custom:button-card
                     entity: sensor.humidity_min_max
                     name: Humidité
-                    #icon: >
-                    #  [[[ return sun.sun === 'above_horizon' ? 'fapro:Icons=humidity.fill#fullcolor' : 'fapro:Icons=humidity.fill#fullcolor'; ]]]
                     template:
                       - topbar
                       - icon_humidity
@@ -89,6 +87,25 @@ views:
                     template:
                       - topbar
                       - icon_light
+                    styles:
+                      card:
+                        - background: >
+                            [[[
+                              if (states['sensor.lights_on_count'].state == '0 lumières allumées') return 'var(--custom-topbar-background)';
+                              return "white";
+                            ]]]
+                      name:
+                        - color: >
+                            [[[
+                              if (states['sensor.lights_on_count'].state == '0 lumières allumées') return 'var(--custom-ha-card-text-color-primary)';
+                              return "black";
+                            ]]]
+                      state:
+                        - color: >
+                            [[[
+                              if (states['sensor.lights_on_count'].state == '0 lumières allumées') return 'var(--custom-ha-card-text-color-third)';
+                              return 'rgba(60,60,60,1)';
+                            ]]]
 
                   - type: custom:button-card
                     entity: sensor.climate_text
@@ -242,17 +259,15 @@ views:
                   backdrop-filter: var(--custom-weather-card-backdrop-filter)
                   background-color: var(--custom-weather-card-background)
                   border-color: rgba(255, 255, 255, 1)
-                  border-radius: 15px
-                  border-width: 1px
-
-                  #text-shadow: 0px 0px 6px rgba(0,0,0,0.3)
+                  border-radius: 1vw
+                  border-width: 0.8px
                 card_mod:
                   style: |
                     ha-card {
-                      --bar-height: 8px !important;
+                      --bar-height: 0.3vw !important;
                     }
                     clock-weather-card-forecast-row {
-                      grid-template-columns: 2rem 2rem 3.1rem 84px 3.1rem !important;
+                      grid-template-columns: 2rem 2rem 3.1rem 1fr 3.1rem !important;
                       gap: 0.7rem !important;
                     }
                     forecast-text {
@@ -263,8 +278,8 @@ views:
                       background: rgb(0,0,0) !important;
                     }
                     .card-content {
-                      padding-top: 8px !important;
-                      padding-bottom: 8px !important;
+                      padding-top: 0.5vw !important;
+                      padding-bottom: 0.5vw !important;
                     }
 
           ########################################
@@ -292,8 +307,8 @@ views:
               style: |
                 ha-card {
                   transform: none;
-                  background: var(--custom-ha-card-background) !important;
-                  backdrop-filter: var(--custom-ha-card-backdrop-filter);
+                  background: var(--custom-calendar-card-background) !important; 
+                  backdrop-filter: var(--custom-calendar-card-backdrop-filter); 
                   border-color: rgba(255, 255, 255, 0.03);
                   border-radius: 1.5vw;
                   box-shadow: var(--custom-ha-card-box-shadow);
@@ -328,12 +343,19 @@ views:
                   font-weight: 500;
                   color: var(--custom-ha-card-text-color-primary) !important;
                 }
+                .event-right {
+                  border-left-style: solid;
+                  border-left-color: var(--custom-ha-card-text-color-secondary);
+                  justify-content: start !important;
+                  padding: 0px 1vw !important;
+                }
                 .daywrap {
                   border-color: rgba(255,255,255,0) !important;
                   padding: 0px !important;
                 }
                 tr{
-                  background-color: var(--custom-ha-card-background-revert);
+                  background-color: var(--custom-calendar-card-background-revert);
+                  backdrop-filter: var(--custom-calendar-card-backdrop-filter-revert); 
                   display: block;
                   border-radius: 1vw;
                   margin-bottom: 0.3vw;
@@ -439,7 +461,7 @@ views:
                     action: none
                   tap_action:
                     action: none
-
+              
                 - type: custom:button-card
                   entity: switch.switch_basement
                   icon: phu:ceiling-runner-three
@@ -467,7 +489,7 @@ views:
                       - background-color: var(--custom-switch-bg-color)
                     state:
                       - font-size: 1vw
-
+                  
             ###############################
             # GROUND FLOOR                #
             ###############################
@@ -511,7 +533,7 @@ views:
                   template:
                     - light
 
-                - entity: switch.switchentreelivingroom_switch
+                - entity: light.couloir_entree
                   type: custom:button-card
                   icon: phu:friends-of-hue-iq-pendant
                   style:
@@ -700,12 +722,9 @@ views:
                 [[[
                   return states['sensor.seb_work_travel_time'].state + ' mins pour aller <br/> au travail.';
                 ]]]
-              styles:
-                card:
-                  - background-image: url('/local/person/seb-blur.jpg')
               template:
                 - person
-
+            
           - type: conditional
             conditions:
               - entity: binary_sensor.7_9am
@@ -719,7 +738,7 @@ views:
               icon: fapro:Icons=washer.fill
               template:
                 - washer-dryer
-
+        
           - type: conditional
             conditions:
               - entity: binary_sensor.7_9am
@@ -727,18 +746,13 @@ views:
               - entity: input_select.washing_machine
                 state: "Off"
             card:
+          
               type: custom:button-card
               entity: person.sebastien_logeais
-              name: Sébastien
-              label: >
-                [[[
-                  return states['sensor.seb_work_travel_time'].state + ' mins pour aller <br/> au travail.';
-                ]]]
-              styles:
-                card:
-                  - background-image: url('/local/person/seb-blur.jpg')
-              template:
-                - person
+              template: person
+              variables:
+                picture: '/local/person/seb.jpg'  #Picture in WWW folder
+                travel_time: "[[[ return states['sensor.seb_work_travel_time'].state ]]]"
 
           - type: conditional
             conditions:
@@ -754,7 +768,7 @@ views:
                   - background-image: url('/local/person/lynn-blur.jpg')
               template:
                 - person
-
+            
           - type: conditional
             conditions:
               - entity: binary_sensor.7_9am
@@ -776,23 +790,21 @@ views:
               - entity: input_select.dryer_machine
                 state: "Off"
             card:
+        
               type: custom:button-card
               entity: person.lynn
-              name: Lynn
-              label: Temps pour aller <br/> au travail.
-              styles:
-                card:
-                  - background-image: url('/local/person/lynn-blur.jpg')
-              template:
-                - person
-
+              template: person
+              variables:
+                picture: '/local/person/lynn'  #Picture in WWW folder
+                travel_time: "[[[ return states['sensor.seb_work_travel_time'].state ]]]"
+              
           - type: custom:button-card
             entity: sensor.garbage
             name: Poubelle
             icon: fapro:Icons=trash.fill
             template:
               - garbage
-
+      
           - type: custom:button-card
             entity: sensor.recycling
             name: Recyclage

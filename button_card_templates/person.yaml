@@ -1,53 +1,84 @@
 person:
-  show_entity_picture: true
+  show_entity_picture: false
   show_name: false
-  show_state: true
-  show_label: true
+  show_state: false
+  show_label: false
+  show_icon: false
   aspect_ratio: 1/1
   styles:
     card:
-      #- width: 176.5px
-      - border-radius: 20px
-      #- height: 176.5px
-      - background-size: 130%
-      - background-position: center
-      - padding: 15px 15px 5px 15px
+      - border-radius: 1.5vw
       - box-shadow: var(--custom-ha-card-box-shadow)
-    grid:
-      - grid-template-areas: '"i" "s" "l"'
-      - grid-template-columns: 1fr
-      - grid-template-rows: 1fr min-content min-content
-    state:
-      - justify-self: start
-      - font-size: 22px
-      - font-weight: 600
-      - color: white
-      - padding-top: 10px
-      - padding-bottom: 5px
-    label:
-      - justify-self: start
-      - font-size: 16px
-      - color: white
-      - padding-bottom: 5px
-      - align-self: start
-      - text-align: justify
-    entity_picture:
-      - border-radius: 50%
-      - height: 60px
-      - width: 60px
+      - background-color: var(--custom-ha-card-background)
+      - border-style: none
 
-    img_cell:
-      - justify-content: start
-      - align-items: start
-      - margin: none
-    icon:
-      - border-width: 10px
-      - border-color: white
-  style: |
-    ha-card {
-      backdrop-filter: blur(33px) !important;
-      -webkit-backdrop-filter: blur(33px) !important;
-      box-shadow: none; 
-      border-color: rgba(255, 255, 255, 0.03);                              
-    }
-              
+    custom_fields:
+
+      bg_picture:
+        
+      cover:
+        - position: absolute
+        - width: 100%
+        - height: 100%
+        - opacity: 0.7
+        - background-color: var(--custom-ha-card-background)
+
+      state:
+        - position: absolute
+        - top: 55%
+        - font-size: 1.5vw
+        - font-weight: 600
+        - color: var(--custom-ha-card-text-color-primary)
+
+      entity_picture:
+        - position: absolute
+        - top: 6%
+        - left: 26%
+        - transform: none
+
+      label:
+        - position: absolute
+        - top: 73%
+        - left: 10%
+        - justify-self: start
+        - align-self: start
+        - text-align: justify
+        - color: var(--custom-ha-card-text-color-third)
+        - font-size: 1.1vw
+        - font-weight: 500
+        - line-height: 1.2
+
+  custom_fields: # the order define the supperposed layer
+    bg_picture: >
+      [[[
+        return `<img 
+                  src= ${variables.picture}
+                  style="
+                    width: 110%;
+                    filter: blur(20px) saturate(200%);
+                ">`
+      ]]]
+    cover: ''
+    label: >
+      [[[
+        return 'Le temps de trajet <br/> est de ' + variables.travel_time + ' mins.' ;
+      ]]]
+    state: > 
+      [[[ 
+        if (entity.state == 'home') return "Présent";
+        if (entity.state == 'not_home') return "Absent";
+        return (entity.state)
+      ]]]
+    entity_picture: >
+      [[[
+        return `<img 
+                  src= ${variables.picture}
+                  style="
+                      width: 5.5vw;
+                      border-radius: 50%;
+                      border: 0.2vw solid #FFFFFF;
+                ">`
+      ]]]
+      
+      
+
