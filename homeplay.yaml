@@ -715,15 +715,13 @@ views:
               - entity: binary_sensor.7_9am
                 state: "on"
             card:
+
               type: custom:button-card
               entity: person.sebastien_logeais
-              name: Sébastien
-              label: >
-                [[[
-                  return states['sensor.seb_work_travel_time'].state + ' mins pour aller <br/> au travail.';
-                ]]]
-              template:
-                - person
+              template: person
+              variables:
+                picture: '/local/person/seb.jpg'  #Picture in WWW folder
+                travel_time: "[[[ return states['sensor.seb_work_travel_time'].state ]]]"
             
           - type: conditional
             conditions:
@@ -759,15 +757,13 @@ views:
               - entity: binary_sensor.7_9am
                 state: "on"
             card:
+              
               type: custom:button-card
               entity: person.lynn
-              name: Lynn
-              label: Temps pour aller <br/> au travail.
-              styles:
-                card:
-                  - background-image: url('/local/person/lynn-blur.jpg')
-              template:
-                - person
+              template: person
+              variables:
+                picture: '/local/person/lynn'  #Picture in WWW folder
+                travel_time: "[[[ return states['sensor.seb_work_travel_time'].state ]]]"
             
           - type: conditional
             conditions:
