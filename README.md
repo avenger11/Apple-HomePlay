@@ -6,6 +6,14 @@ The Wall Mount tablet is a FireHD 10 from amazon running Fully Kiosk Browser.
 
 ![general](https://user-images.githubusercontent.com/37946892/234757433-a61e6b98-37e2-4309-bf98-05d19f896596.gif)
 
+
+### Version 2.1.0
+
+<img src="https://user-images.githubusercontent.com/37946892/236594063-38566c69-27fb-4f21-9a2d-202d87d2eb4f.png" width=75% height=75%>
+
+
+### Version 2.0.0
+
 <img src="https://user-images.githubusercontent.com/37946892/234759009-f83ca24f-1963-4c80-bbe3-b7b3b7f8aaca.png" width=50% height=50%><img src="https://user-images.githubusercontent.com/37946892/234759019-8742bccd-4f0c-4769-bc4f-4363300e87c5.png" width=50% height=50%>
 
 # Architecture
@@ -73,7 +81,8 @@ One example: The high and low temperature in the card use a value template as we
 
 ![Lavage](https://user-images.githubusercontent.com/37946892/234757521-0b5d624e-8156-437f-a92a-d4243921dc2c.gif)
 
-<img src="https://user-images.githubusercontent.com/37946892/234738123-c75fea94-f189-471d-bfbd-1b83dba82e6d.png" width=10% height=10%><img src="https://user-images.githubusercontent.com/37946892/234738133-73cd420a-1eea-4935-8576-96744aae5348.png" width=10% height=10%>
+<img src="https://user-images.githubusercontent.com/37946892/236594194-75aa3790-a11f-46f4-bb08-3a4f6183092e.png" width=10% height=10%><img src="https://user-images.githubusercontent.com/37946892/234738133-73cd420a-1eea-4935-8576-96744aae5348.png" width=10% height=10%>
+
 
 # TASK BAR | 
 
