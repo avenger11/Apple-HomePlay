@@ -6,7 +6,7 @@ light:
   modes: {dark: {.: .}}
 
   ##############################################################################
-  #  CHANGED
+  #  CUSTOM VARIABLE
   ##############################################################################
 
   # Custom Variable
@@ -20,6 +20,10 @@ light:
   custom-calendar-card-background-revert: rgba(255,255,255,0.2)
   custom-calendar-card-backdrop-filter-revert: brightness(120%) 
 
+  custom-map-card-control-background-on: rgb(255, 255, 250)
+  custom-map-card-control-background-off: rgb(220, 220, 220)
+  custom-map-card-control-text: rgb(105, 105, 107)
+
   custom-ha-card-text-color-primary: rgb(0,0,0) #rgb(20,20,20)
   custom-ha-card-text-color-secondary: rgba(0,122,255,0.9) #rgba(60,60,60,0.9)
   custom-ha-card-text-color-third: rgba(60,60,60,0.9) #grey
@@ -27,14 +31,20 @@ light:
 
   custom-switch-bg-color: rgba(60, 60, 60, 0.9)
 
-  custom-weather-card-background: rgba(0,0,0,0.1)
-  custom-weather-card-backdrop-filter: blur(30px) #saturate(109%) brightness(96%)
+
 
   custom-topbar-background: rgba(0,0,0,0.15)
   custom-topbar-icon-color-primary: rgba(0,0,0,0.7)
   custom-topbar-icon-color-secondary: rgba(0,0,0,0.4)
 
   custom-person-card-filter: blur(20px) saturate(200%) brightness(1.3)
+
+##############################################################################
+#  WEATHER APP
+##############################################################################
+
+  custom-weather-card-background: rgba(0,0,0,0.1)
+  custom-weather-card-backdrop-filter: blur(30px) #saturate(109%) brightness(96%)
 
 #_______________________________________________________________________________
 # Background
@@ -89,8 +99,6 @@ light:
   popup-padding-x: 0px
   popup-padding-y: 0px
   popup-background-color: rgba(34,38,39,0.9)  
-  #dialog-backdrop-filter: blur(30px) saturate(180%) brightness(120%)
-
 
   mdc-theme-surface: var(--custom-ha-card-background)
   primary-text-color: var(--custom-ha-card-text-color-primary)
@@ -224,7 +232,7 @@ light:
   # Checkboxes
   mdc-checkbox-unchecked-color: rgb(169, 177, 188)
   mdc-checkbox-disable-color: var(--disabled-text-color)
-  mdc-select-fill-color: rgb(42, 43, 46)
+  mdc-select-fill-color: var(--custom-ha-card-background-revert)
   mdc-select-ink-color: var(--primary-text-color)
   mdc-select-label-ink-color: var(--secondary-text-color)
   mdc-select-idle-line-color: var(--primary-text-color)
@@ -273,7 +281,7 @@ dark:
   modes: {dark: {.: .}}
 
   ##############################################################################
-  #  CHANGED
+  #  CUSTOM VARIABLE
   ##############################################################################
 
   # Custom Variable
@@ -285,7 +293,10 @@ dark:
   custom-calendar-card-background: var(--custom-ha-card-background)
   custom-calendar-card-backdrop-filter: var(--custom-ha-card-backdrop-filter)
   custom-calendar-card-background-revert: var(--custom-ha-card-background-revert)
-  #custom-calendar-card-backdrop-filter-revert: 
+
+  custom-map-card-control-background-on: rgb(58, 59, 64)
+  custom-map-card-control-background-off: rgb(40, 41, 45)
+  custom-map-card-control-text: rgb(171, 172, 176)
 
   custom-ha-card-text-color-primary: rgb(255,255,255)  #white
   custom-ha-card-text-color-secondary: rgba(187,32,62,1)  #red
@@ -294,18 +305,25 @@ dark:
 
   custom-switch-bg-color: rgba(0, 0, 0, 0.8)
 
-  custom-weather-card-backdrop-filter: blur(30px) brightness(1.2)
-  custom-weather-card-background: rgba(255,255,255,0)
+
 
   custom-topbar-background: rgba(255,255,255,0.15)
   custom-topbar-icon-color-primary: rgba(255,255,255,1)
   custom-topbar-icon-color-secondary: rgba(255,255,255,0.4)
 
   custom-person-card-filter: blur(20px) saturate(200%) brightness(0.3)
+
+##############################################################################
+#  WEATHER APP
+##############################################################################
+
+  custom-weather-card-backdrop-filter: blur(30px) brightness(1.2)
+  custom-weather-card-background: rgba(255,255,255,0)
+
+
 #_______________________________________________________________________________
 # Background
   background: left top / contain no-repeat fixed url('/local/background/night-variant.jpg')
-  #center / cover no-repeat fixed url('/local/background/night-variant.jpg')
 
 #_______________________________________________________________________________
 # Swiper theme
@@ -482,7 +500,7 @@ dark:
   # Checkboxes
   mdc-checkbox-unchecked-color: rgb(169, 177, 188)
   mdc-checkbox-disable-color: var(--disabled-text-color)
-  mdc-select-fill-color: rgb(42, 43, 46)
+  mdc-select-fill-color: var(--custom-ha-card-background-revert)
   mdc-select-ink-color: var(--primary-text-color)
   mdc-select-label-ink-color: var(--secondary-text-color)
   mdc-select-idle-line-color: var(--primary-text-color)

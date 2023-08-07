@@ -1,0 +1,78 @@
+
+type: custom:atomic-calendar-revive
+entities:
+  - entity: calendar.famille
+    name: famille
+    maxDaysToShow: 100
+showWeekDay: true
+showMonth: true
+maxEventCount: 3
+showLoader: false
+showLocation: false
+showProgressBar: false
+showDatePerEvent: true
+hideFinishedEvents: true
+tap_action:
+  action: none
+hold_action:
+  action: none
+card_mod:
+  style: |
+    ha-card {
+      transform: none;
+      background: var(--custom-calendar-card-background) !important; 
+      backdrop-filter: var(--custom-calendar-card-backdrop-filter); 
+      border-color: rgba(255, 255, 255, 0.03);
+      border-radius: 1.5vw;
+      box-shadow: var(--custom-ha-card-box-shadow);
+      padding:0.6vw !important;
+    }
+    .hoursHTML {
+      --time-color: var(--custom-ha-card-text-color-secondary) !important;
+      --time-size: 1.3vw !important;
+      font-weight: 500;
+    }
+    .event-title {
+      --event-title-size: 1.6vw !important;
+      color: var(--custom-ha-card-text-color-primary) !important;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 18vw;
+      padding-bottom: 0.3vw;
+    }
+    .relativeTime {
+      --time-color: var(--custom-ha-card-text-color-secondary) !important;
+      --time-size: 1vw !important;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 8.4vw;
+    }
+    .event-left {
+      font-size: 1.3vw !important;
+      font-weight: 500;
+      color: var(--custom-ha-card-text-color-primary) !important;
+    }
+    .event-right {
+      border-left-style: solid;
+      border-left-color: var(--custom-ha-card-text-color-secondary);
+      justify-content: start !important;
+      padding: 0px 1vw !important;
+    }
+    .daywrap {
+      border-color: rgba(255,255,255,0) !important;
+      padding: 0px !important;
+    }
+    tr{
+      background-color: var(--custom-calendar-card-background-revert);
+      backdrop-filter: var(--custom-calendar-card-backdrop-filter-revert); 
+      display: block;
+      border-radius: 1vw;
+      margin-bottom: 0.3vw;
+    }
+    .cal-card{
+      #height: 19.4vw !important;
+    }

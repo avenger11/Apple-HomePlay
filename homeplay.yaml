@@ -1,5 +1,6 @@
 button_card_templates: !include_dir_merge_named button_card_templates
 
+
 kiosk_mode:
   hide_header: true
 
@@ -57,30 +58,29 @@ views:
                 #margin-top: -8px;
                 #margin-bottom: -4px;
               }
-
+        
             elements:
               - type: custom:hui-element
                 card_type: horizontal-stack
                 style:
                   top: 1.5vw
                   left: 50%
-                  #transform: none
-
                 cards:
                   - type: custom:button-card
                     entity: sensor.temperature_min_max
                     name: Temperature
+                    tap_action: !include popup/temperature.yaml
                     template:
                       - topbar
                       - icon_thermometer
-                  
+    
                   - type: custom:button-card
                     entity: sensor.humidity_min_max
                     name: Humidité
                     template:
                       - topbar
                       - icon_humidity
-
+    
                   - type: custom:button-card
                     entity: sensor.lights_on_count
                     name: Lumières
@@ -106,23 +106,23 @@ views:
                               if (states['sensor.lights_on_count'].state == '0 lumières allumées') return 'var(--custom-ha-card-text-color-third)';
                               return 'rgba(60,60,60,1)';
                             ]]]
-
+        
                   - type: custom:button-card
                     entity: sensor.climate_text
                     name: Climat
-                    icon: mdi:thermostat
                     template:
                       - topbar-climate
                     custom_fields:
                       temperature: >
                         [[[ return states['sensor.climate_temp'].state ]]]
+                    tap_action: !include popup/climat.yaml
                       
-                  - type: custom:button-card
-                    entity: lock.x3_xdrive30i_lock
-                    name: Voiture
-                    template:
-                      - topbar
-                      - icon_car
+                  #- type: custom:button-card
+                  #  entity: lock.x3_xdrive30i_lock
+                  #  name: Voiture
+                  #  template:
+                  #    - topbar
+                  #    - icon_car
 
                   - type: custom:button-card
                     entity: sensor.battery_min_max
@@ -131,8 +131,8 @@ views:
                       - topbar
                       - icon_battery_100
                     tap_action: !include popup/battery.yaml
-
-      #..................................
+        
+      #................................
       #.LLLL..................fffff.ttt..
       #.LLLL.................effffftttt..
       #.LLLL.................efff..tttt..
@@ -147,7 +147,7 @@ views:
       #.LLLLLLLLLL.eeeeeeee..efff..tttt..
       #.LLLLLLLLLL..eeeeee...efff..tttt..
       #..................................
-
+              
       ########################################
       ##            Weather Card            ##
       ########################################
@@ -164,10 +164,10 @@ views:
                 --ha-card-background: rgba(0, 0, 0, 0);
                 --ha-card-border-color: rgba(0, 0, 0, 0);
                 --ha-card-border-width: 0px;
-                height: 33.5vw !important; #
+                height: 33.5vw !important;
                 box-shadow: var(--custom-ha-card-box-shadow);
               }
-
+  
             elements:
               - type: image
                 entity: sensor.weather_bg_condition2
@@ -180,50 +180,86 @@ views:
                   transform: none
                   height: 60%
                 state_image: !include button_card_templates/weather_bg.yaml
-
+              
               # Feel Like Temperature
               - type: state-label
                 entity: sensor.feel_like
                 hold_action:
                   action: none
                 style:
-                  color: "rgb(255, 255, 255)"
-                  font-size: 6vw
-                  font-weight: 350
-                  text-align: center
+                  color: rgb(255, 255, 255)
+                  font-size: 8vw
+                  font-weight: lighter
+                  text-align: right
                   left: 50%
-                  top: 7%
+                  top: 11%
                   text-shadow: 0px 0px 10px rgba(0,0,0,0.4)
                 tap_action:
                   action: none
-
+                  
               - type: state-label
                 entity: sensor.montreal_current_condition
                 style:
                   left: 50%
-                  top: 15%
+                  top: 22%
                   #width: 20vw
                   text-align: center
                   font-weight: 400
-                  font-size: 1.5vw
-                  text-shadow: 0px 0px 4px rgba(0,0,0,0.5)
+                  font-size: 2vw
+                  text-shadow: 0px 0px 4px rgba(0,0,0,0.7)
                   color: rgba(255,255,255,1)
 
               - type: state-label
                 entity: sensor.high_low_temp
                 style:
                   left: 50%
-                  top: 18%
+                  top: 27%
                   text-align: center
                   font-weight: 400
-                  font-size: 1.5vw
-                  text-shadow: 0px 0px 4px rgba(0,0,0,0.5)
+                  font-size: 2vw
+                  text-shadow: 0px 0px 4px rgba(0,0,0,0.7)
                   color: rgba(255,255,255,1)
+                
+              - type: conditional
+                conditions:
+                  - entity: sensor.weather_warning
+                    state: "on"
+                elements:
+                  - type: custom:button-card
+                    entity: sensor.weather_warning_statement_1
+                    template:
+                      - icon_exclamationmark
+                    show_icon: false
+                    show_name: false
+                    show_state: true
+                    show_label: false
+                    style:
+                      left: 50%
+                      top: 34%
+                    styles:
+                      grid: 
+                        - grid-template-areas: '"icon s"'
+                        - grid-template-columns: min-content 
+                      card:
+                        - width: 25vw
+                        - background-color: var(--custom-weather-card-background)
+                        - backdrop-filter: var(--custom-weather-card-backdrop-filter)
+                        - border-radius: 1.3vw
+                      state:
+                        - justify-content: start
+                        - color: white
+                      custom_fields:
+                        icon:
+                          - margin-left: 1.5vw
+                          - position: absolute
+                          - height: 2vw
+                          - width: 2vw
+                          - fill: white
 
+      
               - type: custom:mod-card
                 style:
-                  #top: 36%
-                  bottom: 57%
+                  top: 47%
                   left: 50%
                   width: 95%
                 card:
@@ -235,134 +271,34 @@ views:
                   card_mod:
                     style: |
                       .forecast-image-icon > * {
-                        transform: scale(0.8);
+                        transform: scale(0.9);
                         background-size: contain !important;
+                        background-repeat: no-repeat;
+                        filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.4));
                       }
                       .forecast {
                         padding-top: 0.5vw !important;
+                        color: rgba(255,255,255,0.8);
+                        text-shadow: 0px 0px 4px rgba(0,0,0,0.6);
+                        mix-blend-mode: screen;
+                        font-size: 1.3vw;
+                      }
+                      .forecast .temp {
                         color: white;
+                        font-size: 1.5vw !important;
                       }
                       ha-card {
-                        background: var(--custom-weather-card-background);
-                        backdrop-filter: var(--custom-weather-card-backdrop-filter);
+                        background: none;
                         padding: 1px !important;
+                        
                       }
-
-              - type: custom:clock-weather-card
-                entity: weather.openweathermap
-                forecast_days: 4
-                hide_today_section: true
-                style:
-                  left: 50%
-                  bottom: 38%
-                  width: 95%
-                  backdrop-filter: var(--custom-weather-card-backdrop-filter)
-                  background-color: var(--custom-weather-card-background)
-                  border-color: rgba(255, 255, 255, 1)
-                  border-radius: 1vw
-                  border-width: 0.8px
-                card_mod:
-                  style: |
-                    ha-card {
-                      --bar-height: 0.3vw !important;
-                    }
-                    clock-weather-card-forecast-row {
-                      grid-template-columns: 2rem 2rem 3.1rem 1fr 3.1rem !important;
-                      gap: 0.7rem !important;
-                    }
-                    forecast-text {
-                      text-align: right !important;
-                      color: white;
-                    }
-                    forecast-temperature-bar-background {
-                      background: rgb(0,0,0) !important;
-                    }
-                    .card-content {
-                      padding-top: 0.5vw !important;
-                      padding-bottom: 0.5vw !important;
-                    }
-
+                  tap_action: !include popup/weather.yaml
+                  
           ########################################
           ##           Calendar Card            ##
           ########################################
+          - !include custom_module_card/calendar_card.yaml
 
-          - type: custom:atomic-calendar-revive
-            entities:
-              - entity: calendar.famille
-                name: famille
-                maxDaysToShow: 100
-            showWeekDay: true
-            showMonth: true
-            maxEventCount: 3
-            showLoader: false
-            showLocation: false
-            showProgressBar: false
-            showDatePerEvent: true
-            hideFinishedEvents: true
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-            card_mod:
-              style: |
-                ha-card {
-                  transform: none;
-                  background: var(--custom-calendar-card-background) !important; 
-                  backdrop-filter: var(--custom-calendar-card-backdrop-filter); 
-                  border-color: rgba(255, 255, 255, 0.03);
-                  border-radius: 1.5vw;
-                  box-shadow: var(--custom-ha-card-box-shadow);
-                  padding:0.6vw !important;
-                }
-                .hoursHTML {
-                  --time-color: var(--custom-ha-card-text-color-secondary) !important;
-                  --time-size: 1.3vw !important;
-                  font-weight: 500;
-                }
-                .event-title {
-                  --event-title-size: 1.6vw !important;
-                  color: var(--custom-ha-card-text-color-primary) !important;
-                  font-weight: 600;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  white-space: nowrap;
-                  width: 18vw;
-                  padding-bottom: 0.3vw;
-                }
-                .relativeTime {
-                  --time-color: var(--custom-ha-card-text-color-secondary) !important;
-                  --time-size: 1vw !important;
-                  font-weight: 500;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  white-space: nowrap;
-                  width: 8.4vw;
-                }
-                .event-left {
-                  font-size: 1.3vw !important;
-                  font-weight: 500;
-                  color: var(--custom-ha-card-text-color-primary) !important;
-                }
-                .event-right {
-                  border-left-style: solid;
-                  border-left-color: var(--custom-ha-card-text-color-secondary);
-                  justify-content: start !important;
-                  padding: 0px 1vw !important;
-                }
-                .daywrap {
-                  border-color: rgba(255,255,255,0) !important;
-                  padding: 0px !important;
-                }
-                tr{
-                  background-color: var(--custom-calendar-card-background-revert);
-                  backdrop-filter: var(--custom-calendar-card-backdrop-filter-revert); 
-                  display: block;
-                  border-radius: 1vw;
-                  margin-bottom: 0.3vw;
-                }
-                .cal-card{
-                  #height: 19.4vw !important;
-                }
 
       #............................................................
       #....CCCCCCC..........................ttt....................
@@ -379,7 +315,8 @@ views:
       #...CCCCCCCCCC..eeeeeeee..nnnn..nnnn.ttttteeeeeeeee.errr.....
       #....CCCCCCC.....eeeeee...nnnn..nnnn.ttttte.eeeeee..errr.....
       #............................................................
-
+  
+  
       - view_layout:
           grid-area: center
         type: custom:mod-card
@@ -389,45 +326,86 @@ views:
               .swiper-pagination {
                 display: flex;
                 flex-direction: column-reverse;
-                width: 8% !important;
-                left: 0.3vw !important;
+                width: 4vw  !important;
+                left: 0.7vw !important;
                 bottom: inherit !important;
-                top: 37%;
+                padding: 0;
+                top: 0.8vw;
+                box-shadow: var(--custom-ha-card-box-shadow);
+                border-radius: 1vw;
+                background: var(--custom-map-card-control-background-off) !important;
+                
               }
+
+              .swiper-pagination-bullet-active {
+                --swiper-pagination-color: var(--custom-map-card-control-background-on) !important;
+                opacity: 1.0 !important;
+              }
+
+
               .swiper-pagination-bullets>span {
-                margin: 0.3vw !important;
-                min-width: 4.5vw;
-                min-height: 4.5vw;
+                margin: 0 !important;
+                min-width: 4vw;
+                min-height: 4vw;
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
-                color: black;
-                background: rgba(255,255,255,0.8);
+                color: custom-map-card-control-text;
                 box-shadow: var(--custom-ha-card-box-shadow);
               }
+            
               .swiper-pagination-bullets>span:nth-child(1):before {
-                content: "SS";
-                font-size: 1.5vw;
-                font-weight: 600;
+                width: 2.2vw;
+                height: 2.2vw;
+                display: inline-block;
+                content: '';
+                mask: url('/local/icon/square.3.layers.3d.bottom.filled.svg') no-repeat 50% 50%;
+                -webkit-mask: url('/local/icon/square.3.layers.3d.bottom.filled.svg') no-repeat 50% 50%;
+                mask-size: cover;
+                -webkit-mask-size: cover;
+                background-color: var(--custom-map-card-control-text);
+              }
+              .swiper-pagination-bullets>span:nth-child(1) {
+                border-radius: 0 0 1vw 1vw;
               }
               .swiper-pagination-bullets>span:nth-child(2):before {
-                content: "RDC";
-                font-size: 1.5vw;
-                font-weight: 600;
+                width: 2.2vw;
+                height: 2.2vw;
+                display: inline-block;
+                content: '';
+                mask: url('/local/icon/square.3.layers.3d.middle.filled.svg') no-repeat 50% 50%;
+                -webkit-mask: url('/local/icon/square.3.layers.3d.middle.filled.svg') no-repeat 50% 50%;
+                mask-size: cover;
+                -webkit-mask-size: cover;
+                background-color: var(--custom-map-card-control-text);
+              }
+              .swiper-pagination-bullets>span:nth-child(2) {
+                border-radius: 0 0 0 0;
               }
               .swiper-pagination-bullets>span:nth-child(3):before {
-                content: "N1";
-                font-size: 1.5vw;
-                font-weight: 600;
+                width: 2.2vw;
+                height: 2.2vw;
+                display: inline-block;
+                content: '';
+                mask: url('/local/icon/square.3.layers.3d.top.filled.svg') no-repeat 50% 50%;
+                -webkit-mask: url('/local/icon/square.3.layers.3d.top.filled.svg') no-repeat 50% 50%;
+                mask-size: cover;
+                -webkit-mask-size: cover;
+                background-color: var(--custom-map-card-control-text);
+            
+              }
+              .swiper-pagination-bullets>span:nth-child(3) {
+                border-radius: 1vw 1vw 0 0;
               }
               .swiper-container {
                 box-shadow: var(--custom-ha-card-box-shadow);
                 border-radius: 1.5vw;
               }
-
+            
         card:
           type: custom:swipe-card
           start_card: 2
+          reset_after: 10
           parameters:
             effect: cards
             spaceBetween: 8
@@ -449,10 +427,10 @@ views:
                 }
               elements:
                 - type: image
-                  entity: sun.sun
+                  entity: input_select.hass_theme_selected
                   state_image:
-                    above_horizon: /local/house/basement-day.png
-                    below_horizon: /local/house/basement-night.png
+                    light: /local/house/basement-day.png
+                    dark: /local/house/basement-night.png
                   style:
                     Left: 50%
                     top: 50%
@@ -461,35 +439,45 @@ views:
                     action: none
                   tap_action:
                     action: none
-              
+                
                 - type: custom:button-card
-                  entity: switch.switch_basement
-                  icon: phu:ceiling-runner-three
+                  entity: input_boolean.homeplay_map_temperature
                   style:
-                    left: 45%
-                    top: 32%
+                    left: 2.7vw
+                    top: 17vw
                   template:
-                    - light
+                    - icon_thermometer
+                    - house_map_temperature_switch
 
-                - type: custom:button-card
-                  entity: sensor.temperaturesensor_basement_temperature
-                  show_state: true
-                  show_icon: false
-                  show_name: false
-                  show_label: false
-                  style:
-                    left: 45%
-                    top: 45%
-                  styles:
-                    card:
-                      - width: 3vw
-                      - height: 3vw
-                      - borderRadius: 6vw
-                      - border-width: 0px
-                      - background-color: var(--custom-switch-bg-color)
-                    state:
-                      - font-size: 1vw
-                  
+                - type: conditional
+                  conditions:
+                    - entity: input_boolean.homeplay_map_temperature
+                      state: "off"
+                  elements:
+                    - type: custom:button-card
+                      entity: switch.switch_basement
+                      icon: phu:ceiling-runner-three
+                      style:
+                        left: 45%
+                        top: 32%
+                      template:
+                        - light
+          
+                - type: conditional
+                  conditions:
+                    - entity: input_boolean.homeplay_map_temperature
+                      state: "on"
+                  elements:
+                    - type: custom:button-card
+                      entity: sensor.temperaturesensor_basement_temperature
+                      style:
+                        left: 45%
+                        top: 30%
+                      template:
+                        - house_map_-_temp_hum
+                      variables:
+                        entity_temp: "[[[ return states['sensor.temperaturesensor_basement_temperature'].state ]]]"
+                        entity_hum: "[[[ return states['sensor.temperaturesensor_basement_humidity'].state ]]]"
             ###############################
             # GROUND FLOOR                #
             ###############################
@@ -502,10 +490,10 @@ views:
                 }
               elements:
                 - type: image
-                  entity: sun.sun
+                  entity: input_select.hass_theme_selected
                   state_image:
-                    above_horizon: /local/house/rdc-day.png
-                    below_horizon: /local/house/rdc-night.png
+                    light: /local/house/rdc-day.png
+                    dark: /local/house/rdc-night.png
                   style:
                     Left: 50%
                     top: 50%
@@ -516,124 +504,154 @@ views:
                     action: none
 
                 - type: custom:button-card
-                  entity: light.dimmerlivingroom
-                  icon: phu:bulb-group-ceiling-round
+                  entity: input_boolean.homeplay_map_temperature
                   style:
-                    left: 45%
-                    top: 32%
+                    left: 2.7vw
+                    top: 17vw
                   template:
-                    - light
+                    - icon_thermometer
+                    - house_map_temperature_switch
 
-                - entity: light.kitchen_leds
-                  type: custom:button-card
-                  icon: phu:light-strip
-                  style:
-                    left: 85%
-                    top: 75%
-                  template:
-                    - light
+                - type: conditional
+                  conditions:
+                    - entity: input_boolean.homeplay_map_temperature
+                      state: "off"
+                  elements:
+                    - type: custom:button-card
+                      entity: light.dimmerlivingroom
+                      icon: phu:bulb-group-ceiling-round
+                      style:
+                        left: 45%
+                        top: 32%
+                      template:
+                        - light
 
-                - entity: light.couloir_entree
-                  type: custom:button-card
-                  icon: phu:friends-of-hue-iq-pendant
-                  style:
-                    left: 70%
-                    top: 35%
-                  template:
-                    - light
+                    - entity: light.kitchen_leds
+                      type: custom:button-card
+                      icon: phu:light-strip
+                      style:
+                        left: 85%
+                        top: 75%
+                      template:
+                        - light
 
-                - entity: switch.switchvestibule_switch
-                  type: custom:button-card
-                  icon: phu:ceiling-fugato-three
-                  style:
-                    left: 74%
-                    top: 17%
-                  template:
-                    - light
+                    - entity: light.couloir_entree
+                      type: custom:button-card
+                      icon: phu:friends-of-hue-iq-pendant
+                      style:
+                        left: 70%
+                        top: 35%
+                      template:
+                        - light
 
-                - entity: switch.switchexteriorfront
-                  type: custom:button-card
-                  icon: phu:wall-appear
-                  style:
-                    left: 72%
-                    top: 5%
-                  template:
-                    - light
+                    - entity: switch.switchvestibule_switch
+                      type: custom:button-card
+                      icon: phu:ceiling-fugato-three
+                      style:
+                        left: 74%
+                        top: 17%
+                      template:
+                        - light
 
-                - entity: switch.switchexterieurback_switch
-                  type: custom:button-card
-                  icon: phu:wall-flood
-                  style:
-                    left: 64%
-                    top: 95%
-                  template:
-                    - light
+                    - entity: switch.switchexteriorfront
+                      type: custom:button-card
+                      icon: phu:wall-appear
+                      style:
+                        left: 72%
+                        top: 5%
+                      template:
+                        - light
 
-                - entity: light.floodlight_kitchen
-                  name: FloodLight
-                  type: custom:button-card
-                  icon: phu:ceiling-aurelle
-                  style:
-                    left: 70%
-                    top: 65%
-                  template:
-                    - light
+                    - entity: switch.switchexterieurback_switch
+                      type: custom:button-card
+                      icon: phu:wall-flood
+                      style:
+                        left: 64%
+                        top: 95%
+                      template:
+                        - light
 
-                - entity: light.grouplightkitchencounter
-                  type: custom:button-card
-                  icon: phu:bulb-group-classic-hung-4
-                  style:
-                    left: 55%
-                    top: 65%
-                  template:
-                    - light
+                    - entity: light.floodlight_kitchen
+                      name: FloodLight
+                      type: custom:button-card
+                      icon: phu:ceiling-aurelle
+                      style:
+                        left: 70%
+                        top: 65%
+                      template:
+                        - light
 
-                - entity: light.stairs_lights
-                  type: custom:button-card
-                  icon: phu:ceiling-fugato-four-alt
-                  style:
-                    left: 85%
-                    top: 50%
-                  template:
-                    - light
+                    - entity: light.grouplightkitchencounter
+                      type: custom:button-card
+                      icon: phu:bulb-group-classic-hung-4
+                      style:
+                        left: 55%
+                        top: 65%
+                      template:
+                        - light
 
-                - entity: light.groupspotlightkitchensink
-                  type: custom:button-card
-                  icon: phu:bulb-group-ceiling-flush-circular
-                  style:
-                    left: 73%
-                    top: 85%
-                  template:
-                    - light
+                    - entity: light.stairs_lights
+                      type: custom:button-card
+                      icon: phu:ceiling-fugato-four-alt
+                      style:
+                        left: 85%
+                        top: 50%
+                      template:
+                        - light
 
-                - entity: switch.switchexteriorfrontplug
-                  type: custom:button-card
-                  show_entity_picture: true
-                  style:
-                    left: 60%
-                    top: 5%
-                  template:
-                    - switch
+                    - entity: light.groupspotlightkitchensink
+                      type: custom:button-card
+                      icon: phu:bulb-group-ceiling-flush-circular
+                      style:
+                        left: 73%
+                        top: 85%
+                      template:
+                        - light
 
-                - entity: media_player.appletv_salon
-                  type: custom:button-card
-                  entity_picture: /local/icon/appletv.fill.png
-                  show_entity_picture: true
-                  style:
-                    left: 18%
-                    top: 40%
-                  template:
-                    - light
+                    - entity: switch.switchexteriorfrontplug
+                      type: custom:button-card
+                      show_entity_picture: true
+                      style:
+                        left: 60%
+                        top: 5%
+                      template:
+                        - switch
+                    
+                    - entity: media_player.appletv_salon
+                      type: custom:button-card
+                      entity_picture: /local/icon/appletv.fill.png
+                      show_entity_picture: true
+                      style:
+                        left: 18%
+                        top: 40%
+                      template:
+                        - light
 
-                - entity: light.dreamview_t1
-                  type: custom:button-card
-                  style:
-                    left: 18%
-                    top: 30%
-                  template:
-                    - light-svg
-                    - icon_light_panel
+                    - entity: light.dreamview_t1
+                      type: custom:button-card
+                      style:
+                        left: 18%
+                        top: 30%
+                      template:
+                        - light-svg
+                        - icon_light_panel
 
+                - type: conditional
+                  conditions:
+                    - entity: input_boolean.homeplay_map_temperature
+                      state: "on"
+                  elements:
+                    - type: custom:button-card
+                      entity: sensor.entryway_temperature
+                      style:
+                        left: 45%
+                        top: 30%
+                      template:
+                        - house_map_-_temp_hum
+                      variables:
+                        entity_temp: "[[[ return states['sensor.entryway_temperature'].state ]]]"
+                        entity_hum: "[[[ return states['sensor.entryway_humidity'].state ]]]"
+                    
             ###############################
             # 1st floor                   #
             ###############################
@@ -646,10 +664,10 @@ views:
                 }
               elements:
                 - type: image
-                  entity: sun.sun
+                  entity: input_select.hass_theme_selected
                   state_image:
-                    above_horizon: /local/house/1st-floor-day.png
-                    below_horizon: /local/house/1st-floor-night.png
+                    light: /local/house/1st-floor-day.png
+                    dark: /local/house/1st-floor-night.png
                   style:
                     Left: 50%
                     top: 50%
@@ -659,33 +677,100 @@ views:
                   tap_action:
                     action: none
 
-                - entity: light.bathroom_light
-                  type: custom:button-card
-                  icon: mdi:outdoor-lamp
+                - type: custom:button-card
+                  entity: input_boolean.homeplay_map_temperature
                   style:
-                    left: 90%
-                    top: 80%
+                    left: 2.7vw
+                    top: 17vw
                   template:
-                    - light
+                    - icon_thermometer
+                    - house_map_temperature_switch
+              
+                - type: conditional
+                  conditions:
+                    - entity: input_boolean.homeplay_map_temperature
+                      state: "off"
+                  elements:
+                    - entity: light.bathroom_light
+                      type: custom:button-card
+                      icon: mdi:outdoor-lamp
+                      style:
+                        left: 90%
+                        top: 80%
+                      template:
+                        - light
 
-                - entity: light.stairs_lights
-                  type: custom:button-card
-                  icon: phu:ceiling-fugato-four-alt
-                  style:
-                    left: 76%
-                    top: 55%
-                  template:
-                    - light
+                    - entity: light.stairs_lights
+                      type: custom:button-card
+                      icon: phu:ceiling-fugato-four-alt
+                      style:
+                        left: 76%
+                        top: 55%
+                      template:
+                        - light
 
-                - entity: switch.smartplugclara
-                  type: custom:button-card
-                  icon: mdi:apple-icloud
-                  style:
-                    left: 20%
-                    top: 65%
-                  template:
-                    - light
+                    - entity: switch.smartplugclara
+                      type: custom:button-card
+                      icon: mdi:apple-icloud
+                      style:
+                        left: 20%
+                        top: 65%
+                      template:
+                        - light
+                    
+                    - entity: light.ambientlightbedroomclara_lightbulb
+                      type: custom:button-card
+                      icon: phu:lamp-bedside-table
+                      style:
+                        left: 50%
+                        top: 75%
+                      template:
+                        - light
 
+                    - entity: light.0x000d6ffffe238855
+                      type: custom:button-card
+                      icon: mdi:floor-lamp
+                      style:
+                        left: 45%
+                        top: 20%
+                      template:
+                        - light
+
+                - type: conditional
+                  conditions:
+                    - entity: input_boolean.homeplay_map_temperature
+                      state: "on"
+                  elements:
+                    - type: custom:button-card
+                      entity: sensor.temperaturesensor_clara_temperature
+                      style:
+                        left: 40%
+                        top: 75%
+                      template:
+                        - house_map_-_temp_hum
+                      variables:
+                        entity_temp: "[[[ return states['sensor.temperaturesensor_clara_temperature'].state ]]]"
+                        entity_hum: "[[[ return states['sensor.temperaturesensor_clara_humidity'].state ]]]"
+                    - type: custom:button-card
+                      entity: sensor.temperaturesensor_masterbedroom_temperature
+                      style:
+                        left: 35%
+                        top: 30%
+                      template:
+                        - house_map_-_temp_hum
+                      variables:
+                        entity_temp: "[[[ return states['sensor.temperaturesensor_masterbedroom_temperature'].state ]]]"
+                        entity_hum: "[[[ return states['sensor.temperaturesensor_masterbedroom_humidity'].state ]]]"
+                    - type: custom:button-card
+                      entity: sensor.temperaturesensor_upperbathroom_temperature
+                      style:
+                        left: 70%
+                        top: 83%
+                      template:
+                        - house_map_-_temp_hum
+                      variables:
+                        entity_temp: "[[[ return states['sensor.temperaturesensor_upperbathroom_temperature'].state ]]]"
+                        entity_hum: "[[[ return states['sensor.temperaturesensor_upperbathroom_humidity'].state ]]]"
       #...............................................
       #.RRRRRRRRRR...iiii............hhhh........ttt..
       #.RRRRRRRRRRR..iiii............hhhh.......tttt..
@@ -736,7 +821,7 @@ views:
               icon: fapro:Icons=washer.fill
               template:
                 - washer-dryer
-        
+      
           - type: conditional
             conditions:
               - entity: binary_sensor.7_9am
@@ -744,7 +829,7 @@ views:
               - entity: input_select.washing_machine
                 state: "Off"
             card:
-          
+      
               type: custom:button-card
               entity: person.sebastien_logeais
               template: person
@@ -760,10 +845,10 @@ views:
               
               type: custom:button-card
               entity: person.lynn
-              template: person
+              template: person_bus
               variables:
                 picture: '/local/person/lynn'  #Picture in WWW folder
-                travel_time: "[[[ return states['sensor.seb_work_travel_time'].state ]]]"
+                bus_line: "[[[ return states['sensor.491_express_est'].state ]]]"
             
           - type: conditional
             conditions:
@@ -778,7 +863,7 @@ views:
               icon: fapro:Icons=dryer.fill
               template:
                 - washer-dryer
-
+      
           - type: conditional
             conditions:
               - entity: binary_sensor.7_9am
@@ -786,34 +871,63 @@ views:
               - entity: input_select.dryer_machine
                 state: "Off"
             card:
-        
+    
               type: custom:button-card
               entity: person.lynn
-              template: person
+              template: person_bus
               variables:
                 picture: '/local/person/lynn'  #Picture in WWW folder
-                travel_time: "[[[ return states['sensor.seb_work_travel_time'].state ]]]"
-              
+                bus_line: "[[[ return states['sensor.491_express_est'].state ]]]"
+                #bus_line_next: "[[[ return state_attr('sensor.191_bus_est', 'Next bus') ]]]"
+      
           - type: custom:button-card
             entity: sensor.garbage
             name: Poubelle
             icon: fapro:Icons=trash.fill
             template:
               - garbage
-      
+          
           - type: custom:button-card
             entity: sensor.recycling
             name: Recyclage
             icon: fapro:Icons=recycling.fill
             template:
               - garbage
+        
 
-      #      - type: custom:button-card
-      #        entity: input_select.washing_machine
-      #        name: Machine à lavée
-      #        icon: fapro:Icons=washer.fill
-      #        template:
-      #          - washer-dryer
+          - type: grid
+            square: true
+            columns: 2
+            cards:
+  
+              - type: custom:button-card
+                entity: input_boolean.scene_clara_dodo
+                template: 
+                  - icon_scene_clara_dodo
+                  - scene
+              
+              - type: custom:button-card
+                entity: input_boolean.scene_reveil
+                template: 
+                  - icon_scene_reveil
+                  - scene
+
+              - type: custom:button-card
+                entity: input_boolean.scene_invite
+                template: 
+                  - icon_scene_invite
+                  - scene
+              
+              - type: custom:button-card
+                entity: input_boolean.scene_invite
+                template: 
+                  - scene
+          #- type: custom:button-card
+          #  entity: sensor.recycling
+          #  name: Recyclage
+          #  icon: fapro:Icons=recycling.fill
+          #  template:
+          #    - garbage
 
       #.....................................................................
       #.TTTTTTTTTTT..................sssk......kkkb.........................
@@ -844,8 +958,8 @@ views:
                 backdrop-filter: var(--custom-ha-card-backdrop-filter);
                 --ha-card-border-color: rgba(0, 0, 0, 0);
                 --ha-card-border-width: 0px;
-
               }
+
             elements:
               - type: state-label
                 entity: sensor.time
@@ -866,11 +980,11 @@ views:
                 action: none
                 hold_action: none
                 tap_action: none
-
+          
               # Weekday
               - type: state-label
                 entity: sensor.day
-
+            
                 style:
                   top: 1.6vw
                   left: 87%
@@ -902,7 +1016,7 @@ views:
                 action: none
                 hold_action: none
                 tap_action: none
-
+            
               #....................................................
               #.....AAAAA.....PPPPPPPPP...PPPPPPPPP....SSSSSSS.....
               #.....AAAAA.....PPPPPPPPPP..PPPPPPPPPP..SSSSSSSSS....
@@ -918,11 +1032,11 @@ views:
               #.AAAA.....AAAA.PPPP........PPPP........SSSSSSSSSS...
               #.AAAA.....AAAA.PPPP........PPPP.........SSSSSSSS....
               #....................................................
-
+            
               - type: custom:button-card
                 entity: alarm_control_panel.alarme
                 icon: fapro:Icons=gearshape.fill
-                size: 70%
+                size: 60%
                 style:
                   top: 2.5vw
                   left: 3.5%
@@ -931,14 +1045,14 @@ views:
                 tap_action:
                   action: navigate
                   navigation_path: /config/dashboard
-
+      
               - type: custom:button-card
                 entity: alarm_control_panel.alarme
                 icon: fapro:setting
-                size: 85%
+                size: 75%
                 style:
                   top: 2.5vw
-                  left: 10%
+                  left: 9%
                 template:
                   - setting_icon
                 tap_action: !include popup/setting.yaml
@@ -982,17 +1096,3 @@ views:
                     template:
                       - apps
                     tap_action: !include popup/server.yaml
-
-                  ### SEPARATOR ##################################################
-#                  - type: custom:button-card
-#                    show_state: false
-#                    show_name: false
-#                    show_icon: false
-#                    styles:
-#                      card:
-#                        - width: 2px
-#                        - height: 50px
-#                        - borderRadius: 0px
-#                        - border-width: 0px
-#                        - background-color: 'rgba(255,255,255,0.4)'
-#                        - margin: 12px 0px 0px 0px

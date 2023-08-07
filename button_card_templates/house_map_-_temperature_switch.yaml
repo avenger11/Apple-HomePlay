@@ -1,0 +1,28 @@
+house_map_temperature_switch:
+
+  show_state: false
+  show_icon: false
+  show_name: false
+  show_label: false
+  size: 60%
+  tap_action:
+    action: toggle
+  styles:
+    grid:
+      - grid-template-areas: | 
+          "icon"
+    card:
+      - width: 4vw
+      - height: 4vw
+      - borderRadius: 1vw
+      - border-width: 0px
+      - background-color: >
+          [[[ return (entity.state === 'on' ) ? 'var(--custom-map-card-control-background-on)' : 'var(--custom-map-card-control-background-off)'; ]]]
+      - box-shadow: var(--custom-ha-card-box-shadow)
+    custom_fields:
+      icon:
+        - height: 2.5vw
+        - width: 2.5vw
+        - top: 50%
+        - left: 50%
+        - margin: auto

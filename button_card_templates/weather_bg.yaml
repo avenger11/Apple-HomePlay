@@ -13,7 +13,7 @@
 10: /local/weather/cloudy_day.png #Nuageux / Cloudy
 11: /local/weather/drizzle_day.png #Précipitations / Precipitation
 12: /local/weather/rain_day.png #Pluie / Rain
-13: #Pluie forte / Heavy Rain
+13: /local/weather/rain_day.png #Pluie forte / Heavy Rain
 14: /local/weather/rain_day.png #Pluie verglaçante / Freezing Rain
 15: /local/weather/rain_day.png #Pluie et neige / Rain and Snow
 16: /local/weather/light_flurries_day.png #Neige faible / Light Snow
@@ -23,7 +23,7 @@
 23: /local/weather/haze_day.png #Brume sèche / Haze
 24: /local/weather/haze_day.png #Brouillard / Fog
 25: /local/weather/windy_day.png #Poudrerie basse / Drifting Snow
-26: #Cristaux de glace / Ice Crystals
+26: /local/weather/rain_day.pn #Cristaux de glace / Ice Crystals
 27: /local/weather/rain_day.png #Grêle / Hail
 28: /local/weather/drizzle_day.png #Bruine / Drizzle
 30: /local/weather/sunny_day.png #Dégagé / Clear
@@ -32,18 +32,25 @@
 33: /local/weather/mostly_cloudy_day.png #Généralement nuageux / Mostly Cloudy
 40: /local/weather/light_flurries_day.png #Poudrerie élevée / Blowing Snow
 41: /local/weather/cloudy_day.png #Nuage en entonnoir / Funnel Cloud
-42: #Tornade / Tornado
+42: /local/weather/thunderstorm_day.png #Tornade / Tornado
 43: /local/weather/windy_day.png #Windy / Windy
 44: /local/weather/haze_day.png #Fumée / Smoke
 45: /local/weather/windy_day.png #Tempête de poussière / Dust Storm
 46: /local/weather/thunderstorm_day.png #Orage avec grêle / Thunderstorm with Hail
 47: /local/weather/thunderstorm_day.png #Orage avec tempête de poussière / Thunderstorm with Dust Storm
-48: #Trombe marine / Waterspout
+48: /local/weather/thunderstorm_day.png #Trombe marine / Waterspout
 
 ################################################################################
 # 100 - 200 Night weather picture
 ################################################################################
 
+100: /local/weather/clearsky_night.png #Dégagé / Clear
+101: /local/weather/mainlyclear_night.png #Généralement dégagé / Mainly Clear
+102: /local/weather/partly_cloudy_night.png #Partiellement nuageux / Partly Cloudy
+103: /local/weather/mostly_cloudy_night.png #Généralement nuageux / Mostly Cloudy
+106: /local/weather/drizzle_night.png #Faible averse de pluie / Light Rain Shower
+107: /local/weather/drizzle_night.png #Faible averse de pluie et de neige / Light Rain Shower and Flurries
+108: /local/weather/light_flurries_night.png #Faible averse de neige / Light Flurries
 110: /local/weather/cloudy_night.png #Nuageux / Cloudy
 111: /local/weather/drizzle_night.png #Précipitations / Precipitation
 112: /local/weather/rain_night.png #Pluie / Rain
@@ -57,7 +64,7 @@
 123: /local/weather/haze_night.png #Brume sèche / Haze
 124: /local/weather/haze_night.png #Brouillard / Fog
 125: /local/weather/windy_night.png #Poudrerie basse / Drifting Snow
-126: #Cristaux de glace / Ice Crystals
+126: /local/weather/rain_night.png #Cristaux de glace / Ice Crystals
 127: /local/weather/rain_night.png #Grêle / Hail
 128: /local/weather/drizzle_night.png #Bruine / Drizzle
 130: /local/weather/clearsky_night.png #Dégagé / Clear
@@ -70,13 +77,13 @@
 139: /local/weather/thunderstorm_night.png #Orage fort / Heavy Thunderstorm
 140: /local/weather/light_flurries_night.png #Poudrerie élevée / Blowing Snow
 141: /local/weather/cloudy_night.png #Nuage en entonnoir / Funnel Cloud
-142: #Tornade / Tornado
+142: /local/weather/thunderstorm_night.png #Tornade / Tornado
 143: /local/weather/windy_night.png #Windy / Windy
 144: /local/weather/haze_night.png #Fumée / Smoke
 145: /local/weather/windy_night.png #Tempête de poussière / Dust Storm
 146: /local/weather/thunderstorm_night.png #Orage avec grêle / Thunderstorm with Hail
 147: /local/weather/thunderstorm_night.png #Orage avec tempête de poussière / Thunderstorm with Dust Storm
-148: #Trombe marine / Waterspout
+148: /local/weather/thunderstorm_night.png #Trombe marine / Waterspout
 
 ################################################################################
 # 200 - 300 transition weather picture
@@ -87,17 +94,17 @@
 202: /local/weather/partly_cloudy_transition.png #Partiellement nuageux / Partly Cloudy
 203: /local/weather/partly_cloudy_transition.png #Généralement nuageux / Mostly Cloudy
 206: /local/weather/drizzle_night.png #Faible averse de pluie / Light Rain Shower
-207: #Faible averse de pluie et de neige / Light Rain Shower and Flurries
-208: #Faible averse de neige / Light Flurries
+207: /local/weather/drizzle_night.png #Faible averse de pluie et de neige / Light Rain Shower and Flurries
+208: /local/weather/drizzle_night.png #Faible averse de neige / Light Flurries
 210: /local/weather/cloudy_transition.png #Nuageux / Cloudy
 211: /local/weather/drizzle_night.png #Précipitations / Precipitation
 212: /local/weather/rain_night.png #Pluie / Rain
 213: /local/weather/heavy_rain_night.png #Pluie forte / Heavy Rain
 214: /local/weather/rain_night.png #Pluie verglaçante / Freezing Rain
-215: #Pluie et neige / Rain and Snow
+215: /local/weather/rain_night.png #Pluie et neige / Rain and Snow
 216: /local/weather/snow_night.png #Neige faible / Light Snow
 217: /local/weather/snow_night.png #Neige / Snow
-218: #Neige forte / Heavy Snow
+218: /local/weather/heavy_snow_night.png #Neige forte / Heavy Snow
 219: /local/weather/thunderstorm_night.png #Orage / Thunderstorm
 223: #Brume sèche / Haze
 224: #Brouillard / Fog
@@ -109,9 +116,9 @@
 231: /local/weather/mainlyclear_transition.png #Généralement dégagé / Mainly Clear
 232: /local/weather/partly_cloudy_transition.png #Partiellement nuageux / Partly Cloudy
 233: /local/weather/cloudy_transition.png #Généralement nuageux / Mostly Cloudy
-236: #Faible averse de pluie / Light Rain Shower
-237: #Faible averse de pluie et de neige / Light Rain Shower and Flurries
-238: #Faible averse de neige / Light Flurries
+236: /local/weather/drizzle_night.png #Faible averse de pluie / Light Rain Shower
+237: /local/weather/drizzle_night.png #Faible averse de pluie et de neige / Light Rain Shower and Flurries
+238: /local/weather/snow_night.png #Faible averse de neige / Light Flurries
 239: #Orage fort / Heavy Thunderstorm
 240: #Poudrerie élevée / Blowing Snow
 241: #Nuage en entonnoir / Funnel Cloud

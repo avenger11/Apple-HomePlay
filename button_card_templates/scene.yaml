@@ -1,0 +1,34 @@
+scene:
+  show_state: false
+  show_icon: false
+  show_name: false
+  show_label: false
+  aspect_ratio: 1/1
+  state:
+    - value: 'on'
+      styles:
+        card:
+          - background: white
+    - value: 'off'
+      styles:
+        card:
+          - background: var(--custom-ha-card-background)
+  styles:
+    card:
+      - box-shadow: var(--custom-ha-card-box-shadow)
+      - border-radius: 20px
+      - backdrop-filter: var(--custom-ha-card-backdrop-filter)
+      - border-width: 0px
+    custom_fields:
+      icon:
+        - position: absolute
+        - height: 3vw
+        - width: 3vw
+  style: |
+    #container {
+      display: flex !important;
+      justify-content: center !important;
+    }
+  variables:
+    state: > #send the state to the svg icon
+      [[[ return !entity || entity.state; ]]]

@@ -1,0 +1,140 @@
+################################################################################
+## Normal switch template
+################################################################################
+
+climate_switch:
+  show_state: false
+  show_icon: false
+  show_name: false
+  show_label: false
+  state:
+    - value: 'on'
+      styles:
+        card:
+          - background: white
+  styles:
+    card:
+      - border-radius: 20px
+      - border-width: 0px
+      - width: 70px
+      - height: 70px
+      - background: var(--custom-ha-card-background-revert)
+
+    custom_fields:
+      icon:
+        - position: absolute
+        - height: 50px
+        - width: 50px
+        - fill: rgb(255,255,255)
+
+  style: |
+    #container {
+      display: flex !important;
+      justify-content: center !important;
+    }
+  variables:
+    state: > #send the state to the svg icon
+      [[[ return !entity || entity.state; ]]]
+
+################################################################################
+# These switch template use a clip path to be transparent
+################################################################################
+climate_switch_invert:
+  show_state: false
+  show_icon: false
+  show_name: false
+  show_label: false
+  styles:
+    card:
+      - border-radius: 0px
+      - border-width: 0px
+      - width: fit-content
+      - height: 170px
+      - background: transparent
+      - margin-top: -50px
+      - margin-left: -4px
+      - margin-right: -4px
+    custom_fields:
+      icon:
+        - position: absolute
+        - height: 50px
+        - width: 50px
+      button:
+        - position: absolute
+        - border-radius: 20px
+        - border-width: 0px
+        - width: 70px
+        - height: 70px
+        - background: rgba(0,0,0,0)
+
+      background_cut:
+        - background: var(--custom-ha-card-background-revert)
+        - width: 90px
+        - height: 170px
+        - clip-path: polygon(0px 0px, 0px calc(100% - 0px), calc(100% - 0px) calc(100% - 0px), calc(100% - 0px) 0px, 0px 0px, calc(50% - -35px) calc(50% - -15px), calc(50% - -35px) calc(50% - -15px), calc(50% - -34.737px) calc(50% - -18.233px), calc(50% - -33.976px) calc(50% - -21.304px), calc(50% - -32.759px) calc(50% - -24.171px), calc(50% - -31.128px) calc(50% - -26.792px), calc(50% - -29.125px) calc(50% - -29.125px), calc(50% - -26.792px) calc(50% - -31.128px), calc(50% - -24.171px) calc(50% - -32.759px), calc(50% - -21.304px) calc(50% - -33.976px), calc(50% - -18.233px) calc(50% - -34.737px), calc(50% - -15px) calc(50% - -35px), calc(50% - 15px) calc(50% - -35px), calc(50% - 15px) calc(50% - -35px), calc(50% - 18.233px) calc(50% - -34.737px), calc(50% - 21.304px) calc(50% - -33.976px), calc(50% - 24.171px) calc(50% - -32.759px), calc(50% - 26.792px) calc(50% - -31.128px), calc(50% - 29.125px) calc(50% - -29.125px), calc(50% - 31.128px) calc(50% - -26.792px), calc(50% - 32.759px) calc(50% - -24.171px), calc(50% - 33.976px) calc(50% - -21.304px), calc(50% - 34.737px) calc(50% - -18.233px), calc(50% - 35px) calc(50% - -15px), calc(50% - 35px) calc(50% - 15px), calc(50% - 35px) calc(50% - 15px), calc(50% - 34.737px) calc(50% - 18.233px), calc(50% - 33.976px) calc(50% - 21.304px), calc(50% - 32.759px) calc(50% - 24.171px), calc(50% - 31.128px) calc(50% - 26.792px), calc(50% - 29.125px) calc(50% - 29.125px), calc(50% - 26.792px) calc(50% - 31.128px), calc(50% - 24.171px) calc(50% - 32.759px), calc(50% - 21.304px) calc(50% - 33.976px), calc(50% - 18.233px) calc(50% - 34.737px), calc(50% - 15px) calc(50% - 35px), calc(50% - -15px) calc(50% - 35px), calc(50% - -15px) calc(50% - 35px), calc(50% - -18.233px) calc(50% - 34.737px), calc(50% - -21.304px) calc(50% - 33.976px), calc(50% - -24.171px) calc(50% - 32.759px), calc(50% - -26.792px) calc(50% - 31.128px), calc(50% - -29.125px) calc(50% - 29.125px), calc(50% - -31.128px) calc(50% - 26.792px), calc(50% - -32.759px) calc(50% - 24.171px), calc(50% - -33.976px) calc(50% - 21.304px), calc(50% - -34.737px) calc(50% - 18.233px), calc(50% - -35px) calc(50% - 15px), calc(50% - -35px) calc(50% - -15px))
+  style: |
+    #container {
+      display: flex !important;
+      justify-content: center !important;
+    }
+  custom_fields:
+    background_cut: ""
+    button: ""
+  variables:
+    state: > #send the state to the svg icon
+      [[[ return !entity || entity.state; ]]]
+
+################################################################################
+# Temperatur Low Arrow switch template
+################################################################################
+
+climate_switch_arrow_temp_low:
+  show_state: false
+  show_icon: false
+  show_label: false
+  show_name: false
+  styles:
+    card:
+      - width: 70px
+      - height: 70px
+      - background: rgba(0,0,0,0)
+      - border-width: 0px
+      - border-radius: 50%
+      
+    custom_fields:
+      icon:
+        - position: absolute
+        - height: 40px
+        - width: 40px
+        - fill: orange
+  style: |
+    #container {
+      display: flex !important;
+      justify-content: center !important;
+    }
+
+
+climate_switch_arrow_temp_high:
+  show_state: false
+  show_icon: false
+  show_label: false
+  show_name: false
+  styles:
+    card:
+      - width: 70px
+      - height: 70px
+      - background: rgba(0,0,0,0)
+      - border-width: 0px
+      - border-radius: 50%
+      
+    custom_fields:
+      icon:
+        - position: absolute
+        - height: 40px
+        - width: 40px
+        - fill: rgb(0,122,255)
+  style: |
+    #container {
+      display: flex !important;
+      justify-content: center !important;
+    }

@@ -20,6 +20,8 @@
     show_name: false
     show_label: false
     tap_action:
+      action: toggle
+    double_tap_action:
       action: more-info
     entity_picture: >
       [[[ return (entity.state === 'on' ) ? '/local/icon/lightswitch.on.fill.png' : '/local/icon/lightswitch.off.fill.png'; ]]]

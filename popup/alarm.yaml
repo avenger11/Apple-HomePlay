@@ -72,17 +72,4 @@ browser_mod:
               display: none !important;
             }
 
-
-          #  :host {
-          #    left: 89.5%;
-          #    top: 70%;
-          #    #width: 22vw;
-          #  }
-
-          #    background: none;
-          #    box-shadow: none;
-
-          #  mwc-icon-button {
-          ##    display: none;
-          #  }
                 

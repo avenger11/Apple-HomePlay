@@ -13,20 +13,14 @@ homekit: !include homekit.yaml
 homeassistant:
   allowlist_external_dirs:
     - /config
-
-# Configuration for the remote home assistant instance with bluetooth
-#remote_homeassistant:
-#  instances:
-#    - host: !secret ha_remote_host
-#      port: !secret ha_remote_port
-#      secure: false
-#      verify_ssl: false
-#      access_token: !secret ha_remote_token
-#      entity_prefix: "RPI-"
-#      include:
-#        domains:
-#          - sensor
-
+  customize:
+    binary_sensor.smokesensor_kitchen_buzzer_manual_alarm:
+      device_class: smoke
+    binary_sensor.contactsensor_doorbasement_contact:
+      device_class: door
+    media_player.samsung_q60ba_65_tv:
+      device_class: tv
+    
 frontend:
   themes: !include_dir_merge_named themes
 
@@ -104,6 +98,7 @@ light:
 ##############################################
 # UI Librairies
 ##############################################
+
 lovelace:
   dashboards:
     lovelace-homeplay:
@@ -112,7 +107,9 @@ lovelace:
       title: HomePlay
       icon: phu:homekit
       show_in_sidebar: true
-      
+
+
+
 ##############################################
 # Apple Calendar Config
 ##############################################
@@ -126,7 +123,7 @@ calendar:
       - Famille
 
 ##############################################
-# Additional Sensor
+# BINARY SENSOR
 ##############################################
 
 binary_sensor:
@@ -135,20 +132,28 @@ binary_sensor:
     after: '7:00'
     before: '9:00'
 
+        
+##############################################
+# INPUT BOOLEAN
+##############################################
+
 
 sensor:
   # Documentation
   # https://developpeurs.stm.info/documentation/gtfsrtv2
   # https://github.com/zacs/ha-gtfs-rt/issues/22
 
-  #- platform: gtfs_rt
-  #  trip_update_url: "https://api.stm.info/pub/od/gtfs-rt/ic/v2/tripUpdates"
-  #  vehicle_position_url: "https://api.stm.info/pub/od/gtfs-rt/ic/v2/vehiclePositions"
-  #  api_key: "l7xxb2e7ebd39629480aaeb63ffc17b6ac15"
-  #  departures:
-  #    - name: 191 Bus
-  #      route: 191
-  #      stopid: 57237
+  - platform: gtfs_rt
+    trip_update_url: 'https://api.stm.info/pub/od/gtfs-rt/ic/v2/tripUpdates'
+    vehicle_position_url: 'https://api.stm.info/pub/od/gtfs-rt/ic/v2/vehiclePositions'
+    apikey: !secret gtfs_rt_apikey
+    departures:
+      - name: "191 Bus Est"
+        route: 191
+        stopid: 57237
+      - name: "491 Express Est"
+        route: 491
+        stopid: 57244
 
   - platform: time_date
     display_options:
@@ -245,6 +250,8 @@ sensor:
       temperature_min_max:
         value_template: "{{ states('sensor.temperature_min') | round(1) }} - {{ states('sensor.temperature_max') | round(1) }}°"
 
+
+
       lights_on_count:
         friendly_name: 'Lights on count'
         value_template: "{{ expand('group.all_light') | selectattr('state','eq','on') | list | count }} lumières allumées"
@@ -255,7 +262,7 @@ sensor:
             | selectattr('attributes.device_class', 'defined') 
             | selectattr('attributes.device_class', 'eq', 'battery') 
             | map(attribute='state') 
-            | map('int', -1)
+            | map('int', 0)
             | list | min 
           }} - 
           {{ states.sensor 
@@ -292,34 +299,95 @@ sensor:
       feel_like:
         #unit_of_measurement: "°"
         value_template: >
-          {% if is_state('sensor.montreal_wind_chill','unknown') %}
-            {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
+          {% if states('sensor.montreal_temperature') | float < 0 %}
+            {{ states('sensor.montreal_wind_chill') | round(0) }}°
+          {% elif states('sensor.montreal_temperature') | float > 19 %}
+              {% if is_state('sensor.montreal_humidex','unknown') %}
+                {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
+              {% else %}
+                {{ states('sensor.montreal_humidex') | round(0) }}°
+              {% endif %}
           {% else %}
-            {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
+            {{ states('sensor.montreal_temperature') | round(0) }}°
           {% endif %}
       ### High and low temperature
       high_low_temp:
         value_template: >
           ↑ {{ states('sensor.montreal_high_temperature') }}° ↓ {{ states('sensor.montreal_low_temperature') }}°
 
+      ### Warning template
+      weather_warning:
+        value_template: >
+          {% if is_state('sensor.montreal_warnings', '0') %}
+            off
+          {% else %}
+            on
+          {% endif %}
+      weather_warning_statement_1:
+          value_template: >
+            {{ state_attr('sensor.montreal_warnings','alert_1')|capitalize }}
+
       weather_bg_condition2:
         value_template: >
-          {% if is_state('sensor.sun_phase','Day') %}
+          {% if is_state('input_select.hass_theme_selected','light') %}
             {{ states('sensor.montreal_icon_code') | round(0) }}
-          {% elif is_state('sensor.sun_phase','Night') %}
+          {% elif is_state('input_select.hass_theme_selected','dark') %}
             {{ states('sensor.montreal_icon_code') | round(0) + 100  }}
-          {% elif is_state('sensor.sun_phase','Astronomical Twilight') %}
-            {{ states('sensor.montreal_icon_code') | round(0) + 100  }}
-          {% else %}
-            {{ states('sensor.montreal_icon_code') | round(0) + 200 }}
           {% endif %}
+
+      ##################################################################################
+      ### OTHERS TEMPLATE ##############################################################
+      ##################################################################################
+
 
       humidity_masterbedroom:
         value_template: >
           {{ states('sensor.temperaturesensor_masterbedroom_humidity') | round(0) }}%
+      temperature_delta: # if delta temp more than a certain value start fan to balance temperature
+        value_template: >
+          {{ '%.3f' | format (states('sensor.temperature_max') | float - 
+                      states('sensor.temperature_min') | float) }}
+
+      climate_hvac_action:
+        value_template: >
+          {{state_attr('climate.entryway','hvac_action')}}
+      climate_fan_mode:
+        value_template: >
+          {{state_attr('climate.entryway','fan_mode')}}
 
 
-logger:
-  default: info
-  logs:
-    custom_components.gtfs_rt: debug
+################################################################################
+### SEPARATED SWITCH FOR CLIMATE ###############################################
+################################################################################
+
+switch:
+  - platform: template
+    switches:
+      climate_fan:
+        friendly_name: "Ventilateur"
+        value_template: "{{ is_state_attr('climate.entryway', 'fan_mode', 'on') }}"
+        turn_on:
+          service: climate.set_fan_mode
+          data:
+            entity_id: climate.entryway
+            fan_mode: "on"
+        turn_off:
+          service: climate.set_fan_mode
+          data:
+            entity_id: climate.entryway
+            fan_mode: "off"
+    
+      climate_eco_mode:
+        friendly_name: "Eco Mode"
+        value_template: "{{ is_state_attr('climate.entryway', 'preset_mode', 'eco') }}"
+        turn_on:
+          service: climate.set_preset_mode
+          data:
+            entity_id: climate.entryway
+            preset_mode: "eco"
+        turn_off:
+          service: climate.set_preset_mode
+          data:
+            entity_id: climate.entryway
+            preset_mode: "none"
+

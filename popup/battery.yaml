@@ -18,6 +18,9 @@ browser_mod:
           .mdc-dialog .mdc-dialog__surface {
             background-color: var(--custom-ha-card-background) !important;
           }
+          .mdc-dialog .mdc-dialog__scrim {
+            background-color: rgba(0,0,0,0) !important;
+          }
           :host {
             color: var(--custom-ha-card-text-color-primary) !important;
             --paper-item-icon-color:

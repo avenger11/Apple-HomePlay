@@ -1,0 +1,84 @@
+person_bus:
+  show_entity_picture: false
+  show_name: false
+  show_state: false
+  show_label: false
+  show_icon: false
+  aspect_ratio: 1/1
+  styles:
+    card:
+      - border-radius: 1.5vw
+      - box-shadow: var(--custom-ha-card-box-shadow)
+      - background-color: var(--custom-ha-card-background)
+      - border-style: none
+
+    custom_fields:
+
+      bg_picture:
+        
+      cover:
+        - position: absolute
+        - width: 100%
+        - height: 100%
+        #- opacity: 0.8
+        - background-color: var(--custom-ha-card-background)
+
+      state:
+        - position: absolute
+        - top: 55%
+        - font-size: 1.5vw
+        - font-weight: 600
+        - color: var(--custom-ha-card-text-color-primary)
+
+      entity_picture:
+        - position: absolute
+        - top: 6%
+        - left: 26%
+        - transform: none
+
+      label:
+        - position: absolute
+        - top: 73%
+        - left: 10%
+        - justify-self: start
+        - align-self: start
+        - text-align: justify
+        - color: var(--custom-ha-card-text-color-third)
+        - font-size: 1vw
+        - font-weight: 500
+        - line-height: 1.2
+
+  custom_fields: # the order define the supperposed layer
+    bg_picture: >
+      [[[
+        return `<img 
+                  src= ${variables.picture}
+                  style="
+                    width: 110%;
+                    filter: blur(20px) saturate(200%);
+                ">`
+      ]]]
+    cover: ''
+    label: >
+      [[[
+        return '491 Est | ' + variables.bus_line + ' <br/>       | ' + variables.bus_line_next ;
+      ]]]
+    state: > 
+      [[[ 
+        if (entity.state == 'home') return "Présent";
+        if (entity.state == 'not_home') return "Absent";
+        return (entity.state)
+      ]]]
+    entity_picture: >
+      [[[
+        return `<img 
+                  src= ${variables.picture}
+                  style="
+                      width: 5.5vw;
+                      border-radius: 50%;
+                      border: 0.2vw solid #FFFFFF;
+                ">`
+      ]]]
+      
+      
+

@@ -37,4 +37,10 @@ browser_mod:
             - entity: switch.adaptive_lighting_salon
               name: Lumière adaptative Salon
             - entity: input_boolean.automatisation_lumiere_du_salon
+            - entity: input_boolean.automation_fan_1_hour
+              name: Automatisation de balancement de chaleur
+            - entity: input_boolean.on_off_basement_door_alarm
+              name: Alarme porte sous-sol
+            - entity: input_select.hass_theme_selected
+              name: Theme
             

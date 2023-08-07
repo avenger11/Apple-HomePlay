@@ -1,0 +1,255 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    #timeout: 30000
+    title: Météo
+    card_mod:
+      style: 
+        ha-dialog$: |
+          div.mdc-dialog__surface {
+            #backdrop-filter: var(--custom-ha-card-backdrop-filter);
+          } 
+          header.mdc-top-app-bar {
+            background-color: var(--custom-ha-card-background-revert) !important;
+            color: var(--custom-ha-card-text-color-primary) !important;
+          }
+          .mdc-dialog__container {
+            width: 100%;
+          }
+          .mdc-dialog .mdc-dialog__surface {
+            background: left top / cover no-repeat url('/local/weather_full_screen/mostly_cloudy_night.jpg') !important;
+            background-color: rgba(0,0,0,0)!important;
+            #background-color: var(--custom-ha-card-background) !important;
+            --ha-dialog-border-radius: 19px 19px 0px 0px;
+            --dialog-surface-margin-top: 0px;
+            --mdc-dialog-min-height: 57vw;
+          }
+          .mdc-dialog .mdc-dialog__scrim {
+            background-color: rgba(0,0,0,0) !important;
+          }
+
+          :host {
+            color: white !important;
+            --popup-min-width: 100%;
+            #--ha-card-border-color: var(--custom-ha-card-background);
+            --ha-card-border-color: rgba(0,0,0,0);
+          }
+          ha-header-bar {
+            --mdc-theme-primary: black !important;
+          }
+    content:
+      type: custom:layout-card
+      layout_type: custom:grid-layout
+      layout:
+        grid-gap: 1vw
+        grid-template-columns: 1fr repeat(6, 12vw) 1fr
+        grid-template-rows: repeat(4,12vw) 1fr
+        grid-template-areas: |
+          ". Hours Hours Hours Hours Map Map ."
+          ". Forecast Forecast Sum Sum Map Map ."
+          ". Forecast Forecast Uv Sun Air Rain ."
+          ". Forecast Forecast Temp Hum Hux Pres ."
+      cards:
+
+        - type: custom:mod-card
+          view_layout:
+            grid-area: Hours
+          card:
+            type: weather-forecast
+            entity: weather.montreal_hourly_forecast
+            show_current: false
+            show_forecast: true
+            secondary_info_attribute: precipitation
+            style:
+            card_mod:
+              style: |
+                .forecast-image-icon > * {
+                  transform: scale(0.8);
+                  background-size: contain !important;
+                  background-repeat: no-repeat;
+                }
+                .forecast {
+                  padding-top: 0.5vw !important;
+                  color: rgba(255,255,255,1);
+                }
+                .forecast .temp {
+                  color: white
+                }
+                ha-card {
+                  background: var(--custom-weather-card-background);
+                  backdrop-filter: var(--custom-weather-card-backdrop-filter);
+                  padding: 1px !important;
+                }
+
+        - type: custom:clock-weather-card
+          view_layout:
+            grid-area: Forecast
+          entity: weather.openweathermap
+          forecast_days: 10
+          hide_today_section: true
+          card_mod:
+            style: |
+              ha-card {
+                --bar-height: 0.4vw !important;
+                backdrop-filter: var(--custom-weather-card-backdrop-filter);
+                background-color: var(--custom-weather-card-background);
+                border-color: rgba(255,255,255,0.04);
+              }
+              clock-weather-card-forecast-row {
+                grid-template-columns: 2rem 2rem 3.1rem 1fr 3.1rem !important;
+                gap: 0.7rem !important;
+                border-bottom-style: solid;
+                border-bottom-width: 1px;
+                border-bottom-color: rgba(255,255,255,0.1);
+              }
+              forecast-text {
+                text-align: right !important;
+                color: white;
+              }
+              forecast-temperature-bar-background {
+                background: rgb(0,0,0) !important;
+              }
+              .card-content {
+                padding-top: 0.5vw !important;
+                padding-bottom: 0.5vw !important;
+              }
+              forecast-temperature-bar-current-indicator-dot {
+                background-color: white !important;
+                box-shadow: none !important;
+                top: -0.18vw !important;
+                border-color: black !important;
+                border-width: 0.2vw;
+                border-style: solid;
+              }
+
+        # - type: custom:mod-card
+        #   view_layout:
+        #     grid-area: Map
+        #   style: |
+        #     ha-card{
+        #       height: 100%;f
+        #     }
+        #   card:
+        #     type: picture-entity
+        #     entity: camera.montreal_radar
+        #     camera_image: camera.montreal_radar
+        #     camera_view: live
+        #     show_name: false
+        #     show_state: false
+
+
+        - type: 'custom:weather-radar-card'
+          view_layout:
+            grid-area: Map
+          frame_count: 144
+          frame_delay: 80
+          center_latitude: !secret latitude
+          center_longitude: !secret longitude
+          marker_latitude: !secret latitude
+          marker_longitude: !secret longitude
+          show_marker: true
+          show_range: true
+          show_zoom: true
+          show_recenter: true
+          show_playback: true
+          zoom_level: 6
+          map_style: dark
+
+            
+        - type: custom:button-card
+          view_layout:
+            grid-area: Hum
+          entity: sensor.montreal_humidity
+          name: HUMIDITÉ
+          show_name: true
+          show_state: true
+          show_label: false
+          show_icon: false
+          style: |
+            ha-card{
+              height: 100%;
+            }
+
+        - type: custom:button-card
+          view_layout:
+            grid-area: Uv
+          entity: sensor.openweathermap_uv_index
+          name: INDICE UV
+          show_name: true
+          show_state: true
+          show_label: false
+          show_icon: false
+          style: |
+            ha-card{
+              height: 100%;
+            }
+  
+        - type: custom:button-card
+          view_layout:
+            grid-area: Air
+          entity: sensor.montreal_aqhi
+          name: QUALITÉ DE L'AIR
+          show_name: true
+          show_state: true
+          show_label: false
+          show_icon: false
+          styles: 
+            card:
+              - height: 100%
+              - background: var(--custom-weather-card-background)
+              - backdrop-filter: var(--custom-weather-card-backdrop-filter)
+              - border-color: rgba(255,255,255,0.04)
+            state:
+              - white-space: normal
+              - color: white
+            name:
+              - align-self: start
+              - height: fit-content
+              - color: white
+
+        - type: custom:button-card
+          view_layout:
+            grid-area: Sum
+          entity: sensor.montreal_summary
+          name: Sommaire
+          show_name: true
+          show_state: true
+          show_label: false
+          show_icon: false
+          styles: 
+            card:
+              - height: 100%
+              - background: var(--custom-weather-card-background)
+              - backdrop-filter: var(--custom-weather-card-backdrop-filter)
+              - border-color: rgba(255,255,255,0.04)
+            state:
+              - white-space: normal
+              - color: white
+            name:
+              - align-self: start
+              - height: fit-content
+              - color: white
+
+        - type: custom:button-card
+          view_layout:
+            grid-area: Hux
+          entity: sensor.montreal_humidex
+          name: HUMIDEX
+          show_name: true
+          show_state: true
+          show_label: false
+          show_icon: false
+          styles: 
+            card:
+              - height: 100%
+              - background: var(--custom-weather-card-background)
+              - backdrop-filter: var(--custom-weather-card-backdrop-filter)
+              - border-color: rgba(255,255,255,0.04)
+            state:
+              - white-space: normal
+              - color: white
+            name:
+              - align-self: start
+              - height: fit-content
+              - color: white

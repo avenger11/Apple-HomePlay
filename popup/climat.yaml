@@ -2,148 +2,325 @@ action: fire-dom-event
 browser_mod:
   service: browser_mod.popup
   data:
-    title: Climat
-    timeout: 30000
+    #timeout: 10000
     style: |
-      --popup-max-width: 900px;
+      #--popup-min-width: fit-content;
       --primary-color: transparent; /* hide timeout progress */
     card_mod:
-      style:
-        # card divider border
-        layout-card$grid-layout$: |
-          #root {
-            margin: -24px 0 !important;
-          }
-          hui-vertical-stack-card {
-            border-right: 1.5px solid rgba(0, 0, 0, 0.2);
-            border-radius: 0;
-            transition: none;
-          }
+      style: 
         ha-dialog$: |
-          div.mdc-dialog__scrim {
-            backdrop-filter: blur(15px) !important;
-            -webkit-backdrop-filter: blur(15px) !important;
+          div.mdc-dialog__surface {
+            border-radius: 0px !important;
+            border: none !important;
+            backdrop-filter: var(--custom-ha-card-backdrop-filter);
+            clip-path: polygon(calc(100% - 30px) 22.5px, calc(50% - -150.9px) 22.5px, calc(50% - -150.9px) 22.5px, calc(50% - -150.1535px) 22.4731px, calc(50% - -149.416px) 22.3928px, calc(50% - -148.6905px) 22.2597px, calc(50% - -147.98px) 22.0744px, calc(50% - -147.2875px) 21.8375px, calc(50% - -146.616px) 21.5496px, calc(50% - -145.9685px) 21.2113px, calc(50% - -145.348px) 20.8232px, calc(50% - -144.7575px) 20.3859px, calc(50% - -144.2px) 19.9px, calc(50% - -127.4px) 4.7px, calc(50% - -127.4px) 4.7px, calc(50% - -126.2367px) 3.806px, calc(50% - -124.9816px) 3.104px, calc(50% - -123.6569px) 2.594px, calc(50% - -122.2848px) 2.276px, calc(50% - -120.8875px) 2.15px, calc(50% - -119.4872px) 2.216px, calc(50% - -118.1061px) 2.474px, calc(50% - -116.7664px) 2.924px, calc(50% - -115.4903px) 3.566px, calc(50% - -114.3px) 4.4px, calc(50% - -95.4px) 20.1px, calc(50% - -95.4px) 20.1px, calc(50% - -94.8454px) 20.5289px, calc(50% - -94.2632px) 20.9152px, calc(50% - -93.6558px) 21.2583px, calc(50% - -93.0256px) 21.5576px, calc(50% - -92.375px) 21.8125px, calc(50% - -91.7064px) 22.0224px, calc(50% - -91.0222px) 22.1867px, calc(50% - -90.3248px) 22.3048px, calc(50% - -89.6166px) 22.3761px, calc(50% - -88.9px) 22.4px, 30px 22.4px, 30px 22.4px, 25.1262px 22.7918px, 20.5056px 23.9264px, 16.1994px 25.7426px, 12.2688px 28.1792px, 8.775px 31.175px, 5.7792px 34.6688px, 3.3426px 38.5994px, 1.5264px 42.9056px, 0.3918px 47.5262px, 4.9550325609195E-31px 52.4px, 0px calc(100% - 30.1px), 0px calc(100% - 30.1px), 0.3918px calc(100% - 25.2262px), 1.5264px calc(100% - 20.6056px), 3.3426px calc(100% - 16.2994px), 5.7792px calc(100% - 12.3688px), 8.775px calc(100% - 8.875px), 12.2688px calc(100% - 5.8792px), 16.1994px calc(100% - 3.4426px), 20.5056px calc(100% - 1.6264px), 25.1262px calc(100% - 0.49180000000001px), 30px calc(100% - 0.099999999999994px), calc(100% - 30px) calc(100% - 0.099999999999994px), calc(100% - 30px) calc(100% - 0.099999999999994px), calc(100% - 25.1262px) calc(100% - 0.49179999999998px), calc(100% - 20.5056px) calc(100% - 1.6264px), calc(100% - 16.1994px) calc(100% - 3.4426px), calc(100% - 12.2688px) calc(100% - 5.8792px), calc(100% - 8.775px) calc(100% - 8.875px), calc(100% - 5.7791999999999px) calc(100% - 12.3688px), calc(100% - 3.3425999999999px) calc(100% - 16.2994px), calc(100% - 1.5264px) calc(100% - 20.6056px), calc(100% - 0.39179999999999px) calc(100% - 25.2262px), calc(100% - 1.1368683772162E-13px) calc(100% - 30.1px), calc(100% - 0px) 52.5px, calc(100% - 0px) 52.5px, calc(100% - 0.39179999999999px) 47.6262px, calc(100% - 1.5263999999999px) 43.0056px, calc(100% - 3.3425999999999px) 38.6994px, calc(100% - 5.7792000000001px) 34.7688px, calc(100% - 8.775px) 31.275px, calc(100% - 12.2688px) 28.2792px, calc(100% - 16.1994px) 25.8426px, calc(100% - 20.5056px) 24.0264px, calc(100% - 25.1262px) 22.8918px, calc(100% - 30px) 22.5px); 
+          } 
+          .mdc-dialog .mdc-dialog__surface {
+            background-color: var(--custom-ha-card-background) !important;
+            box-shadow: var(--custom-ha-card-box-shadow);
+          }
+          .mdc-dialog .mdc-dialog__container {
+            position: absolute !important;
+            left: 12% !important;
+          }
+          .mdc-dialog .mdc-dialog__scrim {
+            background-color: rgba(0,0,0,0) !important;
+          }
+          :host {
+            color: var(--custom-ha-card-text-color-primary) !important;
+            --popup-min-width: 1113px !important; #Control width of popup
+          }
+          ha-header-bar {
+            --mdc-theme-primary: black !important;
+          }
+          .mdc-dialog__content {
+            overflow: hidden !important;
           }
     content:
-      type: custom:layout-card
-      layout_type: custom:grid-layout
-      layout:
-        margin: 0
-        grid-template-columns: 300px 300px 300px
-        grid-template-rows: 1fr
-        grid-template-areas: |
-          "control temperature humidity"
+        type: custom:mod-card
+        style:
+            hui-horizontal-stack-card$: |
+              #root {
+                column-gap: 0px !important;
+              }
+            .: |
+              ha-card {
+                height: 65px !important;
+                width: 100px !important;
+                margin-top: 30px !important;
+                margin-left: 9px !important;
+              }
+            
+        card:
+          type: horizontal-stack
+          cards:
+                # HEAT TEMP SETTING ############################################
+                - type: custom:button-card
+                  entity: climate.entryway
+                  template:
+                    - icon_climate_left  #icon-svg-dualtone.yaml
+                    - climate_switch_arrow_temp_low  #climate_switch.yaml
+                  tap_action:
+                    action: call-service
+                    service: climate.set_temperature
+                    service_data:
+                      entity_id: climate.entryway
+                      target_temp_low: >
+                        [[[
+                          var temp = states['climate.entryway'].attributes.target_temp_low - 0.5;
+                          return temp;
+                        ]]]
+                      target_temp_high: >
+                        [[[ return states['climate.entryway'].attributes.target_temp_high ]]]
 
-      cards:
-      - type: vertical-stack
-        view_layout:
-          grid-area: control
-        cards:
-          - type: thermostat
-            entity: climate.entryway
-      
-      - type: grid
-        view_layout:
-          grid-area: temperature
-        columns: 2
-        square: true
-        cards:
+                - type: custom:button-card
+                  entity: climate.entryway
+                  label: >
+                    [[[
+                      return states['climate.entryway'].attributes.target_temp_low;
+                    ]]]
+                  show_state: false
+                  show_icon: false
+                  show_name: false
+                  show_label: true
+                  action: none
+                  styles:
+                    card:
+                      - width: 60px
+                      - height: 60px
+                      - border-radius: 50%
+                      - background: var(--custom-ha-card-background-revert)
+                      - margin-top: 5px
+                      - border-width: 0px
+                    label:
+                      - color: var(--custom-ha-card-text-color-primary)
+                      - font-size: 24px
+                      - font-weight: 400
 
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.temperaturesensor_masterbedroom_temperature
-                color: '#2196f3'
-            name: PARENT
-            hours_to_show: 48
-            icon: mdi:thermometer
-            align_icon: left
-            line_width: 5
-            font-size: 10px
-            card_mod:
-              style: |
-                ha-icon {
-                  color: rgb(148, 148, 148)
-                }
+                - type: custom:button-card
+                  entity: climate.entryway
+                  template:
+                    - icon_climate_right  #icon-svg-dualtone.yaml
+                    - climate_switch_arrow_temp_low  #climate_switch.yaml
+                  tap_action: 
+                    action: call-service
+                    service: climate.set_temperature
+                    service_data:
+                      entity_id: climate.entryway
+                      target_temp_low: >
+                        [[[
+                          var temp = states['climate.entryway'].attributes.target_temp_low + 0.5;
+                          return temp;
+                        ]]]
+                      target_temp_high: >
+                        [[[ return states['climate.entryway'].attributes.target_temp_high ]]]
 
+                # COOL TEMP SETTING ############################################
 
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.temperaturesensor_clara_temperature
-                color: '#2196f3'
-            name: CLARA
-            hours_to_show: 48
-            icon: mdi:thermometer
-            align_icon: left
-            line_width: 5
-            card_mod:
-              style: |
-                ha-icon {
-                  color: rgb(148, 148, 148)
-                }
+                - type: custom:button-card
+                  entity: climate.entryway
+                  template:
+                    - icon_climate_left
+                    - climate_switch_arrow_temp_high
+                  tap_action:
+                    action: call-service
+                    service: climate.set_temperature
+                    service_data:
+                      entity_id: climate.entryway
+                      target_temp_low: >
+                        [[[ return states['climate.entryway'].attributes.target_temp_low ]]]
+                      target_temp_high: >
+                        [[[
+                          var temp = states['climate.entryway'].attributes.target_temp_high - 0.5;
+                          return temp;
+                        ]]]
 
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.temperaturesensor_basement_temperature
-                color: '#2196f3'
-            name: SOUS-SOL
-            hours_to_show: 48
-            icon: mdi:thermometer
-            align_icon: left
-            line_width: 5
-            card_mod:
-              style: |
-                ha-icon {
-                  color: rgb(148, 148, 148)
-                }
+                - type: custom:button-card
+                  entity: climate.entryway
+                  label: >
+                    [[[
+                      return states['climate.entryway'].attributes.target_temp_high;
+                    ]]]
+                  show_state: false
+                  show_icon: false
+                  show_name: false
+                  show_label: true
+                  action: none
+                  styles:
+                    card:
+                      - width: 60px
+                      - height: 60px
+                      - border-radius: 50%
+                      - background: var(--custom-ha-card-background-revert)
+                      - margin-top: 5px
+                      - border-width: 0px
+                    label:
+                      - color: var(--custom-ha-card-text-color-primary)
+                      - font-size: 24px
+                      - font-weight: 400
 
-      - type: grid
-        view_layout:
-          grid-area: humidity
-        columns: 2
-        square: true
-        cards:
+                - type: custom:button-card
+                  entity: climate.entryway
+                  template:
+                    - icon_climate_right
+                    - climate_switch_arrow_temp_high
+                  tap_action:
+                    action: call-service
+                    service: climate.set_temperature
+                    service_data:
+                      entity_id: climate.entryway
+                      target_temp_low: >
+                        [[[ return states['climate.entryway'].attributes.target_temp_low ]]]
+                      target_temp_high: >
+                        [[[
+                          var temp = states['climate.entryway'].attributes.target_temp_high + 0.5;
+                          return temp;
+                        ]]]
+                        
+                #SEPARATOR #####################################################
+                - type: custom:button-card
+                  entity: climate.entryway
+                  show_state: false
+                  show_name: false
+                  show_icon: false
+                  styles:
+                    card:
+                      - background: var(--custom-ha-card-background-revert)
+                      - width: 8px
+                      - height: 170px
+                      - borderRadius: 0px
+                      - border-width: 0px
+                      - margin-top: -50px
+                      - margin-left: -4px
+                      - margin-right: -4px
+                  tap_action:
+                    action: none
+                    
+                # CLIMATE AUTO #################################################
+                - type: custom:button-card
+                  entity: climate.entryway
+                  template: 
+                    - climate_switch_invert
+                    - icon_climate_auto
+                  state:
+                    - value: 'heat_cool'
+                      styles:
+                        custom_fields:
+                          button:
+                            - background: white
+                  tap_action:
+                    action: call-service
+                    service: climate.set_hvac_mode
+                    service_data:
+                      entity_id: climate.entryway
+                      hvac_mode: 'heat_cool'
 
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.temperaturesensor_masterbedroom_humidity
-                color: '#2196f3'
-            name: PARENT
-            hours_to_show: 48
-            icon: mdi:water-percent
-            align_icon: left
-            line_width: 5
-            card_mod:
-              style: |
-                ha-icon {
-                  color: rgb(148, 148, 148)
-                }
+                # CLIMATE HEAT #################################################
+                - type: custom:button-card
+                  entity: climate.entryway
+                  template: 
+                    - climate_switch_invert
+                    - icon_climate_heating
+                  state:
+                    - value: 'heat'
+                      styles:
+                        custom_fields:
+                          button:
+                            - background: white
+                  tap_action:
+                    action: call-service
+                    service: climate.set_hvac_mode
+                    service_data:
+                      entity_id: climate.entryway
+                      hvac_mode: 'heat'
 
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.temperaturesensor_clara_humidity
-                color: '#2196f3'
-            name: CLARA
-            hours_to_show: 48
-            icon: mdi:water-percent
-            align_icon: left
-            line_width: 5
-            card_mod:
-              style: |
-                ha-icon {
-                  color: rgb(148, 148, 148)
-                }
+                # CLIMATE COOL #################################################
+                - type: custom:button-card
+                  entity: climate.entryway
+                  template: 
+                    - climate_switch_invert
+                    - icon_climate_cooling
+                  state:
+                    - value: 'cool'
+                      styles:
+                        custom_fields:
+                          button:
+                            - background: white
+                  tap_action:
+                    action: call-service
+                    service: climate.set_hvac_mode
+                    service_data:
+                      entity_id: climate.entryway
+                      hvac_mode: 'cool'
+                      
+                # CLIMATE OFF ##################################################
+                - type: custom:button-card
+                  entity: climate.entryway
+                  template: 
+                    - climate_switch_invert
+                    - icon_climate_off
+                  state:
+                    - value: 'off'
+                      styles:
+                        custom_fields:
+                          button:
+                            - background: white
+                  tap_action:
+                    action: call-service
+                    service: climate.set_hvac_mode
+                    service_data:
+                      entity_id: climate.entryway
+                      hvac_mode: 'off'
+              
+                #SEPARATOR #####################################################
+                - type: custom:button-card
+                  entity: climate.entryway
+                  show_state: false
+                  show_name: false
+                  show_icon: false
+                  styles:
+                    card:
+                      - background: var(--custom-ha-card-background-revert)
+                      - width: 8px
+                      - height: 170px
+                      - borderRadius: 0px
+                      - border-width: 0px
+                      - margin-top: -50px
+                      - margin-left: -4px
+                      - margin-right: -4px
+                  tap_action:
+                    action: none
 
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.temperaturesensor_basement_humidity
-                color: '#2196f3'
-            name: SOUS-SOL
-            hours_to_show: 48
-            icon: mdi:water-percent
-            align_icon: left
-            line_width: 5
-            card_mod:
-              style: |
-                ha-icon {
-                  color: rgb(148, 148, 148)
-                }
+                # FAN ONLY #####################################################
+                
+                - type: custom:button-card
+                  entity: switch.climate_fan
+                  styles:
+                    card:
+                      - margin-left: 14px
+                  template: 
+                    - climate_switch
+                    - icon_climate_fan
+                
+                # ECO MODE #####################################################
+
+                - type: custom:button-card
+                  entity: switch.climate_eco_mode
+                  styles:
+                    card:
+                      - margin-left: 8px
+                  template:
+                    - climate_switch
+                    - icon_climate_eco_mode
+
+                # MORE #########################################################
+                - type: custom:button-card
+                  entity: climate.entryway
+                  styles:
+                    card:
+                      - margin-left: 8px
+                  template:
+                    - icon_climate_more
+                    - climate_switch
+
+                

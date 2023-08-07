@@ -1,37 +1,35 @@
 garbage:
   show_name: true
   show_label: true
-  aspect_ratio: 1/1
+  #aspect_ratio: 1/1
   styles:
     card:
       #- width: 176.5px
       #- height: 176.5px
-      - padding: 15px
-      - border-radius: 20px
+      - padding: 1.2vw 0.8vw 1.2vw 0.8vw
+      - border-radius: 1.5vw
       - box-shadow: var(--custom-ha-card-box-shadow)
     grid:
-      - grid-template-areas: '"i" "n" "l"'
-      - grid-template-columns: 1fr
-      - grid-template-rows: 1fr min-content min-content
+      - grid-template-areas: '"i n" "i l"'
+      - grid-template-columns: none
+      - grid-template-rows: 1fr 1fr
     name:
       - justify-self: start
-      - font-size: 22px 
+      - font-size: 1.2vw
       - font-weight: 600
       - color: var(--custom-ha-card-text-color-primary)
-      - padding-bottom: 3px
+      - align-self: end
     img_cell:
       - justify-content: center
       - align-items: center
-      - margin-bottom: 0.5vw
-      - size: 60px
       - background: var(--custom-ha-card-background-revert)
-      - border-radius: 10px
-      - width: 5.5vw
-      - height: 5.5vw
+      - border-radius: 1.75vw
+      - width: 3.5vw
+      - height: 3.5vw
       - place-self: start
     label:
       - justify-self: start
-      - font-size: 14px
+      - font-size: 1vw
       - font-weight: 600
       - color: var(--custom-ha-card-text-color-secondary)
       - padding-bottom: 5px
@@ -43,6 +41,7 @@ garbage:
       styles:
         img_cell:
           - background: 'rgb(90,201,186)'
+          - animation: blink 2s ease infinite
         name:
           - color: black
         label:
@@ -55,6 +54,7 @@ garbage:
       styles:
         img_cell:
           - background: 'rgb(90,201,186)'
+          - animation: blink 2s ease infinite
         name:
           - color: black
         label:
@@ -65,9 +65,9 @@ garbage:
           - color: black
   label: >
     [[[
-      if (entity.state == 0) return 'Sortir bac ce matin';
-      if (entity.state == 1) return 'Sortir le bac ce soir';
-      else return 'Passe dans '+ entity.attributes.days + ' jours';
+      if (entity.state == 0) return 'Ce matin';
+      if (entity.state == 1) return 'Ce soir';
+      else return 'Dans '+ entity.attributes.days + ' jours';
     ]]]
   style: |
     ha-card {
