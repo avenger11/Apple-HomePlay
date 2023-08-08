@@ -16,15 +16,6 @@ https://www.youtube.com/watch?v=zyPGEAOFoiQ
 
 
 
-### Version 2.1.0
-
-<img src="https://user-images.githubusercontent.com/37946892/236594063-38566c69-27fb-4f21-9a2d-202d87d2eb4f.png" width=75% height=75%>
-
-
-### Version 2.0.0
-
-<img src="https://user-images.githubusercontent.com/37946892/234759009-f83ca24f-1963-4c80-bbe3-b7b3b7f8aaca.png" width=50% height=50%><img src="https://user-images.githubusercontent.com/37946892/234759019-8742bccd-4f0c-4769-bc4f-4363300e87c5.png" width=50% height=50%>
-
 # Architecture
 
 This is the keyplan for the layout.
