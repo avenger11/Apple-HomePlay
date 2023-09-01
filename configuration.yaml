@@ -21,17 +21,19 @@ homeassistant:
     media_player.samsung_q60ba_65_tv:
       device_class: tv
     
+  packages: !include_dir_named packages
+
+
 frontend:
-  themes: !include_dir_merge_named themes
+  themes: 
+    light: !include_dir_merge_named themes/HomeOS/light/
+    dark: !include_dir_merge_named themes/HomeOS/dark/
 
   extra_module_url:
     - /local/community/custom-brand-icons/custom-brand-icons.js #Add new icon from elax46, use phu:
     - /local/community/garbage-collection-card/garbage-collection-card.js
-    - /local/community/light-popup-card/light-popup-card.js
     - /local/community/kiosk-mode/kiosk-mode.js
-    - /local/community/bar-card/bar-card.js
     - /local/fonts.css
-
 
 ##############################################
 # Group
@@ -107,6 +109,12 @@ lovelace:
       title: HomePlay
       icon: phu:homekit
       show_in_sidebar: true
+    home-os:
+      mode: yaml
+      filename: HomeOS.yaml
+      title: HomeOS
+      icon: mdi:home
+      show_in_sidebar: true
 
 
 
@@ -132,10 +140,10 @@ binary_sensor:
     after: '7:00'
     before: '9:00'
 
-        
+    
 ##############################################
 # INPUT BOOLEAN
-##############################################
+#############################################
 
 
 sensor:
@@ -203,6 +211,7 @@ sensor:
   #######################################################################################
 
   - platform: template
+
     sensors:
 
       ##################################################################################
@@ -296,20 +305,30 @@ sensor:
       ##################################################################################
 
       ### feel like temperature
+      # Based on template sensor from https://www.home-assistant.io/integrations/environment_canada/
       feel_like:
-        #unit_of_measurement: "°"
         value_template: >
-          {% if states('sensor.montreal_temperature') | float < 0 %}
+          {% if not is_state('sensor.montreal_humidex', 'unknown') %}
+            {{ states('sensor.montreal_humidex') | round(0) }}°
+          {% elif not is_state('sensor.montreal_wind_chill', 'unknown') %}
             {{ states('sensor.montreal_wind_chill') | round(0) }}°
-          {% elif states('sensor.montreal_temperature') | float > 19 %}
-              {% if is_state('sensor.montreal_humidex','unknown') %}
-                {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
-              {% else %}
-                {{ states('sensor.montreal_humidex') | round(0) }}°
-              {% endif %}
           {% else %}
             {{ states('sensor.montreal_temperature') | round(0) }}°
           {% endif %}
+
+      #Previous Homemade version
+          # {% if states('sensor.montreal_temperature') | float < 0 %}
+          #   {{ states('sensor.montreal_wind_chill') | round(0) }}°
+          # {% elif states('sensor.montreal_temperature') | float > 19 %}
+          #     {% if is_state('sensor.montreal_humidex','unknown') %}
+          #       {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
+          #     {% else %}
+          #       {{ states('sensor.montreal_humidex') | round(0) }}°
+          #     {% endif %}
+          # {% else %}
+          #   {{ states('sensor.montreal_temperature') | round(0) }}°
+          # {% endif %}
+
       ### High and low temperature
       high_low_temp:
         value_template: >

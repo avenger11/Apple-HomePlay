@@ -1,0 +1,63 @@
+#..............................................................................
+#.HHHH...HHHH.........................................OOOOOOO......SSSSSSS.....
+#.HHHH...HHHH........................................OOOOOOOOOO...OSSSSSSSS....
+#.HHHH...HHHH.......................................eOOOOOOOOOOO..OSSSSSSSSS...
+#.HHHH...HHHH....oooooo..ommmmmmmmmmmmm....eeeeee...eOOOO..OOOOO.OOSSS..SSSS...
+#.HHHH...HHHH..ooooooooo.ommmmmmmmmmmmmm..eeeeeeee.eeOOO....OOOOOOOSSS.........
+#.HHHHHHHHHHH..oooo.oooooommmm.mmmmmmmmm.meee.eeee.eeOO......OOOO.OSSSSSS......
+#.HHHHHHHHHHH.Hooo...ooooommm..mmmm..mmmmmeee..eeeeeeOO......OOOO..SSSSSSSSS...
+#.HHHHHHHHHHH.Hooo...ooooommm..mmmm..mmmmmeeeeeeeeeeeOO......OOOO....SSSSSSS...
+#.HHHH...HHHH.Hooo...ooooommm..mmmm..mmmmmeeeeeeeeeeeOOO....OOOOO.......SSSSS..
+#.HHHH...HHHH.Hooo...ooooommm..mmmm..mmmmmeee.......eOOOO..OOOOO.OOSS....SSSS..
+#.HHHH...HHHH..oooo.oooooommm..mmmm..mmmmmeee..eeee.eOOOOOOOOOOO.OOSSSSSSSSSS..
+#.HHHH...HHHH..ooooooooo.ommm..mmmm..mmmm.eeeeeeee...OOOOOOOOOO...OSSSSSSSSS...
+#.HHHH...HHHH....oooooo..ommm..mmmm..mmmm..eeeeee......OOOOOO......SSSSSSSS....
+#..............................................................................
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is the main file for the HomeOS dashboard                             |
+# +----------------------------------------------------------------------------+
+# | Author: Sebastien Logeais                                                  |
+# +----------------------------------------------------------------------------+
+# | Date: 25 Aug 2023                                                          |
+# +----------------------------------------------------------------------------+
+
+kiosk_mode:
+  hide_header: true
+
+views:
+  - type: custom:grid-layout
+    title: HomeOS
+    background: var(--background)
+
+    layout:
+      margin: 0
+      padding: 0
+      grid-template-columns: 5vw 1fr 2.3fr 0.6fr 0
+      grid-template-rows: 3vw 2.1fr 
+      grid-gap: 0.7vw
+      grid-template-areas: |
+        "apps topbar topbar topbar ."
+        "apps left center right ."
+    cards:
+
+    
+# +----------------------------------------------------------------------------+
+# | Left Area Definition                                                       |
+# +----------------------------------------------------------------------------+
+      - type: vertical-stack
+        view_layout:
+          grid-area: left
+        cards:
+          - !include HomeOS_Module/weather/weather_card.yaml
+          - !include HomeOS_Module/Calendar/calendar_card.yaml
+
+# +----------------------------------------------------------------------------+
+# | Right Area Definition                                                      |
+# +----------------------------------------------------------------------------+
+      - type: vertical-stack
+        view_layout:
+          grid-area: right
+        cards:
+          - !include HomeOS_Module/person/person_card.yaml

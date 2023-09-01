@@ -1,0 +1,81 @@
+# +----------------------------------------------------------------------------+
+# | Integration instruction:                                                   |
+# | 1. weather_bg_condition:                                                   |
+# |    Change 'sensor.montreal_icon_code' by the weather integration you use   |
+# | 2. In weather_feel_like_temp:                                              |
+# |    Change 'sensor.montreal_humidex','sensor.montreal_wind_chill',          |
+# |    'sensor.montreal_temperature' by the integration you use.               |
+# |    If you don't use feel like replace all the code by temp from your       |
+# |    weather integration.                                                    |
+# | 3. weather_current_condition:                                              |
+# |    change 'sensor.montreal_current_condition' by your weather integration  |
+# |    This is the text description of the current weather condition           |
+# | 4. weather_high_low_temp:                                                  |
+# |    change 'sensor.montreal_high_temperature' and                           |
+# |    'sensor.montreal_low_temperature' by the low and high temperature from  |
+# |    your weather                                                            |
+# | 5. weather platform:                                                       |
+# |    change all 'weather.openweathermap' by your weather integration         |
+# +----------------------------------------------------------------------------+
+sensor:
+  - platform: template
+    sensors:
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This create a sensor to determine which weather background to use day or   |
+# | night.                                                                     |
+# | This is use on icon code from a weather integration                        |
+# +----------------------------------------------------------------------------+
+      weather_bg_condition: 
+        value_template: >
+          {% if is_state('input_select.hass_theme_selected','light') %}
+            {{ states('sensor.montreal_icon_code') | round(0) }}
+          {% elif is_state('input_select.hass_theme_selected','dark') %}
+            {{ states('sensor.montreal_icon_code') | round(0) + 100  }}
+          {% endif %}
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This create a sensor to show the feel like temperature.                    |
+# | Here in Canada the humidity and wind have a huge impact on the temperature |
+# +----------------------------------------------------------------------------+
+      weather_feel_like_temp:
+        value_template: >
+          {% if not is_state('sensor.montreal_humidex', 'unknown') %}
+            {{ states('sensor.montreal_humidex') | round(0) }}°
+          {% elif not is_state('sensor.montreal_wind_chill', 'unknown') %}
+            {{ states('sensor.montreal_wind_chill') | round(0) }}°
+          {% else %}
+            {{ states('sensor.montreal_temperature') | round(0) }}°
+          {% endif %}
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This create a sensor to redirect your integration in the card              |
+# +----------------------------------------------------------------------------+
+      weather_current_condition:
+        value_template: >
+          {{ states('sensor.montreal_current_condition') }}
+  
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This create a sensor for the high low temp description                     |
+# +----------------------------------------------------------------------------+
+      weather_high_low_temp:
+        value_template: >
+          ↑ {{ states('sensor.montreal_high_temperature') }}° ↓ 
+          {{ states('sensor.montreal_low_temperature') }}°
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This create a weather sensor to redirect your weather information          |
+# +----------------------------------------------------------------------------+
+weather:
+  - platform: template
+    unique_id: weather_forecast_id
+    name: weather_forecast
+    condition_template: "{{ states('weather.openweathermap')}}"
+    humidity_template: "{{ state_attr('weather.openweathermap','humidity')}}"
+    temperature_template: "{{ state_attr('weather.openweathermap','temperature')}}"
+    forecast_template: "{{ state_attr('weather.openweathermap','forecast')}}"

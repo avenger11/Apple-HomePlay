@@ -2,8 +2,8 @@
 type: custom:atomic-calendar-revive
 entities:
   - entity: calendar.famille
-    name: famille
     maxDaysToShow: 100
+
 showWeekDay: true
 showMonth: true
 maxEventCount: 3

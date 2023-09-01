@@ -1,0 +1,30 @@
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is the dark theme file for the weather card and popup                 |
+# +----------------------------------------------------------------------------+
+# | Author: Sebastien Logeais                                                  |
+# +----------------------------------------------------------------------------+
+# | Date: 31 Aug 2023                                                          |
+# +----------------------------------------------------------------------------+
+
+homeos-weather-box-shadow: var(--homeos-card-box-shadow)
+homeos-weather-border-radius: var(--homeos-card-border-radius)
+
+# +----------------------------------------------------------------------------+
+# | IOS Weather Icon                                                           |
+# +----------------------------------------------------------------------------+
+weather-icon-snowy: url('/local/weather_media/Icons=snowflake.svg')
+weather-icon-cloudy: url('/local/weather_media/Icons=cloud.fill.svg')
+weather-icon-clear-night: url('/local/weather_media/Icons=moon.stars.fill.svg')
+weather-icon-fog: url('/local/weather_media/Icons=moon.haze.fill.svg')
+weather-icon-lightning: url('/local/weather_media/Icons=cloud.moon.bolt.fill.svg')
+weather-icon-lightning-rainy: url('/local/weather_media/Icons=cloud.bolt.rain.fill.svg')
+weather-icon-partlycloudy: url('/local/weather_media/Icons=cloud.moon.fill.svg')
+weather-icon-pouring: url('/local/weather_media/Icons=cloud.heavyrain.fill.svg')
+weather-icon-rainy: url('/local/weather_media/Icons=cloud.rain.fill.svg')
+weather-icon-hail: url('/local/weather_media/Icons=cloud.moon.rain.fill.svg')
+weather-icon-snowy-rainy: url('/local/weather_media/Icons=cloud.sleet.fill.svg')
+weather-icon-sunny: url('/local/weather_media/Icons=sun.max.fill.svg')
+weather-icon-windy: url('/local/weather_media/Icons=wind.svg')
+weather-icon-windy-variant: url('/local/weather_media/Icons=wind.snow.svg')
+weather-icon-exceptional: url('/local/weather_media/Icons=exclamationmark.triangle.svg')

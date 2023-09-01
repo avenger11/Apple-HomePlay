@@ -1,0 +1,28 @@
+# +----------------------------------------------------------------------------+
+# | Integration instruction:                                                   |
+# | 1. person_identity_1:                                                      |
+# |       |
+# | 2. person_travel_time:
+# |    change 'sensor.seb_work_travel_time' by the sensor representing your    |
+# |    travel time.                                                            |
+# +----------------------------------------------------------------------------+
+sensor:
+  - platform: template
+    sensors:
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+
+# +----------------------------------------------------------------------------+
+      person_identity_1:
+        value_template: >
+          Sebastien
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This create a sensor to redirect the information from your travel time     |
+# | integration. I'm using waze integration.
+# +----------------------------------------------------------------------------+
+      person_travel_time:
+        value_template: >
+          {{ states('sensor.seb_work_travel_time')}}

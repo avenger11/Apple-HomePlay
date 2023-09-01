@@ -9,16 +9,19 @@ light:
   #  CUSTOM VARIABLE
   ##############################################################################
 
+  
   # Custom Variable
   custom-ha-card-background: rgba(255, 255, 255, 0.7)
   custom-ha-card-background-revert: rgba(0,0,0,0.15)
   custom-ha-card-backdrop-filter: blur(30px) saturate(180%)
   custom-ha-card-box-shadow: 0px 0px 10px rgba(0,0,0,0.3)
 
-  custom-calendar-card-background: rgba(220, 220, 220, 0.8)
+  
+
+  custom-calendar-card-background: rgba(225, 225, 225, 0.6)
   custom-calendar-card-backdrop-filter: blur(30px) saturate(180%)
-  custom-calendar-card-background-revert: rgba(255,255,255,0.2)
-  custom-calendar-card-backdrop-filter-revert: brightness(120%) 
+  custom-calendar-card-background-revert: rgba(255,255,255,0.6)
+
 
   custom-map-card-control-background-on: rgb(255, 255, 250)
   custom-map-card-control-background-off: rgb(220, 220, 220)
@@ -48,7 +51,7 @@ light:
 
 #_______________________________________________________________________________
 # Background
-  background: left top / contain no-repeat fixed url('/local/background/day-variant.jpg')
+  background: left top / contain no-repeat fixed url('/local/background/day-variant-2.jpg')
 
 
 #_______________________________________________________________________________
@@ -75,21 +78,21 @@ light:
 #   Day Weather Icon
 ################################################################################
 
-  weather-icon-snowy: url('/local/icon/weather/Icons=snowflake.svg')
-  weather-icon-cloudy: url('/local/icon/weather/Icons=cloud.fill.svg')
-  weather-icon-clear-night: url('/local/icon/weather/Icons=moon.stars.fill.svg')
-  weather-icon-fog: url('/local/icon/weather/Icons=sun.haze.fill.svg')
-  weather-icon-lightning: url('/local/icon/weather/Icons=cloud.sun.bolt.fill.svg')
-  weather-icon-lightning-rainy: url('/local/icon/weather/Icons=cloud.bolt.rain.fill.svg')
-  weather-icon-partlycloudy: url('/local/icon/weather/Icons=cloud.sun.fill.svg')
-  weather-icon-pouring: url('/local/icon/weather/Icons=cloud.heavyrain.fill.svg')
-  weather-icon-rainy: url('/local/icon/weather/Icons=cloud.sun.rain.fill.svg')
-  weather-icon-hail: url('/local/icon/weather/Icons=cloud.hail.fill.svg')
-  weather-icon-snowy-rainy: url('/local/icon/weather/Icons=cloud.sleet.fill.svg')
-  weather-icon-sunny: url('/local/icon/weather/Icons=sun.max.fill.svg')
-  weather-icon-windy: url('/local/icon/weather/Icons=wind.svg')
-  weather-icon-windy-variant: url('/local/icon/weather/Icons=wind.snow.svg')
-  weather-icon-exceptional: url('/local/icon/weather/Icons=exclamationmark.triangle.svg')
+  weather-icon-snowy: url('/local/weather_media/Icons=snowflake.svg')
+  weather-icon-cloudy: url('/local/weather_media/Icons=cloud.fill.svg')
+  weather-icon-clear-night: url('/local/weather_media/Icons=moon.stars.fill.svg')
+  weather-icon-fog: url('/local/weather_media/Icons=sun.haze.fill.svg')
+  weather-icon-lightning: url('/local/weather_media/Icons=cloud.sun.bolt.fill.svg')
+  weather-icon-lightning-rainy: url('/local/weather_media/Icons=cloud.bolt.rain.fill.svg')
+  weather-icon-partlycloudy: url('/local/weather_media/Icons=cloud.sun.fill.svg')
+  weather-icon-pouring: url('/local/weather_media/Icons=cloud.heavyrain.fill.svg')
+  weather-icon-rainy: url('/local/weather_media/Icons=cloud.sun.rain.fill.svg')
+  weather-icon-hail: url('/local/weather_media/Icons=cloud.hail.fill.svg')
+  weather-icon-snowy-rainy: url('/local/weather_media/Icons=cloud.sleet.fill.svg')
+  weather-icon-sunny: url('/local/weather_media/Icons=sun.max.fill.svg')
+  weather-icon-windy: url('/local/weather_media/Icons=wind.svg')
+  weather-icon-windy-variant: url('/local/weather_media/Icons=wind.snow.svg')
+  weather-icon-exceptional: url('/local/weather_media/Icons=exclamationmark.triangle.svg')
 
 
 #_______________________________________________________________________________
@@ -348,21 +351,21 @@ dark:
 #_______________________________________________________________________________
 #   Night Weather Icon
 
-  weather-icon-snowy: url('/local/icon/weather/Icons=snowflake.svg')
-  weather-icon-cloudy: url('/local/icon/weather/Icons=cloud.fill.svg')
-  weather-icon-clear-night: url('/local/icon/weather/Icons=moon.stars.fill.svg')
-  weather-icon-fog: url('/local/icon/weather/Icons=moon.haze.fill.svg')
-  weather-icon-lightning: url('/local/icon/weather/Icons=cloud.moon.bolt.fill.svg')
-  weather-icon-lightning-rainy: url('/local/icon/weather/Icons=cloud.bolt.rain.fill.svg')
-  weather-icon-partlycloudy: url('/local/icon/weather/Icons=cloud.moon.fill.svg')
-  weather-icon-pouring: url('/local/icon/weather/Icons=cloud.heavyrain.fill.svg')
-  weather-icon-rainy: url('/local/icon/weather/Icons=cloud.rain.fill.svg')
-  weather-icon-hail: url('/local/icon/weather/Icons=cloud.moon.rain.fill.svg')
-  weather-icon-snowy-rainy: url('/local/icon/weather/Icons=cloud.sleet.fill.svg')
-  weather-icon-sunny: url('/local/icon/weather/Icons=sun.max.fill.svg')
-  weather-icon-windy: url('/local/icon/weather/Icons=wind.svg')
-  weather-icon-windy-variant: url('/local/icon/weather/Icons=wind.snow.svg')
-  weather-icon-exceptional: url('/local/icon/weather/Icons=exclamationmark.triangle.svg')
+  weather-icon-snowy: url('/local/weather_media/Icons=snowflake.svg')
+  weather-icon-cloudy: url('/local/weather_media/Icons=cloud.fill.svg')
+  weather-icon-clear-night: url('/local/weather_media/Icons=moon.stars.fill.svg')
+  weather-icon-fog: url('/local/weather_media/Icons=moon.haze.fill.svg')
+  weather-icon-lightning: url('/local/weather_media/Icons=cloud.moon.bolt.fill.svg')
+  weather-icon-lightning-rainy: url('/local/weather_media/Icons=cloud.bolt.rain.fill.svg')
+  weather-icon-partlycloudy: url('/local/weather_media/Icons=cloud.moon.fill.svg')
+  weather-icon-pouring: url('/local/weather_media/Icons=cloud.heavyrain.fill.svg')
+  weather-icon-rainy: url('/local/weather_media/Icons=cloud.rain.fill.svg')
+  weather-icon-hail: url('/local/weather_media/Icons=cloud.moon.rain.fill.svg')
+  weather-icon-snowy-rainy: url('/local/weather_media/Icons=cloud.sleet.fill.svg')
+  weather-icon-sunny: url('/local/weather_media/Icons=sun.max.fill.svg')
+  weather-icon-windy: url('/local/weather_media/Icons=wind.svg')
+  weather-icon-windy-variant: url('/local/weather_media/Icons=wind.snow.svg')
+  weather-icon-exceptional: url('/local/weather_media/Icons=exclamationmark.triangle.svg')
 
 #_______________________________________________________________________________
 #   Browser mod popup

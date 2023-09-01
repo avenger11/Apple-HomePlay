@@ -1,0 +1,43 @@
+
+type: custom:button-card
+entity: person.sebastien_logeais
+show_entity_picture: true
+show_name: false
+show_state: true
+show_label: true
+show_icon: false
+aspect_ratio: 1/1
+styles:
+  card:
+    - border-radius: 1.5vw
+    - box-shadow: var(--custom-ha-card-box-shadow)
+    - background-color: var(--custom-ha-card-background)
+    - backdrop-filter: var(--custom-calendar-card-backdrop-filter)
+    - border-style: none
+  entity_picture:
+    - border-radius: 50%
+  state:
+    - position: absolute
+    - top: 55%
+    - font-size: 1.5vw
+    - font-weight: 600
+    - color: var(--custom-ha-card-text-color-primary)
+
+  label:
+    - position: absolute
+    - top: 73%
+    - left: 10%
+    - justify-self: start
+    - align-self: start
+    - text-align: justify
+    - color: var(--custom-ha-card-text-color-third)
+    - font-size: 1vw
+    - font-weight: 500
+    - line-height: 1.2
+    
+label: >
+    [[[
+      return 'Le temps de trajet <br/> est de ' + sensor.person_travel_time + ' mins.' ;
+    ]]]
+
+

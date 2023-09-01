@@ -1,5 +1,5 @@
-button_card_templates: !include_dir_merge_named button_card_templates
 
+button_card_templates: !include_dir_merge_named button_card_templates
 
 kiosk_mode:
   hide_header: true
@@ -167,7 +167,8 @@ views:
                 height: 33.5vw !important;
                 box-shadow: var(--custom-ha-card-box-shadow);
               }
-  
+
+              
             elements:
               - type: image
                 entity: sensor.weather_bg_condition2
@@ -264,7 +265,7 @@ views:
                   width: 95%
                 card:
                   type: weather-forecast
-                  entity: weather.montreal_hourly_forecast
+                  entity: weather.openweathermap
                   show_current: false
                   show_forecast: true
                   style:
@@ -285,7 +286,7 @@ views:
                       }
                       .forecast .temp {
                         color: white;
-                        font-size: 1.5vw !important;
+                        font-size: 1.3vw !important;
                       }
                       ha-card {
                         background: none;
@@ -298,9 +299,8 @@ views:
           ##           Calendar Card            ##
           ########################################
           - !include custom_module_card/calendar_card.yaml
-
-
-      #............................................................
+            
+      #.........................  ...................................
       #....CCCCCCC..........................ttt....................
       #...CCCCCCCCC........................tttt....................
       #..CCCCCCCCCCC.......................tttt....................
@@ -535,7 +535,7 @@ views:
                       template:
                         - light
 
-                    - entity: light.couloir_entree
+                    - entity: light.light_livingroomentry
                       type: custom:button-card
                       icon: phu:friends-of-hue-iq-pendant
                       style:
@@ -642,6 +642,17 @@ views:
                       state: "on"
                   elements:
                     - type: custom:button-card
+                      entity: sensor.temperaturesensor_vestibule_temperature
+                      style:
+                        left: 75%
+                        top: 15%
+                      template:
+                        - house_map_-_temp_hum
+                      variables:
+                        entity_temp: "[[[ return states['sensor.temperaturesensor_vestibule_temperature'].state ]]]"
+                        entity_hum: "[[[ return states['sensor.temperaturesensor_vestibule_humidity'].state ]]]"
+                    
+                    - type: custom:button-card
                       entity: sensor.entryway_temperature
                       style:
                         left: 45%
@@ -651,7 +662,6 @@ views:
                       variables:
                         entity_temp: "[[[ return states['sensor.entryway_temperature'].state ]]]"
                         entity_hum: "[[[ return states['sensor.entryway_humidity'].state ]]]"
-                    
             ###############################
             # 1st floor                   #
             ###############################
@@ -713,16 +723,16 @@ views:
                       type: custom:button-card
                       icon: mdi:apple-icloud
                       style:
-                        left: 20%
+                        left: 15%
                         top: 65%
                       template:
                         - light
                     
                     - entity: light.ambientlightbedroomclara_lightbulb
                       type: custom:button-card
-                      icon: phu:lamp-bedside-table
+                      icon: mdi:lamp
                       style:
-                        left: 50%
+                        left: 53%
                         top: 75%
                       template:
                         - light
@@ -735,6 +745,16 @@ views:
                         top: 20%
                       template:
                         - light
+
+                    - entity: light.clarabedroom
+                      type: custom:button-card
+                      icon: phu:ceiling-lamp-round
+                      style:
+                        left: 33%
+                        top: 75%
+                      template:
+                        - light
+                        
 
                 - type: conditional
                   conditions:
@@ -771,6 +791,16 @@ views:
                       variables:
                         entity_temp: "[[[ return states['sensor.temperaturesensor_upperbathroom_temperature'].state ]]]"
                         entity_hum: "[[[ return states['sensor.temperaturesensor_upperbathroom_humidity'].state ]]]"
+                    - type: custom:button-card
+                      entity: sensor.temperaturesensor_office_temperature
+                      style:
+                        left: 65%
+                        top: 25%
+                      template:
+                        - house_map_-_temp_hum
+                      variables:
+                        entity_temp: "[[[ return states['sensor.temperaturesensor_office_temperature'].state ]]]"
+                        entity_hum: "[[[ return states['sensor.temperaturesensor_office_humidity'].state ]]]"
       #...............................................
       #.RRRRRRRRRR...iiii............hhhh........ttt..
       #.RRRRRRRRRRR..iiii............hhhh.......tttt..
@@ -807,7 +837,7 @@ views:
               variables:
                 picture: '/local/person/seb.jpg'  #Picture in WWW folder
                 travel_time: "[[[ return states['sensor.seb_work_travel_time'].state ]]]"
-            
+    
           - type: conditional
             conditions:
               - entity: binary_sensor.7_9am
@@ -1044,7 +1074,7 @@ views:
                   - setting_icon
                 tap_action:
                   action: navigate
-                  navigation_path: /config/dashboard
+                  navigation_path: /config/integrations/dashboard
       
               - type: custom:button-card
                 entity: alarm_control_panel.alarme
