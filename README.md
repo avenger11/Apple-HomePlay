@@ -1,3 +1,5 @@
+![GitHub last commit](https://img.shields.io/github/last-commit/avenger11/Apple-HomePlay)
+
 # HomeOS Dashboard
 
 My take on Apple Home Dashboard Design for Home Assistant.
