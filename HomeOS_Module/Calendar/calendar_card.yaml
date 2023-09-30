@@ -1,91 +1,169 @@
 # +----------------------------------------------------------------------------+
-# | Variables                                                                  |
+# | File type: card definition                                                 |
 # +----------------------------------------------------------------------------+
-# | change:
-# | Change only 'calendar.famille' by the calendar you wish to see on          |
-# | the front page.                                                            |
+# | Description:                                                               |
+# | This is the Calendar card, use a custom button card as base and add the    |
+# | card atomic calendar revive                                                |
 # +----------------------------------------------------------------------------+
-
-calendar_entity: &calendar_entity calendar.famille
-
+# | Author: Sebastien Logeais                                                  |
 # +----------------------------------------------------------------------------+
-# | Card definition                                                            |
+# | Date: 31 Aug 2023                                                          |
 # +----------------------------------------------------------------------------+
 
-type: custom:atomic-calendar-revive
-entities:
-  - entity: *calendar_entity
-    maxDaysToShow: 100
-
-showWeekDay: true
-showMonth: true
-maxEventCount: 3
-showLoader: false
-showLocation: false
-showProgressBar: false
-showDatePerEvent: true
-hideFinishedEvents: true
+type: custom:button-card
+entity: sensor.calendar_weekday 
+name: >
+  [[[ return states['sensor.calendar_day'].state ]]]
+label: >
+  [[[ return states['sensor.calendar_month'].state ]]]
+show_icon: false
+show_name: true
+show_state: true 
+show_label: false
 tap_action:
   action: none
 hold_action:
   action: none
-card_mod:
-  style: |
-    ha-card {
-      transform: none;
-      background: var(--custom-calendar-card-background) !important; 
-      backdrop-filter: var(--custom-calendar-card-backdrop-filter); 
-      border-color: rgba(255, 255, 255, 0.03);
-      border-radius: 1.5vw;
-      box-shadow: var(--custom-ha-card-box-shadow);
-      padding:0.6vw !important;
-    }
-    .hoursHTML {
-      --time-color: var(--custom-ha-card-text-color-secondary) !important;
-      --time-size: 1.3vw !important;
-      font-weight: 500;
-    }
-    .event-title {
-      --event-title-size: 1.6vw !important;
-      color: var(--custom-ha-card-text-color-primary) !important;
-      font-weight: 600;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 18vw;
-      padding-bottom: 0.3vw;
-    }
-    .relativeTime {
-      --time-color: var(--custom-ha-card-text-color-secondary) !important;
-      --time-size: 1vw !important;
-      font-weight: 500;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 8.4vw;
-    }
-    .event-left {
-      font-size: 1.3vw !important;
-      font-weight: 500;
-      color: var(--custom-ha-card-text-color-primary) !important;
-    }
-    .event-right {
-      border-left-style: solid;
-      border-left-color: var(--custom-ha-card-text-color-secondary);
-      justify-content: start !important;
-      padding: 0px 1vw !important;
-    }
-    .daywrap {
-      border-color: rgba(255,255,255,0) !important;
-      padding: 0px !important;
-    }
-    tr{
-      background-color: var(--custom-calendar-card-background-revert);
-      backdrop-filter: var(--custom-calendar-card-backdrop-filter-revert); 
-      display: block;
-      border-radius: 1vw;
-      margin-bottom: 0.3vw;
-    }
-    .cal-card{
-      #height: 19.4vw !important;
-    }
+style: |
+  :host {
+    display: contents !important;
+  }
+
+styles:
+  grid:
+    - grid-template-areas: |
+        "s"
+        "n"
+        "agenda"
+    - grid-template-rows: min-content min-content 1fr
+    - grid-template-columns: 100%
+  card:
+    - background-color: var(--homeos-card-background)
+    - backdrop-filter: var(--homeos-card-backdrop-filter)
+    - border-radius: var(--homeos-card-border-radius)
+    - box-shadow: var(--homeos-card-box-shadow)
+    - padding: 4% #all side
+    - height: 100%
+  state: # style for text day
+    - color: var(--homeos-card-text-color-secondary)
+    - font-size: 2.5vw
+    - font-weight: 600
+    - place-self: self-start
+  name: # style for day
+    - color: var(--homeos-card-text-color-primary)
+    - font-size: 4vw
+    - font-weight: 400
+    - place-self: self-start
+    - margin-top: -0.5vw
+
+custom_fields:
+  agenda:
+    card:
+      type: custom:atomic-calendar-revive
+      entities:
+        - entity: calendar.famille
+
+      dateFormat: L
+      showMonth: true
+      maxEventCount: 2
+      showLoader: false
+      showLocation: false
+      showWeekDay: true         # Show week day under day (left side)
+      showEventDate: true
+      showRelativeTime: false   # shows amount of time until event starts
+      showProgressBar: false    # Show event progress with moving icon. Don’t enable when showCurrentEventLine - will look bad
+      showDatePerEvent: true    # Show the date next to each event entry
+      hideFinishedEvents: true  # if set true will hide any finished events
+      showAllDayHours: true     # Show “All Day” text under full day events
+      europeanDate: true
+      titleLength: 30
+      fullDayEventText: 'toute la journée'
+      
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      card_mod:
+        style: |
+          ha-card {
+            transform: none;
+            background: none !important; 
+            backdrop-filter: none; 
+            border-color: rgba(255, 255, 255, 0.03);
+            box-shadow: none;
+            padding: 0 !important;
+            border-radius: 0px;
+          }
+          .cal-eventContainer {
+            padding: 0 !important;
+          }
+          .hoursHTML {
+            --time-color: var(--homeos-card-text-color-primary) !important;
+            --time-size: 1.3vw !important;
+            font-weight: 300;
+            background-color: var(--homeos-card-background-revert); 
+            border-radius: 0 0 0.5vw 0.5vw;
+            padding-left: 1vw !important;
+            text-align: left !important;
+            width: 100%;
+            padding-bottom: 0.3vw;
+          }
+          .event-main {
+
+            color: var(--homeos-card-text-color-primary) !important;
+            font-weight: 400;
+            font-size: 1.6vw !important;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 18vw;
+            text-align: left;
+            padding-left: 1vw;
+            border-radius: 0.5vw 0.5vw 0 0;
+            background-color: var(--homeos-card-background-revert); 
+            width: 100%;
+            padding-top: 0.3vw;
+            
+          }
+          .relativeTime {
+            --time-color: var(--homeos-card-text-color-secondary) !important;
+            --time-size: 1vw !important;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 8.4vw;
+          }
+          .event-left {
+            font-size: 1.3vw !important;
+            font-weight: 400;
+            color: var(--homeos-card-text-color-third) !important;
+            vertical-align: inherit !important;
+            text-align: left !important;
+            padding: 0 !important;
+            display: flex;
+          }
+          .event-right {
+            border-left-style: solid;
+            border-left-width: 0.4vw;
+            border-left-color: var(--homeos-card-text-color-secondary);
+            justify-content: start !important;
+            padding: 0 0 0 0.6vw !important;
+          }
+          .daywrap {
+            border-color: rgba(255,255,255,0) !important;
+            padding: 0px !important;
+          }
+          tr{
+            display: grid;
+            margin-bottom: 0.3vw;
+            padding: 0px !important;
+          }
+          td{ 
+            padding: 0  !important;
+            padding-top: 0.3vw !important; 
+            padding-bottom: 0.4vw !important;
+          }
+          .event-leftCurrentDay {
+            width: unset !important;
+          }

@@ -294,7 +294,7 @@ views:
                         
                       }
                   tap_action: !include popup/weather.yaml
-                  
+              
           ########################################
           ##           Calendar Card            ##
           ########################################
@@ -911,16 +911,18 @@ views:
                 #bus_line_next: "[[[ return state_attr('sensor.191_bus_est', 'Next bus') ]]]"
       
           - type: custom:button-card
-            entity: sensor.garbage
+            entity: schedule.garbage
             name: Poubelle
             icon: fapro:Icons=trash.fill
+            label: "[[[ return states['sensor.garbage_weekday'].state ]]]"
             template:
               - garbage
-          
+
           - type: custom:button-card
-            entity: sensor.recycling
+            entity: schedule.recycling
             name: Recyclage
             icon: fapro:Icons=recycling.fill
+            label: "[[[ return states['sensor.recycling_weekday'].state ]]]"
             template:
               - garbage
         

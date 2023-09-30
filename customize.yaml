@@ -1,0 +1,13 @@
+binary_sensor.smokesensor_kitchen_buzzer_manual_alarm:
+  device_class: smoke
+binary_sensor.contactsensor_doorbasement_contact:
+  device_class: door
+media_player.samsung_q60ba_65_tv:
+  device_class: tv
+binary_sensor.watersensor_washingmachine_water_leak:
+  device_class: moisture
+binary_sensor.watersensor_heater_water_leak:
+  device_class: moisture
+binary_sensor.watersensor_dishwasher_water_leak:
+  device_class: moisture
+

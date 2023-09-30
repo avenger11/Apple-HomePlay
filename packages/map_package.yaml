@@ -1,0 +1,26 @@
+# +----------------------------------------------------------------------------+
+# | HOME ASSISTANT PACKAGE                                                     |
+# +----------------------------------------------------------------------------+
+# | Package name: map_package.yaml                                        |
+# +----------------------------------------------------------------------------+
+# | Author: Sebastien Logeais                                                  |
+# | Date: 9 sep 2023                                                           |
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This package contain all entities and value template related to the        |
+# | map card.                                                                  |
+# +----------------------------------------------------------------------------+
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is to create buttons to switch the information on the map card        |
+# +----------------------------------------------------------------------------+
+input_select:
+  homeos_map_layer_selection:
+    name: HomeOS Layer Selection Map
+    icon: mdi:list-box
+    options: 
+      - light
+      - temperature
+      - battery
+    initial: light

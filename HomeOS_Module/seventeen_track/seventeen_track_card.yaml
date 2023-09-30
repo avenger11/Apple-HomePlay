@@ -1,0 +1,6 @@
+
+type: vertical-stack
+cards:
+  - type: custom:seventeen-track-card
+    entity: sensor.seventeentrack_packages_in_transit
+    title: ''

@@ -20,6 +20,7 @@ custom_components/
 automations.yaml
 go2rtc.yaml
 homekit.yaml
+mqtt.yaml
 gtfs/
 
 *.log*

@@ -1,6 +1,46 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+# +----------------------------------------------------------------------------+
+# | Setting for the dashboard                                                  |
+# +----------------------------------------------------------------------------+
+lovelace:
+  dashboards:
+
+    lovelace-homeplay:
+      mode: yaml
+      filename: homeplay.yaml
+      title: HomePlay
+      icon: phu:homekit
+      show_in_sidebar: true
+
+    home-os:
+      mode: yaml
+      filename: HomeOS.yaml
+      title: HomeOS
+      icon: phu:homekit
+      show_in_sidebar: true
+
+
+# +----------------------------------------------------------------------------+
+# | Definition for the theme folder and file                                   |
+# +----------------------------------------------------------------------------+
+frontend:
+  themes:
+    light: !include_dir_merge_named themes/HomeOS/light/
+    dark: !include_dir_merge_named themes/HomeOS/dark/
+
+# +----------------------------------------------------------------------------+
+# | Definition for extra module                                                |
+# +----------------------------------------------------------------------------+
+  extra_module_url:
+    - /local/community/custom-brand-icons/custom-brand-icons.js #Add new icon from elax46, use phu:
+    - /local/community/kiosk-mode/kiosk-mode.js
+    - /local/fonts.css
+    - /local/lovelace-card-mod/card-mod.js # Performance improvement called as fronted instead of lovelace resource
+
+
+
 # Text to speech
 tts:
   - platform: google_translate
@@ -10,31 +50,33 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 homekit: !include homekit.yaml
 
+
 homeassistant:
+  packages: !include_dir_named packages
+  customize: !include customize.yaml
   allowlist_external_dirs:
     - /config
-  customize:
-    binary_sensor.smokesensor_kitchen_buzzer_manual_alarm:
-      device_class: smoke
-    binary_sensor.contactsensor_doorbasement_contact:
-      device_class: door
-    media_player.samsung_q60ba_65_tv:
-      device_class: tv
-    
-  packages: !include_dir_named packages
 
 
-frontend:
-  themes: 
-    light: !include_dir_merge_named themes/HomeOS/light/
-    dark: !include_dir_merge_named themes/HomeOS/dark/
 
-  extra_module_url:
-    - /local/community/custom-brand-icons/custom-brand-icons.js #Add new icon from elax46, use phu:
-    - /local/community/garbage-collection-card/garbage-collection-card.js
-    - /local/community/kiosk-mode/kiosk-mode.js
-    - /local/fonts.css
 
+
+##############################################
+# UI Librairies
+##############################################
+
+
+
+
+
+
+
+
+panel_iframe:
+  zigbeebasement:
+    title: "Zigbee Basement"
+    url: "http://192.168.0.20:8081"
+    icon: mdi:zigbee
 ##############################################
 # Group
 ##############################################
@@ -63,72 +105,25 @@ group:
   all_light:
     name: All light (switch and Light)
     entities:
-        - light.dimmerlivingroom
-        - light.dreamview_t1
-        - light.floodlight_kitchen
-        - light.grouplightkitchencounter
-        - light.groupspotlightkitchen
-        - light.groupspotlightkitchensink
-        - light.kitchen_leds
-        - light.lampe_salle_de_bain
-        - light.stairs_lights
-        - light.ambientlightbedroomclara_lightbulb
-        - light.wiz_rgbw_tunable_6261a4
-        - switch.switch_basement
-        - switch.switchexterieurback_switch
-        - switch.switchexteriorfront
-        - switch.smartplugclara
-        - switch.switchvestibule_switch
-
-
-
-light:
-  - platform: group
-    name: "Kitchen Leds"
-    entities:
-      - light.ledkitchen_light_bulb
-      - light.ledkitchenoven_light_bulb
-  
-  - platform: group
-    name: "Bathroom light"
-    entities:
+      - light.dimmerlivingroom
+      - light.dreamview_t1
+      - light.floodlight_kitchen
+      - light.grouplightkitchencounter
+      - light.groupspotlightkitchen
+      - light.groupspotlightkitchensink
+      - light.kitchen_leds
       - light.lampe_salle_de_bain
-      - light.lumiere_salle_de_bain_2
+      - light.stairs_lights
+      - light.ambientlightbedroomclara_lightbulb
+      - light.wiz_rgbw_tunable_6261a4
+      - switch.switch_basement
+      - switch.switchexterieurback_switch
+      - switch.switchexteriorfront
+      - switch.smartplugclara
+      - switch.switchvestibule_switch
 
 
 
-##############################################
-# UI Librairies
-##############################################
-
-lovelace:
-  dashboards:
-    lovelace-homeplay:
-      mode: yaml
-      filename: homeplay.yaml
-      title: HomePlay
-      icon: phu:homekit
-      show_in_sidebar: true
-    home-os:
-      mode: yaml
-      filename: HomeOS.yaml
-      title: HomeOS
-      icon: mdi:home
-      show_in_sidebar: true
-
-
-
-##############################################
-# Apple Calendar Config
-##############################################
-
-calendar:
-  - platform: caldav
-    url: https://caldav.icloud.com
-    username: !secret apple_username
-    password: !secret apple_secret
-    calendars:
-      - Famille
 
 ##############################################
 # BINARY SENSOR
@@ -137,23 +132,21 @@ calendar:
 binary_sensor:
   - platform: tod
     name: 7-9AM
-    after: '7:00'
-    before: '9:00'
-
-    
-##############################################
-# INPUT BOOLEAN
-#############################################
-
+    after: "7:00"
+    before: "9:00"
 
 sensor:
+  - platform: seventeentrack
+    username: !secret seventeentrack_username
+    password: !secret seventeentrack_password
+
   # Documentation
   # https://developpeurs.stm.info/documentation/gtfsrtv2
   # https://github.com/zacs/ha-gtfs-rt/issues/22
 
   - platform: gtfs_rt
-    trip_update_url: 'https://api.stm.info/pub/od/gtfs-rt/ic/v2/tripUpdates'
-    vehicle_position_url: 'https://api.stm.info/pub/od/gtfs-rt/ic/v2/vehiclePositions'
+    trip_update_url: "https://api.stm.info/pub/od/gtfs-rt/ic/v2/tripUpdates"
+    vehicle_position_url: "https://api.stm.info/pub/od/gtfs-rt/ic/v2/vehiclePositions"
     apikey: !secret gtfs_rt_apikey
     departures:
       - name: "191 Bus Est"
@@ -173,7 +166,6 @@ sensor:
     monitored_conditions:
       - sun_phase
 
-
   ##########
   # FILTER #
   ##########
@@ -188,8 +180,7 @@ sensor:
         time_constant: 5
         precision: 2
 
-
-# Determine the min and max humidity in the house
+  # Determine the min and max humidity in the house
   - platform: min_max
     name: humidity_min
     type: min
@@ -213,14 +204,12 @@ sensor:
   - platform: template
 
     sensors:
-
       ##################################################################################
       ### TOP BAR TEMPLATE #############################################################
       ##################################################################################
 
       climate_temp:
         value_template: "{{ state_attr('climate.entryway','current_temperature') | round(0)}}°"
-
 
       climate_text:
         value_template: >
@@ -230,11 +219,11 @@ sensor:
             Refroidi à {{ state_attr('climate.entryway','target_temp_high') | round(1) }}°
           {% else %}
             {{ state_attr('climate.entryway','target_temp_low') | round(1) }} - {{ state_attr('climate.entryway','target_temp_high') | round(1) }}°
-          {% endif %}          
+          {% endif %}
 
       humidity_min_max:
         value_template: "{{ states('sensor.humidity_min') | round(0) }} - {{ states('sensor.humidity_max') | round(0) }} %"
-    
+
       ## Find the Min and max temperature in the house
       ## Do not forget to add new temperature sensor to these math
       temperature_min:
@@ -259,14 +248,12 @@ sensor:
       temperature_min_max:
         value_template: "{{ states('sensor.temperature_min') | round(1) }} - {{ states('sensor.temperature_max') | round(1) }}°"
 
-
-
       lights_on_count:
-        friendly_name: 'Lights on count'
+        friendly_name: "Lights on count"
         value_template: "{{ expand('group.all_light') | selectattr('state','eq','on') | list | count }} lumières allumées"
 
       battery_min_max:
-        value_template: > 
+        value_template: >
           {{ states.sensor 
             | selectattr('attributes.device_class', 'defined') 
             | selectattr('attributes.device_class', 'eq', 'battery') 
@@ -300,6 +287,7 @@ sensor:
         friendly_name: "Full Date"
         value_template: "{{ states('sensor.day') }} {{ states('sensor.month') }}"
 
+
       ##################################################################################
       ### WEATHER CARD TEMPLATE ########################################################
       ##################################################################################
@@ -316,19 +304,6 @@ sensor:
             {{ states('sensor.montreal_temperature') | round(0) }}°
           {% endif %}
 
-      #Previous Homemade version
-          # {% if states('sensor.montreal_temperature') | float < 0 %}
-          #   {{ states('sensor.montreal_wind_chill') | round(0) }}°
-          # {% elif states('sensor.montreal_temperature') | float > 19 %}
-          #     {% if is_state('sensor.montreal_humidex','unknown') %}
-          #       {{ states('sensor.openweathermap_feels_like_temperature') | round(0) }}°
-          #     {% else %}
-          #       {{ states('sensor.montreal_humidex') | round(0) }}°
-          #     {% endif %}
-          # {% else %}
-          #   {{ states('sensor.montreal_temperature') | round(0) }}°
-          # {% endif %}
-
       ### High and low temperature
       high_low_temp:
         value_template: >
@@ -343,8 +318,8 @@ sensor:
             on
           {% endif %}
       weather_warning_statement_1:
-          value_template: >
-            {{ state_attr('sensor.montreal_warnings','alert_1')|capitalize }}
+        value_template: >
+          {{ state_attr('sensor.montreal_warnings','alert_1')|capitalize }}
 
       weather_bg_condition2:
         value_template: >
@@ -357,7 +332,6 @@ sensor:
       ##################################################################################
       ### OTHERS TEMPLATE ##############################################################
       ##################################################################################
-
 
       humidity_masterbedroom:
         value_template: >
@@ -374,7 +348,13 @@ sensor:
         value_template: >
           {{state_attr('climate.entryway','fan_mode')}}
 
+      garbage_weekday:
+        value_template: >
+          {{as_timestamp(states.schedule.garbage.attributes.next_event) | timestamp_custom('%A',false) }}
 
+      recycling_weekday:
+        value_template: >
+          {{as_timestamp(states.schedule.recycling.attributes.next_event) | timestamp_custom('%A',false) }}
 ################################################################################
 ### SEPARATED SWITCH FOR CLIMATE ###############################################
 ################################################################################
@@ -395,7 +375,7 @@ switch:
           data:
             entity_id: climate.entryway
             fan_mode: "off"
-    
+
       climate_eco_mode:
         friendly_name: "Eco Mode"
         value_template: "{{ is_state_attr('climate.entryway', 'preset_mode', 'eco') }}"
@@ -409,4 +389,9 @@ switch:
           data:
             entity_id: climate.entryway
             preset_mode: "none"
+
+################################################################################
+### GARBAGE ####################################################################
+################################################################################
+
 

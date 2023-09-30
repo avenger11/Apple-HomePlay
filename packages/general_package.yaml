@@ -1,0 +1,15 @@
+# +----------------------------------------------------------------------------+
+# | File type: package                                                         |
+# +----------------------------------------------------------------------------+
+# | Integration instruction:                                                   |
+# | 1. person_identity_1:                                                      |
+
+# +----------------------------------------------------------------------------+
+
+input_select:
+  homeos_selected_theme:
+    name: HomeOS Selected Theme
+    options: 
+      - homeos_light
+      - homeos_dark
+    icon: mdi:theme-light-dark

@@ -1,0 +1,45 @@
+- type: image
+  entity: input_select.homeos_selected_theme
+  state_image:
+    homeos_light: /local/map_media/basement-day.jpg
+    homeos_dark: /local/map_media/basement-night.jpg
+  style:
+    top: 0px
+    left: 0px
+    transform: none
+  hold_action:
+    action: none
+  tap_action:
+    action: none
+
+- type: custom:button-card
+  entity: input_select.homeos_map_layer_selection
+  style:
+    left: 2.72vw
+    top: 15.5vw
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      option: temperature
+    target:
+      entity_id: input_select.homeos_map_layer_selection
+  template:
+    - icon_thermometer
+    - house_map_switch_layer
+
+- type: custom:button-card
+  entity: input_select.homeos_map_layer_selection
+  style:
+    left: 2.72vw
+    top: 20.2vw
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      option: battery
+    target:
+      entity_id: input_select.homeos_map_layer_selection
+  template:
+    - icon_battery
+    - house_map_switch_layer

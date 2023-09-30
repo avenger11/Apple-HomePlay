@@ -26,38 +26,81 @@
 kiosk_mode:
   hide_header: true
 
+# all relevant template will be find
+button_card_templates: !include_dir_merge_named HomeOS_Module/
+
 views:
   - type: custom:grid-layout
     title: HomeOS
     background: var(--background)
-
     layout:
-      margin: 0
-      padding: 0
-      grid-template-columns: 5vw 1fr 2.3fr 0.6fr 0
-      grid-template-rows: 3vw 2.1fr 
-      grid-gap: 0.7vw
+      height: 61.8vw # 16/10 screen
+      margin: 0 0.8vw 0.8vw 0 # top right bottom left
+      grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+      grid-template-rows: 0.25fr 1fr 1fr 1fr 1fr 1fr
+      grid-gap: 0.8vw
+      display: grid
+      justify-content: stretch
+      align-content: stretch
+      justify-items: stretch
+      align-items: stretch
       grid-template-areas: |
-        "apps topbar topbar topbar ."
-        "apps left center right ."
-    cards:
-
+        "apps topbar topbar topbar topbar topbar topbar topbar"
+        "apps weather weather map map map map pack"
+        "apps weather weather map map map map pack"
+        "apps weather weather map map map map 3"
+        "apps calendar calendar map map map map 4"
+        "apps calendar calendar . . . . 5"
+  
     
+    cards:
 # +----------------------------------------------------------------------------+
-# | Left Area Definition                                                       |
+# | Weather Area Definition                                                    |
 # +----------------------------------------------------------------------------+
-      - type: vertical-stack
+      - type: custom:mod-card 
         view_layout:
-          grid-area: left
-        cards:
-          - !include HomeOS_Module/weather/weather_card.yaml
-          - !include HomeOS_Module/Calendar/calendar_card.yaml
+          grid-area: weather
+        # the following style ensure the card resize to the grid
+        style: |
+          ha-card {
+            display: contents;   
+          }
+        card: !include HomeOS_Module/weather/weather_card.yaml
 
+  
 # +----------------------------------------------------------------------------+
-# | Right Area Definition                                                      |
+# | Calendar Area Definition                                                   |
 # +----------------------------------------------------------------------------+
-      - type: vertical-stack
+      - type: custom:mod-card
         view_layout:
-          grid-area: right
-        cards:
-          - !include HomeOS_Module/person/person_card.yaml
+          grid-area: calendar
+        style: |
+          ha-card {
+            display: contents;   
+          }
+        card: !include HomeOS_Module/Calendar/calendar_card.yaml
+
+      
+# +----------------------------------------------------------------------------+
+# | Map Area Definition                                                        |
+# +----------------------------------------------------------------------------+
+      - type: custom:mod-card
+        view_layout:
+          grid-area: map
+        style: |
+          ha-card {
+            display: contents;   
+          }
+        card: !include HomeOS_Module/map/map_card.yaml
+    
+# # +----------------------------------------------------------------------------+
+# # | seventeen track Package Tracking Definition                                |
+# # +----------------------------------------------------------------------------+
+#       - type: custom:mod-card
+#         view_layout:
+#           grid-area: pack
+#         style: |
+#           ha-card {
+#             display: contents;   
+#           }
+#         card: !include HomeOS_Module/seventeen_track/seventeen_track_card.yaml

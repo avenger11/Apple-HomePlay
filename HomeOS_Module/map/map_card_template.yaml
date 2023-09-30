@@ -1,0 +1,59 @@
+house_map_switch_layer:
+  show_state: false
+  show_icon: false
+  show_name: false
+  show_label: false
+  size: 60%
+  tap_action:
+    action: toggle
+  styles:
+    grid:
+      - grid-template-areas: | 
+          "icon"
+    card:
+      - width: 3.95vw
+      - height: 3.95vw
+      - borderRadius: 50%
+      - border-width: 0px
+      - background-color: >
+          [[[ return (entity.state === 'on' ) ? 'var(--homeos-map-pagination-background-on)' : 'var(--homeos-map-pagination-background-off)'; ]]]
+      - box-shadow: var(--homeos-map-pagination-shadow)
+    custom_fields:
+      icon:
+        - height: 2.5vw
+        - width: 2.5vw
+        - top: 50%
+        - left: 50%
+        - margin: auto
+  variables:
+    state: > #send the state to the svg icon
+      [[[ return !entity || entity.state; ]]]
+
+light:
+  show_state: false
+  show_icon: false
+  show_name: false
+  show_label: false
+  tap_action:
+    action: toggle
+  double_tap_action:
+    action: more-info
+  styles:
+    custom_fields:
+      icon:
+        - width: 2.3vw
+    card:
+      - width: 4vw
+      - height: 4vw
+      - borderRadius: 50%
+      - border-width: 0px
+      - background-color: >
+          [[[ return (entity.state === 'on' ) ? 'rgba(252, 204, 17, 1.0)' : 'rgba(0,0,0,0.8)'; ]]]
+    grid:
+      - grid-template-areas: |
+          "icon"
+      - grid-template-columns: auto
+      - grid-template-row: auto
+  variables:
+    state: > #send the state to the svg icon
+      [[[ return !entity || entity.state; ]]]

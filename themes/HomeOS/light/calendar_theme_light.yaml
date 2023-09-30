@@ -1,0 +1,12 @@
+# +----------------------------------------------------------------------------+
+# | File type: Theme                                                           |
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is the light theme file for the Calendar card and popup                |
+# +----------------------------------------------------------------------------+
+# | Author: Sebastien Logeais                                                  |
+# +----------------------------------------------------------------------------+
+# | Date: 31 Aug 2023                                                          |
+# +----------------------------------------------------------------------------+
+homeos-calendar-card-background: var(--homeos-card-background)
+homeos-calendar-card-backdrop-filter: var(--homeos-card-backdrop-filter)

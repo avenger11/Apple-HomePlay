@@ -1,4 +1,6 @@
 # +----------------------------------------------------------------------------+
+# | File type: Theme                                                           |
+# +----------------------------------------------------------------------------+
 # | Description:                                                               |
 # | This is the dark theme file for HomeOS                                     |
 # +----------------------------------------------------------------------------+
@@ -8,26 +10,35 @@
 # +----------------------------------------------------------------------------+
 modes: {dark: {.: .}}
 
+card-mod-theme: dark
+
 # +----------------------------------------------------------------------------+
-# | General Custom variable                                                    |
+# | General card Custom variable                                               |
 # +----------------------------------------------------------------------------+
-homeos-card-border-radius: 3vw
+homeos-card-border-radius: 2.5vw
 homeos-card-box-shadow: 0px 0px 10px rgba(0,0,0,0.3)
+homeos-card-background: rgba(0, 0, 0, 0.8)
+homeos-card-background-revert: rgba(255,255,255,0.15)
+homeos-card-border-style: none
+homeos-card-backdrop-filter: blur(30px) saturate(180%)
+homeos-card-text-color-primary: rgb(255,255,255)      #white
+homeos-card-text-color-secondary: rgba(187,32,62,1)   #red
+homeos-card-text-color-third: rgba(200,200,200,0.8)   #light grey
+
+# +----------------------------------------------------------------------------+
+# | General icon Custom variable                                               |
+# +----------------------------------------------------------------------------+
+homeos-icon-color-primary: rgba(255,255,255,1)
+homeos-icon-color-secondary: rgba(255,255,255,0.4)
 
 # +----------------------------------------------------------------------------+
 # | Modified Home Assistant Variable                                           |
 # +----------------------------------------------------------------------------+
 
 # Cards
-ha-card-background: rgba(0, 0, 0, 0);
-ha-card-border-color: rgba(0, 0, 0, 0);
-ha-card-border-width: 0px;
-
-
-
-
-
-
+ha-card-background: rgba(0, 0, 0, 0)
+ha-card-border-color: rgba(0, 0, 0, 0)
+ha-card-border-width: 0px
 
 
 

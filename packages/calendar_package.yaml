@@ -1,0 +1,58 @@
+# +----------------------------------------------------------------------------+
+# | HOME ASSISTANT PACKAGE                                                     |
+# +----------------------------------------------------------------------------+
+# | Package name: calendar_package.yaml                                        |
+# +----------------------------------------------------------------------------+
+# | Author: Sebastien Logeais                                                  |
+# | Date: 9 sep 2023                                                           |
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This package contain all entities and value template related to the        |
+# | calendar card.                                                             |
+# +----------------------------------------------------------------------------+
+
+
+# +----------------------------------------------------------------------------+
+# | Integration instruction:                                                   |
+# | 1. Calendar:                                                               |
+# |    I'm using caldav as a platform for my calendar                          |
+# |    replace the username and password for your calendar                     |
+# |    If you change Famille, go into the calendar_card to update the name     |
+# +----------------------------------------------------------------------------+
+
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is for creating my family calendar using caldav                       |
+# +----------------------------------------------------------------------------+
+calendar:
+  - platform: caldav
+    url: https://caldav.icloud.com
+    username: !secret apple_username
+    password: !secret apple_secret
+    calendars:
+      - Famille
+
+# +----------------------------------------------------------------------------+
+# |                                                                            |
+# +----------------------------------------------------------------------------+
+sensor:
+  - platform: template
+    sensors:
+
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is to create sensor to show the date on the card                      |
+# +----------------------------------------------------------------------------+
+      calendar_day:
+        value_template: >
+          {{ strptime(states('sensor.date'), '%Y-%m-%d').day }}
+
+      calendar_weekday:
+        value_template: >
+          {{["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"][now().weekday()]}}
+  
+      calendar_month:
+        value_template: >
+          {% set months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"] %}
+          {{ months[now().month-1] }}

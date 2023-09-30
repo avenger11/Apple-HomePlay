@@ -1,0 +1,15 @@
+# +----------------------------------------------------------------------------+
+# | File type: Theme                                                           |
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is the dark theme file for the map card                               |
+# +----------------------------------------------------------------------------+
+# | Author: Sebastien Logeais                                                  |
+# +----------------------------------------------------------------------------+
+# | Date: 8 sep 2023                                                           |
+# +----------------------------------------------------------------------------+
+
+homeos-map-pagination-background-on: rgb(80, 81, 88)
+homeos-map-pagination-background-off: rgb(40, 41, 45)
+homeos-map-pagination-text-color: rgb(171, 172, 176)
+homeos-map-pagination-shadow: 0px 0px 13px 2px rgba(0,0,0,0.4)

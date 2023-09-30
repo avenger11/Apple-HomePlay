@@ -1,11 +1,12 @@
 # +----------------------------------------------------------------------------+
-# | Description:
-# |                                                            |
+# | File type: card definition                                                 |
 # +----------------------------------------------------------------------------+
-
-
+# | Description:                                                               |
+# | This is the weather card                                                   |
 # +----------------------------------------------------------------------------+
-# | Card definition                                                            |
+# | Author: Sebastien Logeais                                                  |
+# +----------------------------------------------------------------------------+
+# | Date: 31 Aug 2023                                                          |
 # +----------------------------------------------------------------------------+
 
 type: picture-elements
@@ -13,8 +14,8 @@ image: /local/weather_media/empty.png
 style: |
   ha-card {
     border-radius: var(--homeos-weather-border-radius) !important;
-    height: 33.5vw !important;
     box-shadow: var(--homeos-weather-box-shadow);
+    border-style: var(--homeos-card-border-style);
   }
 
 elements:
@@ -27,7 +28,6 @@ elements:
       top: 0px
       left: 0px
       transform: none
-      height: 60%
     state_image: 
       ##########################################################################
       # 0 - 100 Day weather picture
@@ -152,7 +152,7 @@ elements:
 
   - type: custom:mod-card
     style:
-      top: 47%
+      top: 52%
       left: 50%
       width: 95%
     card:
