@@ -1,0 +1,26 @@
+# +----------------------------------------------------------------------------+
+# | File type: card definition                                                 |
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is the top Bar definition                                             |
+# |                                                                            |
+# +----------------------------------------------------------------------------+
+# | Author: Sebastien Logeais                                                  |
+# +----------------------------------------------------------------------------+
+# | Date: 1 October 2023                                                       |
+# +----------------------------------------------------------------------------+
+type: picture-elements
+image: '/local/topbar_media/empty.png'
+elements:
+  - type: state-label
+    entity: sensor.time
+    style:
+      top: calc(var(--homeos-topbar-height) / 2)
+      left: 5vw
+      color: var(--homeos-card-text-color-primary)
+      font-size: 2.7vw
+      letter-spacing: "-0.1vw"
+      font-weight: 400
+    action: none
+    hold_action: none
+    tap_action: none

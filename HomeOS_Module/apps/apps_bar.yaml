@@ -1,0 +1,52 @@
+# +----------------------------------------------------------------------------+
+# | File type: card definition                                                 |
+# +----------------------------------------------------------------------------+
+# | Description:                                                               |
+# | This is the Apps Bar definition                                            |
+# |                                                                            |
+# +----------------------------------------------------------------------------+
+# | Author: Sebastien Logeais                                                  |
+# +----------------------------------------------------------------------------+
+# | Date: 1 October 2023                                                       |
+# +----------------------------------------------------------------------------+
+type: picture-elements
+image: /local/app_media/empty.png
+style: |
+  ha-card {
+    border-radius: 0;
+    border-top-left-radius: var(--homeos-card-border-radius);
+    border-bottom-left-radius: var(--homeos-card-border-radius);
+    --ha-card-background: var(--homeos-card-background);
+    backdrop-filter: var(--homeos-card-backdrop-filter);
+    --ha-card-border-color: rgba(0, 0, 0, 0);
+    --ha-card-border-width: 0px;
+  }
+  #root {
+    height: 100%
+  }
+
+elements:
+  - type: custom:button-card
+    style:
+      left: calc(var(--homeos-appsbar-width) / 2)
+      top: 95%
+    template:
+      - icon_gearshape_fill
+      - template_system_icon
+    tap_action:
+      action: navigate
+      navigation_path: /config/integrations/dashboard
+
+  - type: custom:button-card
+    style:
+      left: calc(var(--homeos-appsbar-width) / 2)
+      top: 87%
+
+    styles: # Override normal setting to make the icon bigger
+      custom_fields:
+        icon: 
+          - width: calc( var(--homeos-appsbar-width) - 1.5vw)
+    template:
+      - icon_setting_fill
+      - template_system_icon
+

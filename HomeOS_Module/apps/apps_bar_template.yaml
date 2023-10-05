@@ -1,0 +1,20 @@
+
+template_system_icon:
+  show_state: false
+  show_icon: false
+  show_name: false
+  show_label: false
+  styles:
+    card:
+      - background: none
+    custom_fields:
+      icon:
+        - width: calc( var(--homeos-appsbar-width) - 2vw)
+        - top: 50%
+        - left: 50%
+        - margin: auto
+  grid:
+    - grid-template-areas: |
+        "icon"
+    - grid-template-columns: auto
+    - grid-template-row: auto

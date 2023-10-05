@@ -526,15 +526,6 @@ views:
                       template:
                         - light
 
-                    - entity: light.kitchen_leds
-                      type: custom:button-card
-                      icon: phu:light-strip
-                      style:
-                        left: 85%
-                        top: 75%
-                      template:
-                        - light
-
                     - entity: light.light_livingroomentry
                       type: custom:button-card
                       icon: phu:friends-of-hue-iq-pendant

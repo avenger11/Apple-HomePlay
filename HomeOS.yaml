@@ -17,6 +17,8 @@
 # +----------------------------------------------------------------------------+
 # | Description:                                                               |
 # | This is the main file for the HomeOS dashboard                             |
+# | A first grid layout define the app bar / top bar / cards area              |
+# | A second grid layout define the cars position within the cards area        |
 # +----------------------------------------------------------------------------+
 # | Author: Sebastien Logeais                                                  |
 # +----------------------------------------------------------------------------+
@@ -30,77 +32,126 @@ kiosk_mode:
 button_card_templates: !include_dir_merge_named HomeOS_Module/
 
 views:
+# +----------------------------------------------------------------------------+
+# | Definition of the first grid-layout                                        |
+# | +------+----------------------------------+                                |
+# | |      |             topbar               |                                |
+# | |      +----------------------------------+                                |
+# | | Apps |                                  |                                |
+# | |      |             Cards                |                                |
+# | |      |                                  |                                |
+# | +------+----------------------------------+                                |
+# |                                                                            |
+# +----------------------------------------------------------------------------+
   - type: custom:grid-layout
     title: HomeOS
     background: var(--background)
     layout:
-      height: 61.8vw # 16/10 screen
-      margin: 0 0.8vw 0.8vw 0 # top right bottom left
-      grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
-      grid-template-rows: 0.25fr 1fr 1fr 1fr 1fr 1fr
-      grid-gap: 0.8vw
-      display: grid
-      justify-content: stretch
-      align-content: stretch
-      justify-items: stretch
-      align-items: stretch
+      height: 62.6vw # 16/10 screen
+      margin: 0
+      grid-template-columns: var(--homeos-appsbar-width) 1fr 
+      grid-template-rows: var(--homeos-topbar-height) 1fr 
+      grid-gap: 0
       grid-template-areas: |
-        "apps topbar topbar topbar topbar topbar topbar topbar"
-        "apps weather weather map map map map pack"
-        "apps weather weather map map map map pack"
-        "apps weather weather map map map map 3"
-        "apps calendar calendar map map map map 4"
-        "apps calendar calendar . . . . 5"
+        "apps topbar "
+        "apps cards"
+    cards:
   
     
-    cards:
+# +----------------------------------------------------------------------------+
+# | Apps bar Definition                                                        |
+# +----------------------------------------------------------------------------+
+      - type: custom:mod-card
+        view_layout:
+          grid-area: apps
+        style: |
+          ha-card {
+            display: contents;   
+          }
+        card: !include HomeOS_Module/apps/apps_bar.yaml
+
+# +----------------------------------------------------------------------------+
+# | Top bar Definition                                                         |
+# +----------------------------------------------------------------------------+
+      - type: custom:mod-card
+        view_layout:
+          grid-area: topbar
+        style: |
+          ha-card {
+            display: contents;   
+          }
+        card: !include HomeOS_Module/topbar/top_bar.yaml
+
+
+# +----------------------------------------------------------------------------+
+# | Second Custom Grid layout definition for placing cards                     |
+# +----------------------------------------------------------------------------+
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        view_layout:
+          grid_area: cards
+        layout:
+          height: 58vw # 16/10 screen
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+          grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+          grid-gap: 0.8vw
+          margin: 0 0.8vw 0.8vw 0.8vw
+          grid-template-areas: |
+            "weather weather map map map map pack"
+            "weather weather map map map map pack"
+            "weather weather map map map map 3"
+            "calendar calendar map map map map 4"
+            "calendar calendar . . . . 5"
+        cards:
 # +----------------------------------------------------------------------------+
 # | Weather Area Definition                                                    |
 # +----------------------------------------------------------------------------+
-      - type: custom:mod-card 
-        view_layout:
-          grid-area: weather
-        # the following style ensure the card resize to the grid
-        style: |
-          ha-card {
-            display: contents;   
-          }
-        card: !include HomeOS_Module/weather/weather_card.yaml
+          - type: custom:mod-card 
+            view_layout:
+              grid-area: weather
+            # the following style ensure the card resize to the grid
+            style: |
+              ha-card {
+                display: contents;   
+              }
+            card: !include HomeOS_Module/weather/weather_card.yaml  
 
-  
 # +----------------------------------------------------------------------------+
 # | Calendar Area Definition                                                   |
 # +----------------------------------------------------------------------------+
-      - type: custom:mod-card
-        view_layout:
-          grid-area: calendar
-        style: |
-          ha-card {
-            display: contents;   
-          }
-        card: !include HomeOS_Module/Calendar/calendar_card.yaml
+          - type: custom:mod-card
+            view_layout:
+              grid-area: calendar
+            style: |
+              ha-card {
+                display: contents;   
+              }
+            card: !include HomeOS_Module/Calendar/calendar_card.yaml
 
-      
 # +----------------------------------------------------------------------------+
 # | Map Area Definition                                                        |
 # +----------------------------------------------------------------------------+
-      - type: custom:mod-card
-        view_layout:
-          grid-area: map
-        style: |
-          ha-card {
-            display: contents;   
-          }
-        card: !include HomeOS_Module/map/map_card.yaml
-    
-# # +----------------------------------------------------------------------------+
-# # | seventeen track Package Tracking Definition                                |
-# # +----------------------------------------------------------------------------+
-#       - type: custom:mod-card
-#         view_layout:
-#           grid-area: pack
-#         style: |
-#           ha-card {
-#             display: contents;   
-#           }
-#         card: !include HomeOS_Module/seventeen_track/seventeen_track_card.yaml
+          - type: custom:mod-card
+            view_layout:
+              grid-area: map
+            style: |
+              ha-card {
+                display: contents;   
+              }
+            card: !include HomeOS_Module/map/map_card.yaml
+
+
+
+
+
+# # # +----------------------------------------------------------------------------+
+# # # | seventeen track Package Tracking Definition                                |
+# # # +----------------------------------------------------------------------------+
+# #       - type: custom:mod-card
+# #         view_layout:
+# #           grid-area: pack
+# #         style: |
+# #           ha-card {
+# #             display: contents;   
+# #           }
+# #         card: !include HomeOS_Module/seventeen_track/seventeen_track_card.yaml
