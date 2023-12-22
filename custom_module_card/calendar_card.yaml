@@ -27,13 +27,13 @@ card_mod:
       box-shadow: var(--custom-ha-card-box-shadow);
       padding:0.6vw !important;
     }
-    .hoursHTML {
+    .hours {
       --time-color: var(--custom-ha-card-text-color-secondary) !important;
       --time-size: 1.3vw !important;
       font-weight: 500;
     }
     .event-title {
-      --event-title-size: 1.6vw !important;
+      font-size: 1.6vw !important;
       color: var(--custom-ha-card-text-color-primary) !important;
       font-weight: 600;
       overflow: hidden;
@@ -42,7 +42,7 @@ card_mod:
       width: 18vw;
       padding-bottom: 0.3vw;
     }
-    .relativeTime {
+    div.relative-time.time-remaining {
       --time-color: var(--custom-ha-card-text-color-secondary) !important;
       --time-size: 1vw !important;
       font-weight: 500;
@@ -51,28 +51,30 @@ card_mod:
       white-space: nowrap;
       width: 8.4vw;
     }
-    .event-left {
-      font-size: 1.3vw !important;
-      font-weight: 500;
-      color: var(--custom-ha-card-text-color-primary) !important;
-    }
-    .event-right {
+    div.event-right {
       border-left-style: solid;
       border-left-color: var(--custom-ha-card-text-color-secondary);
       justify-content: start !important;
       padding: 0px 1vw !important;
     }
-    .daywrap {
+    div.daywrap {
       border-color: rgba(255,255,255,0) !important;
       padding: 0px !important;
     }
-    tr{
+    ha-card.cal-card.type-custom-atomic-calendar-revive div.cal-eventContainer div.single-event-container{
       background-color: var(--custom-calendar-card-background-revert);
       backdrop-filter: var(--custom-calendar-card-backdrop-filter-revert); 
-      display: block;
       border-radius: 1vw;
       margin-bottom: 0.3vw;
+      padding-top: 8px;
     }
     .cal-card{
       #height: 19.4vw !important;
+    }
+    div.event-left {
+      display: unset;
+      text-align: center;
+      padding-left: .3vw;
+      padding: 4px 0px 3px 8px;
+    }
     }
